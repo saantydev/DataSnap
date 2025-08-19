@@ -44,6 +44,7 @@ main{
     width: 100vh;
     height: 100%;
     transform: rotate(-90deg);
+    z-index: 0;
 }
 
 .panel-2{
@@ -86,6 +87,7 @@ main{
     flex-direction: column;
     width: 70%;
     gap: 15px;
+    z-index: 1;
 }
 
 .formulario label {
@@ -134,6 +136,7 @@ main{
     width: 100vh;
     height: 100%;
     transform: rotate(90deg);
+    z-index: 0;
 }
 
 #login-button{
