@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #333;
+}
+
+.panel-1 {
+    background-color: #3fb6b2;
+    width: 45%;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-1 .logo {
+    display: flex;
+    align-items: center;
+    color: #646464;
+    justify-content: center;
+}
+
+.persona{
+    width: 90%;
+    max-width: 900px;
+}
+
+.wave{
+    position: absolute;
+    left: -50vh;
+    top:0;
+    width: 100vh;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.panel-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #c8f1f1;
+    width: 55%;
+    padding: 40px;
+    position: relative;
+}
+
+.registrarse-boton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.registrarse-boton button {
+    background: #00d6c2;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.login-titulo {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.formulario {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 15px;
+}
+
+.formulario label {
+    font-size: 1rem;
+    color: #444;
+}
+
+.input-grupo {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.input-grupo .icon {
+    background: white;
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.input-grupo input {
+    border: none;
+    padding: 10px;
+    flex: 1;
+    outline: none;
+}
+
+.submit-boton {
+    margin-top: 20px;
+    background-color: #3fb6b2;
+    border: none;
+    padding: 12px;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    width: 150px;
+}
+
+#wave-2{
+    position: absolute;
+    right: -46vh;
+    top:0;
+    width: 100vh;
+    height: 100%;
+    transform: rotate(90deg);
+}
+
+#login-button{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
