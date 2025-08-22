@@ -144,3 +144,72 @@ main{
     top: 20px;
     left: 20px;
 }
+
+#mobile{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3fb6b2;
+}
+
+.tabs{
+    display: flex;
+    color: gray;
+    gap: 30px;
+}
+
+#seleccionado{
+    color: black;
+    border-bottom: 5px solid black;
+    padding-bottom: 10px;
+    border-radius: 2px;
+}
+
+#wave-3 img{
+    display: none;
+    width: 100px;
+}
+
+@media screen and (orientation: portrait) {
+    body{
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    .panel-1, .panel-2{
+        display: none;
+    }
+    .panel-3{
+        display: flex;
+    }
+    .logo{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    .formulario{
+        margin-top: 30px;
+    }
+    .submit-boton{
+        color: black;
+        background-color: none;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+
+    #wave-3{
+        height: 30px;
+        display: block;
+        position: absolute;
+        bottom: -10;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    #mobile{
+        display: none;
+    }
+}
