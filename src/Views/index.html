@@ -3,15 +3,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datasnap</title>
-    <link rel="stylesheet" href="/DataSnap/config/css/style.css">
+    <link rel="stylesheet" href="/config/css/style.css">
 </head>
 <body>
     <main>
         <nav class="menu">
             <div class="logo">
-                <img src="/DataSnap/config/images/logo.svg">
+                <img src="/config/images/logo.svg">
             </div>
-            <div class="opciones">
+            <div class="opciones" id="opciones-menu-hamburguesa">
                 <a href="#">
                     Inicios
                 </a>
@@ -25,13 +25,18 @@
                     Faq
                 </a>
             </div>
-            <div class="opciones">
+            <div class="opciones" id="opciones-boton">
                 <a href="#" class="btn1">
                     Registrarse
                 </a>
                 <a href="#" class="btn2">
                     Iniciar Sesion
                 </a>
+            </div>
+            <div id="menu-hamburguesa">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
             </div>
         </nav>
         <div class="inicio">
@@ -54,10 +59,10 @@
                 </div>
             </div>
             <div class="persona">
-                <img src="/DataSnap/config/images/Persona.png">
+                <img src="/config/images/Persona.png">
             </div>
         </div>
-        <img src="/DataSnap/config/images/wave.svg" class="wave">
+        <img src="/config/images/wave.svg" class="wave">
         <div class="acerca centrar">
             <div class="texto">
                 <h1 class="titulo centrar">
@@ -73,7 +78,7 @@
                 <div class="caracteristicas">
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/file.svg">
+                            <img src="/config/images/file.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -86,7 +91,7 @@
                     </div>
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/efficiency.svg">
+                            <img src="/config/images/efficiency.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -99,12 +104,12 @@
                     </div>
                 </div>
                 <div class="dispositivos">
-                    <img src="/DataSnap/config/images/dispositivos.png">
+                    <img src="/config/images/dispositivos.png">
                 </div>
                 <div class="caracteristicas">
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/backup.svg">
+                            <img src="/config/images/backup.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -117,7 +122,7 @@
                     </div>
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/statistics.svg">
+                            <img src="/config/images/statistics.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -128,6 +133,9 @@
                             </p>
                         </div>
                     </div>
+                </div>
+                <div class="dispositivos" id="dispositivos2">
+                    <img src="/config/images/dispositivos.png">
                 </div>
             </div>
         </div>
@@ -160,7 +168,7 @@
     <footer>
         <div class="dudas">
             <div class="logo">
-                <img src="/DataSnap/config/images/logo.svg">
+                <img src="/config/images/logo.svg">
             </div>
             <div class="opcion-footer">
                 <h2>Ayuda</h2>
