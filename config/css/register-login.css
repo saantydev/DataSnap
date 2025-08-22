@@ -118,7 +118,7 @@ main{
 
 .submit-boton {
     margin-top: 20px;
-    background-color: #3fb6b2;
+    background-color: transparent;
     border: none;
     padding: 12px;
     color: white;
@@ -151,7 +151,7 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #3fb6b2;
+    background-color: 2DACB5;
 }
 
 .tabs{
@@ -160,11 +160,20 @@ main{
     gap: 30px;
 }
 
+.tabs a{
+    text-decoration: none;
+    color: gray;
+}
+
 #seleccionado{
     color: black;
     border-bottom: 5px solid black;
     padding-bottom: 10px;
     border-radius: 2px;
+}
+
+#seleccionado a{
+    color: black;
 }
 
 #wave-3 img{
@@ -181,18 +190,35 @@ main{
     .panel-1, .panel-2{
         display: none;
     }
+
     .panel-3{
         display: flex;
     }
+
     .logo{
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 10px;
     }
+
     .formulario{
         margin-top: 30px;
     }
+
+    .input-grupo .icon {
+        background: white;
+        padding: 5px;
+        font-size: 1.2rem;
+    }
+    
+    .input-grupo input {
+        border: none;
+        padding: 5px;
+        flex: 1;
+        outline: none;
+    }
+    
     .submit-boton{
         color: black;
         background-color: none;
@@ -201,10 +227,20 @@ main{
     }
 
     #wave-3{
-        height: 30px;
         display: block;
         position: absolute;
-        bottom: -10;
+        width: 100vw;
+        left: 0;
+        bottom: -5vh;
+    }
+
+    #wave-4{
+        display: block;
+        position: absolute;
+        width: 100vw;
+        left: 0;
+        bottom: -5vh;
+        transform: rotateY(3.142rad);
     }
 }
 
