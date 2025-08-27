@@ -3,19 +3,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datasnap</title>
-    <link rel="stylesheet" href="/DataSnap/config/css/style.css">
+    <link rel="stylesheet" href="/config/css/style.css">
+    <link rel="shortcut icon" href="/config/images/icons/logo-solo.svg">
 </head>
 <body>
     <main>
         <nav class="menu">
             <div class="logo">
-                <img src="/DataSnap/config/images/logo.svg">
+                <img src="/config/images/icons/logo.svg">
             </div>
-            <div class="opciones">
-                <a href="#">
+            <div class="opciones" id="opciones-menu-hamburguesa">
+                <a href="#inicio">
                     Inicios
                 </a>
-                <a href="#">
+                <a href="#acerca">
                     Acerca de Nosotros
                 </a>
                 <a href="#">
@@ -25,19 +26,24 @@
                     Faq
                 </a>
             </div>
-            <div class="opciones">
-                <a href="#" class="btn1">
+            <div class="opciones" id="opciones-boton">
+                <a href="/src/Views/register.html" class="btn1">
                     Registrarse
                 </a>
-                <a href="#" class="btn2">
+                <a href="/src/Views/login.html" class="btn2">
                     Iniciar Sesion
                 </a>
             </div>
+            <div id="menu-hamburguesa">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </div>
         </nav>
-        <div class="inicio">
+        <div class="inicio" id="inicio">
             <div class="texto">
                 <h1 class="titulo">
-                    Impulsá tu negocio con gestión inteligente <br> de datos
+                    Impulsá tu negocio con Datasnap
                 </h1>
                 <p class="descripcion">
                     A través de inteligencia artificial, analizamos y optimizamos tus bases 
@@ -45,20 +51,20 @@
                     eficiencia operativa.
                 </p>
                 <div class="opciones">
-                    <a href="#" class="btn1" id="btn-inicio">
+                    <a href="/src/Views/register.html" class="btn1" id="btn-inicio">
                         COMENZAR
                     </a>
-                    <a href="#" class="btn2" id="btn-inicio">
+                    <a href="#acerca" class="btn2" id="btn-inicio">
                         ACERCA
                     </a>
                 </div>
             </div>
             <div class="persona">
-                <img src="/DataSnap/config/images/Persona.png">
+                <img src="/config/images/Persona.png">
             </div>
         </div>
-        <img src="/DataSnap/config/images/wave.svg" class="wave">
-        <div class="acerca centrar">
+        <img src="/config/images/icons/wave.svg" class="wave">
+        <div class="acerca centrar" id="acerca">
             <div class="texto">
                 <h1 class="titulo centrar">
                     Acerca de Datasnap
@@ -73,7 +79,7 @@
                 <div class="caracteristicas">
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/file.svg">
+                            <img src="/config/images/icons/file.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -86,7 +92,7 @@
                     </div>
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/efficiency.svg">
+                            <img src="/config/images/icons/efficiency.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -99,12 +105,12 @@
                     </div>
                 </div>
                 <div class="dispositivos">
-                    <img src="/DataSnap/config/images/dispositivos.png">
+                    <img src="/config/images/dispositivos.png">
                 </div>
                 <div class="caracteristicas">
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/backup.svg">
+                            <img src="/config/images/icons/backup.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -117,7 +123,7 @@
                     </div>
                     <div class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/statistics.svg">
+                            <img src="/config/images/icons/statistics.svg">
                         </div>
                         <div class="caracteristica-texto">
                             <h1 class="centrar">
@@ -128,6 +134,9 @@
                             </p>
                         </div>
                     </div>
+                </div>
+                <div class="dispositivos" id="dispositivos2">
+                    <img src="/config/images/dispositivos.png">
                 </div>
             </div>
         </div>
@@ -160,7 +169,7 @@
     <footer>
         <div class="dudas">
             <div class="logo">
-                <img src="/DataSnap/config/images/logo.svg">
+                <img src="/config/images/icons/logo.svg">
             </div>
             <div class="opcion-footer">
                 <h2>Ayuda</h2>
