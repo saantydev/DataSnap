@@ -118,7 +118,7 @@ main{
 
 .submit-boton {
     margin-top: 20px;
-    background-color: transparent;
+    background-color: #3fb6b2;
     border: none;
     padding: 12px;
     color: white;
@@ -221,7 +221,7 @@ main{
     
     .submit-boton{
         color: black;
-        background-color: none;
+        background-color: transparent;
         border: 2px solid black;
         border-radius: 5px;
     }
