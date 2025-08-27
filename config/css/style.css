@@ -4,6 +4,7 @@
     font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 .body{
@@ -88,7 +89,8 @@ a{
 }
 
 .descripcion{
-    font-size: clamp(1.1rem, 0.0629rem + 1.8438vw, 2rem);
+    color: rgb(39, 39, 39);
+    font-size: clamp(1.1rem, 0.0629rem + 1.8438vw, 1.4rem);
 }
 
 .persona{
