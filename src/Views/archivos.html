@@ -23,43 +23,11 @@
         <div class="wave wave3"></div>
         <div class="wave wave4"></div>
     </section>
-    <aside class="w-72 bg-gray-100 min-h-screen p-4 flex flex-col">
-        <div class="flex items-center mb-8">
-            <div>
-                <img src="/config/images/logo-solo.png" alt="Logo Datasnap">
-            </div>
-            <div>
-                <h1 class="font-bold text-gray-800">DATASNAP</h1>
-                <p class="text-xs text-gray-500">ORGANIZA A LA VELOCIDAD DE UN ZAP</p>
-            </div>
-        </div>
-        <nav class="space-y-2">
-            <a href="/panel" class="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-                <span class="font-medium text-gray-700">Subir Archivo</span>
-                <span class="material-icons sidebar-icon text-gray-600">add</span>
-            </a>
-            <div class="flex items-center justify-between bg-blue-100 p-3 rounded-lg shadow-sm">
-                <span class="font-medium text-blue-700">Mis Bases de Datos</span>
-                <span class="material-icons sidebar-icon text-blue-600">storage</span>
-            </div>
-            <div class="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm">
-                <span class="font-medium text-gray-700">Historial</span>
-                <span class="material-icons sidebar-icon text-gray-600">history</span>
-            </div>
-        </nav>
-    </aside>
+    <?php $active = 'files'; include __DIR__ . '/partials/sidebar.php'; ?>
 
-    <main class="flex-1 relative">
-        <header class="flex justify-between items-center p-4 bg-white shadow-md">
+    <main class="flex-1 relative ml-72">
+        <header class="p-4 bg-white shadow-md">
             <h1 class="text-2xl font-bold text-gray-800">Mis Bases de Datos</h1>
-            <div class="flex items-center space-x-6">
-                <div class="flex items-center space-x-2">
-                    <img alt="User avatar" class="w-10 h-10 rounded-full"
-                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJqC-zVvqfengqsRcwZ9_pp-XI9RXGHksUvAJAv8W48FsNJ2ihn6fvfCWBlfW8Ws28Zf5yB107QaTUZeGujN9V86iQWfiJAh5TM47IGyEKnLCTY-Z__OmGkb-0Mc1o8UWEdlUTs_GoxIaEcOYP_1iHKbkTCgogKQgg3It_AFGpFfaaQP4fsY10ZgXP4aYqLYZarLcfowMjn27i1iHl2Tj-PVmZHA6SZYKDSOQs1oAcBb3rsOg25yfR6ED06YjcDH931Yi-5kqd-os" />
-                    <span class="font-medium text-gray-700"><?php echo htmlspecialchars($userData['username'] ?? 'Usuario'); ?></span>
-                </div>
-                <span class="material-icons text-gray-600 cursor-pointer">settings</span>
-            </div>
         </header>
 
         <div class="p-6">

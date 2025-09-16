@@ -2,8 +2,7 @@
 /**
  * Script de prueba para verificar las rutas del sistema DataSnap
  *
- * Este script verifica que todas las rutas principales estén funcionando correctamente
- * después de la implementación del sistema de enrutamiento.
+ * Este script verifica que todas las rutas principales estén funcionando correctamente.
  */
 
 // Incluir las clases necesarias
@@ -55,7 +54,7 @@ function testRoute($method, $uri, $expectedController, $expectedMethod) {
                 return false;
             }
         } else {
-            echo "<p class='error'>❌ Ruta no encontrada en el sistema de enrutamiento</p>";
+            echo "<p class='error'>❌ Ruta no encontrada</p>";
             return false;
         }
 
@@ -107,7 +106,7 @@ echo "<h2>📁 Verificación de archivos:</h2>";
 $filesToCheck = [
     'index.php' => 'Punto de entrada principal',
     '.htaccess' => 'Configuración de Apache',
-    'src/Core/Router.php' => 'Sistema de enrutamiento',
+    'src/Core/Router.php' => 'Router del sistema',
     'src/Core/Database.php' => 'Conexión a base de datos',
     'config/database.php' => 'Configuración de BD',
 ];
