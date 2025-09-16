@@ -83,6 +83,7 @@ main{
 
 .formulario {
     margin-top: 100px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -180,6 +181,8 @@ main{
     display: none;
     width: 100px;
 }
+
+
 
 @media screen and (orientation: portrait) {
     body{
