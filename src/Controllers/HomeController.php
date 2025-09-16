@@ -40,7 +40,7 @@ class HomeController
      */
     public function index(): void
     {
-        // Mostrar la página de inicio (landing page) dentro de deploy/src/Views
-        require_once __DIR__ . '/../Views/index.html';
+        // Mostrar la página de inicio (landing page) en la raíz del proyecto
+        require_once __DIR__ . '/../../index.html';
     }
 }

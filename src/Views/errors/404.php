@@ -9,14 +9,14 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../config/css/panel.css">
+    <link rel="stylesheet" href="/config/css/panel.css">
 </head>
 <body class="bg-white flex">
     <!-- Sidebar igual que en las otras vistas -->
     <aside class="w-72 bg-gray-100 min-h-screen p-4 flex flex-col">
         <div class="flex items-center mb-8">
             <div>
-                <img src="../../../config/images/logo-solo.png" alt="Logo Datasnap" class="w-10 h-10">
+                <img src="/config/images/logo-solo.png" alt="Logo Datasnap" class="w-10 h-10">
             </div>
             <div>
                 <h1 class="font-bold text-gray-800">DATASNAP</h1>
