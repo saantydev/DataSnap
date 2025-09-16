@@ -63,6 +63,12 @@
                         </svg>
                     </span>
                     <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
+                    <button type="button" class="toggle-password" data-target="password" aria-label="Mostrar/ocultar contraseña">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon" viewBox="0 0 24 24">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
                 </div>
                 <center>
                     <button type="submit" class="submit-boton" name="ingresar">Iniciar sesion</button>
@@ -123,6 +129,12 @@
                         </svg>
                     </span>
                     <input type="password" id="password_mobile" name="password" placeholder="Ingrese su contraseña" required>
+                    <button type="button" class="toggle-password" data-target="password_mobile" aria-label="Mostrar/ocultar contraseña">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon" viewBox="0 0 24 24">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
                 </div>
                 <center>
                     <button type="submit" class="submit-boton">INICIAR SESION</button>
@@ -131,5 +143,42 @@
             <img src="/config/images/wave-login.png" id="wave-4">
         </div>
     </main>
+
+    <script>
+        // Función para alternar visibilidad de contraseña
+        function togglePasswordVisibility(button) {
+            const targetId = button.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            const icon = button.querySelector('svg');
+
+            // Agregar animación de transición
+            button.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 150);
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                // Cambiar icono a "ojo cerrado" con línea diagonal
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+                button.setAttribute('aria-label', 'Ocultar contraseña');
+            } else {
+                input.type = 'password';
+                // Cambiar icono a "ojo abierto"
+                icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+                button.setAttribute('aria-label', 'Mostrar contraseña');
+            }
+        }
+
+        // Agregar event listeners a todos los botones de toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    togglePasswordVisibility(this);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
