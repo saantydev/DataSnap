@@ -81,6 +81,21 @@ class FileController
                 return;
             }
 
+            // Obtener información del usuario para el sidebar
+            $user = $this->userModel->findById($userId);
+            if (!$user) {
+                $this->logout();
+                $this->redirectToLogin();
+                return;
+            }
+
+            // Preparar datos para la vista
+            $userData = [
+                'id' => $user['user_id'],
+                'username' => $user['username'],
+                'email' => $user['email']
+            ];
+
             // Renderizar la vista de listado de archivos (frontend usa /files/list vía fetch)
             require_once __DIR__ . '/../Views/archivos.html';
 
