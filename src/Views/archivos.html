@@ -2,173 +2,161 @@
 <html lang="es">
 
 <head>
-    <meta charset="utf-8" />
-    <meta charset="utf-8" />
-    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
-    <link as="style"
-        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
-        onload="this.rel='stylesheet'" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <title>Gestor de Archivos</title>
-    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style type="text/tailwindcss">
-        :root {
-      --primary-color: #26AAB5;
-      --secondary-color: #1A1617;
-      --light-gray: #F3F4F6;
-      --medium-gray: #E5E7EB;
-      --dark-gray: #4B5563;
-      --text-dark: #1F2937;
-      --text-light: #6B7280;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tabla de Archivos</title>
+    <link rel="stylesheet" href="../../config/css/misArchivos.css">
 </head>
 
-<body class="bg-white text-gray-800">
-    <div class="flex h-screen bg-white">
-        <aside class="w-64 flex-shrink-0 bg-gray-100 p-6 flex flex-col justify-between">
-            <div>
-                <div class="flex items-center gap-3 mb-10">
-                    <img src="../../config/images/icons/logo-solo.svg" width="40px">
-                    <h1 class="text-xl font-bold text-[var(--primary-color)]" >Datasnap</h1>
-                </div>
-                <nav class="flex flex-col gap-4">
-                    <a class="flex items-center gap-3 rounded-lg bg-[var(--primary-color)] px-4 py-3 text-white transition-colors hover:bg-opacity-90"
-                        href="#">
-                        <span class="material-symbols-outlined">
-                            folder
-                        </span>
-                        <span>Archivos</span>
-                    </a>
-                    <a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900"
-                        href="#">
-                        <span class="material-symbols-outlined">
-                            settings
-                        </span>
-                        <span>Configuración</span>
-                    </a>
-                    <a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-900"
-                        href="#">
-                        <span class="material-symbols-outlined">
-                            help
-                        </span>
-                        <span>Ayuda</span>
-                    </a>
-                </nav>
-            </div>
-            <div class="flex items-center gap-4">
-                <img alt="User Avatar" class="size-10 rounded-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb4cqdAU2A5mr2BJ7ilmtoJaMSO-9U7LZemgNnrStSWvRlxocJroPvdNsL0GFyrDcQvoseZCyxbZyUuOkfhd5iy-lo5xzL1F9JZd6tvKam7JIWyGLu-rAxobJU7FVjAQBKdI28HWsucsSp56-h-F_al13MJlehtHoewmIw4mvoyE7aJOZnahhxJo7uc0m55QFXCP7aE_5YJ48gDx6GqmH3cq21T1khs1FOO7o8KV93o7x5O4N2M5FCl3u9n9wy4T1klpmHbJh2VZE" />
-                <div>
-                    <p class="font-semibold text-gray-900">Usuario</p>
-                    <p class="text-sm text-gray-500">usuario@ejemplo.com</p>
-                </div>
-            </div>
-        </aside>
-        <main class="flex-1 overflow-y-auto p-10">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Archivos Cargados</h2>
-                <button
-                    class="flex items-center justify-center gap-2 rounded-lg bg-[var(--primary-color)] px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-105 hover:bg-opacity-90">
-                    <span class="material-symbols-outlined">
-                        upload_file
-                    </span>
-                    <span class="truncate">Subir Archivo</span>
-                </button>
-            </div>
-            <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white">
-                <table class="w-full text-left text-sm text-gray-600">
-                    <thead class="bg-gray-50 text-xs uppercase text-gray-500">
-                        <tr>
-                            <th class="px-6 py-4 font-medium" scope="col">Nombre</th>
-                            <th class="px-6 py-4 font-medium" scope="col">Tipo</th>
-                            <th class="px-6 py-4 font-medium" scope="col">Tamaño</th>
-                            <th class="px-6 py-4 font-medium" scope="col">Fecha de Carga</th>
-                            <th class="px-6 py-4" scope="col">
-                                <span class="sr-only">Acciones</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <th class="flex items-center gap-3 px-6 py-4 font-medium text-gray-900" scope="row">
-                                <span class="material-symbols-outlined text-[var(--primary-color)]">description</span>
-                                document1.txt
-                            </th>
-                            <td class="px-6 py-4"><span
-                                    class="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">TXT</span>
-                            </td>
-                            <td class="px-6 py-4">2 MB</td>
-                            <td class="px-6 py-4">2024-01-15</td>
-                            <td class="px-6 py-4 text-right">
-                                <a class="font-medium text-[var(--primary-color)] hover:underline" href="#">...</a>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <th class="flex items-center gap-3 px-6 py-4 font-medium text-gray-900" scope="row">
-                                <span class="material-symbols-outlined text-[var(--primary-color)]">receipt_long</span>
-                                data.csv
-                            </th>
-                            <td class="px-6 py-4"><span
-                                    class="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">CSV</span>
-                            </td>
-                            <td class="px-6 py-4">5 MB</td>
-                            <td class="px-6 py-4">2024-01-16</td>
-                            <td class="px-6 py-4 text-right">
-                                <a class="font-medium text-[var(--primary-color)] hover:underline" href="#">...</a>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <th class="flex items-center gap-3 px-6 py-4 font-medium text-gray-900" scope="row">
-                                <span class="material-symbols-outlined text-[var(--primary-color)]">toc</span>
-                                report.xsl
-                            </th>
-                            <td class="px-6 py-4"><span
-                                    class="rounded-full bg-purple-100 px-2 py-1 text-xs font-semibold text-purple-800">XSL</span>
-                            </td>
-                            <td class="px-6 py-4">3 MB</td>
-                            <td class="px-6 py-4">2024-01-17</td>
-                            <td class="px-6 py-4 text-right">
-                                <a class="font-medium text-[var(--primary-color)] hover:underline" href="#">...</a>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <th class="flex items-center gap-3 px-6 py-4 font-medium text-gray-900" scope="row">
-                                <span class="material-symbols-outlined text-[var(--primary-color)]">database</span>
-                                query.sql
-                            </th>
-                            <td class="px-6 py-4"><span
-                                    class="rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-800">SQL</span>
-                            </td>
-                            <td class="px-6 py-4">1 MB</td>
-                            <td class="px-6 py-4">2024-01-18</td>
-                            <td class="px-6 py-4 text-right">
-                                <a class="font-medium text-[var(--primary-color)] hover:underline" href="#">...</a>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <th class="flex items-center gap-3 px-6 py-4 font-medium text-gray-900" scope="row">
-                                <span class="material-symbols-outlined text-[var(--primary-color)]">description</span>
-                                analysis.txt
-                            </th>
-                            <td class="px-6 py-4"><span
-                                    class="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">TXT</span>
-                            </td>
-                            <td class="px-6 py-4">4 MB</td>
-                            <td class="px-6 py-4">2024-01-19</td>
-                            <td class="px-6 py-4 text-right">
-                                <a class="font-medium text-[var(--primary-color)] hover:underline" href="#">...</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
+<body>
+
+    <h2>Mis archivos</h2>
+
+    <div class="tabs">
+        <div class="tab">archivos originales</div>
+        <div class="tab inactive">archivos modificados</div>
     </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>tipo</th>
+                <th>tamaño</th>
+                <th>fecha</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="file-icon"></span>documento.sql</td>
+                <td><span class="tag sql">sql</span></td>
+                <td>3 MB</td>
+                <td>9/9/25</td>
+                <td><button class="btn-optimize" aria-label="optimizar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
+                        </svg> optimizar
+                    </button></td>
+                <td class="actions" title="Más opciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3" />
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="file-icon"></span>documento.csv</td>
+                <td><span class="tag csv">csv</span></td>
+                <td>6 MB</td>
+                <td>23/2/25</td>
+                <td><button class="btn-optimize" aria-label="optimizar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
+                        </svg> optimizar
+                    </button></td>
+                <td class="actions" title="Más opciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3" />
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="file-icon"></span>documento.txt</td>
+                <td><span class="tag txt">txt</span></td>
+                <td>8 MB</td>
+                <td>5/4/25</td>
+                <td><button class="btn-optimize" aria-label="optimizar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
+                        </svg> optimizar
+                    </button></td>
+                <td class="actions" title="Más opciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3" />
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="file-icon"></span>documento.json</td>
+                <td><span class="tag json">json</span></td>
+                <td>10 MB</td>
+                <td>1/7/20</td>
+                <td><button class="btn-optimize" aria-label="optimizar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
+                        </svg> optimizar
+                    </button></td>
+                <td class="actions" title="Más opciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3" />
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="file-icon"></span>documento.json</td>
+                <td><span class="tag json">json</span></td>
+                <td>2 MB</td>
+                <td>1/7/20</td>
+                <td><button class="btn-optimize" aria-label="optimizar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
+                        </svg> optimizar
+                    </button></td>
+                <td class="actions" title="Más opciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3" />
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="file-icon"></span>documento.json</td>
+                <td><span class="tag json">json</span></td>
+                <td>16 MB</td>
+                <td>17/10/17</td>
+                <td><button class="btn-optimize" aria-label="optimizar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
+                        </svg> optimizar
+                    </button></td>
+                <td class="actions" title="Más opciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3" />
+                    </svg>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="file-icon"></span>documento.json</td>
+                <td><span class="tag json">json</span></td>
+                <td>20 MB</td>
+                <td>27/9/23</td>
+                <td><button class="btn-optimize" aria-label="optimizar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
+                        </svg> optimizar
+                    </button></td>
+                <td class="actions" title="Más opciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                        <circle cx="3" cy="3" r="3" />
+                        <circle cx="10" cy="3" r="3" />
+                        <circle cx="17" cy="3" r="3" />
+                    </svg>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 
