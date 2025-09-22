@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+.wave {
+  position:absolute;
+  width: 125%;
+  height: 75%;
+  bottom: 0;
+  left: 0;
+  background: #e6cb92;
+  z-index: -10;
+  border-radius: 10% 10% 10% 10% / 10% 10% 10% 10%;
+  opacity: 0.6;
+  animation: waveMove 90s linear infinite;
+  transform: translateX(0); /* Asegura que no haya desplazamiento al cargar */
+}
+
+.wave1 {
+  background: #26AAB5;
+  animation-duration: 30s;
+  z-index: -4;
+  opacity: 0.7;
+}
+
+.wave2 {
+  background: #26AAB5;
+  animation-duration: 25s;
+  z-index: -3;
+  opacity: 0.5;
+}
+
+.wave3 {
+  background: #26AAB5;
+  animation-duration: 20s;
+  z-index: -2;
+  opacity: 0.3;
+}
+
+.wave4 {
+  background: #26AAB5;
+  animation-duration: 15s;
+  z-index: -1; 
+  opacity: 0.1;
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0%) rotate(1deg);
+  }
+  100% {
+    transform: translateX(0%) rotate(360deg);
+  }
+}
+
+/* Estilos para layout con sidebar fijo */
+main {
+  transition: margin-left 0.3s ease;
+}
+
+main.ml-72 {
+  margin-left: 18rem; /* 288px = 18rem */
+}
+
+/* Ajustes para el modal de subida de archivos */
+#uploadModal {
+  z-index: 60; /* Asegurar que esté por encima del sidebar */
+}
+
+/* Ajustes para el modal de progreso */
+#progressModal {
+  z-index: 60;
+}
+
+/* Ajustes para el modal de eliminación */
+#deleteModal {
+  z-index: 60;
+}
+
+/* Ajustes para el modal de confirmación */
+#confirmModal {
+  z-index: 60;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  main.ml-72 {
+    margin-left: 0;
+  }
+
+  aside {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  aside.show {
+    transform: translateX(0);
+  }
+}
