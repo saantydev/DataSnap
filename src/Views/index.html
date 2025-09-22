@@ -1,21 +1,23 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/config/icons/logo-solo.svg" />
     <title>Datasnap</title>
-    <link rel="stylesheet" href="/DataSnap/config/css/style.css">
+    <link rel="stylesheet" href="/config/css/landing.css" />
 </head>
 <body>
     <main>
         <nav class="menu">
             <div class="logo">
-                <img src="/DataSnap/config/images/logo.svg">
+                <img src="/config/icons/logo.svg">
             </div>
-            <div class="opciones">
-                <a href="#">
+            <div class="opciones" id="opciones-menu-hamburguesa">
+                <a href="#inicio">
                     Inicios
                 </a>
-                <a href="#">
+                <a href="#acerca">
                     Acerca de Nosotros
                 </a>
                 <a href="#">
@@ -25,19 +27,24 @@
                     Faq
                 </a>
             </div>
-            <div class="opciones">
-                <a href="#" class="btn1">
+            <div class="opciones" id="opciones-boton">
+                <a href="/register" class="btn1">
                     Registrarse
                 </a>
-                <a href="#" class="btn2">
+                <a href="/login" class="btn2">
                     Iniciar Sesion
                 </a>
             </div>
+            <div id="menu-hamburguesa">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </div>
         </nav>
-        <div class="inicio">
+        <section class="inicio" id="inicio">
             <div class="texto">
                 <h1 class="titulo">
-                    Impulsá tu negocio con gestión inteligente <br> de datos
+                    Impulsá tu negocio con Datasnap
                 </h1>
                 <p class="descripcion">
                     A través de inteligencia artificial, analizamos y optimizamos tus bases 
@@ -45,146 +52,124 @@
                     eficiencia operativa.
                 </p>
                 <div class="opciones">
-                    <a href="#" class="btn1" id="btn-inicio">
-                        COMENZAR
-                    </a>
-                    <a href="#" class="btn2" id="btn-inicio">
-                        ACERCA
-                    </a>
+                    <a href="#" class="btn1" id="btn-inicio">COMENZAR</a>
+                    <a href="#" class="btn2" id="btn-inicio">ACERCA</a>
                 </div>
             </div>
             <div class="persona">
-                <img src="/DataSnap/config/images/Persona.png">
+                <img src="/config/images/Persona.png" alt="Persona ilustrativa" />
             </div>
-        </div>
-        <img src="/DataSnap/config/images/wave.svg" class="wave">
-        <div class="acerca centrar">
-            <div class="texto">
-                <h1 class="titulo centrar">
-                    Acerca de Datasnap
-                </h1>
-                <p class="descripcion centrar" >
+        </section>
+
+        <img src="/config/icons/wave.svg" class="wave" alt="Decoración de ola" />
+
+        <section class="acerca centrar" id="acerca">
+            <header class="texto">
+                <h2 class="titulo centrar mt-3">Acerca de Datasnap</h2>
+                <p class="descripcion centrar">
                     Datasnap integra actualmente diversas funcionalidades clave orientadas
                     a la conversión, análisis y optimización de datos, entre las cuales se 
                     encuentran:
                 </p>
-            </div>
+            </header>
+
             <div class="contenido">
                 <div class="caracteristicas">
-                    <div class="caracteristica">
+                    <article class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/file.svg">
+                            <img src="/config/icons/file.svg" alt="Archivo" />
                         </div>
                         <div class="caracteristica-texto">
-                            <h1 class="centrar">
-                                Lectura de Archivos
-                            </h1>
-                            <p>
-                                puede procesar archivos csv, txt, json y sql
-                            </p>
+                            <h3 class="centrar">Lectura de Archivos</h3>
+                            <p>Puede procesar archivos CSV, TXT, JSON y SQL</p>
                         </div>
-                    </div>
-                    <div class="caracteristica">
+                    </article>
+                    <article class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/efficiency.svg">
+                            <img src="/config/icons/efficiency.svg" alt="Eficiencia" />
                         </div>
                         <div class="caracteristica-texto">
-                            <h1 class="centrar">
-                                Correcion de Errores
-                            </h1>
-                            <p>
-                                eliminacion de datos repetidos y optimizacion
-                            </p>
+                            <h3 class="centrar">Corrección de Errores</h3>
+                            <p>Eliminación de datos repetidos y optimización</p>
                         </div>
-                    </div>
+                    </article>
                 </div>
-                <div class="dispositivos">
-                    <img src="/DataSnap/config/images/dispositivos.png">
-                </div>
+
+                <figure class="dispositivos">
+                    <img src="/config/images/dispositivos.png" alt="Dispositivos con Datasnap" />
+                </figure>
+
                 <div class="caracteristicas">
-                    <div class="caracteristica">
+                    <article class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/backup.svg">
+                            <img src="/config/icons/backup.svg" alt="Backup" />
                         </div>
                         <div class="caracteristica-texto">
-                            <h1 class="centrar">
-                                Copias de Seguridad
-                            </h1>
+                            <h3 class="centrar">Copias de Seguridad</h3>
                             <p>
-                                cada vez que se modifique <br> se guarda una copia de <br> respaldo
+                                Cada vez que se modifique <br />
+                                se guarda una copia de <br />
+                                respaldo
                             </p>
                         </div>
-                    </div>
-                    <div class="caracteristica">
+                    </article>
+                    <article class="caracteristica">
                         <div class="icono">
-                            <img src="/DataSnap/config/images/statistics.svg">
+                            <img src="/config/icons/statistics.svg" alt="Estadísticas" />
                         </div>
                         <div class="caracteristica-texto">
-                            <h1 class="centrar">
-                                Estadistcas
-                            </h1>
+                            <h3 class="centrar">Estadísticas</h3>
                             <p>
-                                se puede analizar los datos <br> del archivo y otorga un informo de estadisticas
+                                Se pueden analizar los datos <br />
+                                del archivo y otorga un informe de estadísticas
                             </p>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
-        </div>
-        <div class="faq">
-            <div class="texto">
-                <h1 class="centrar">
-                    Preguntas Frecuentes 
-                </h1>
-            </div>
+        </section>
+
+        <section class="faq">
+            <header class="texto">
+                <h2 class="centrar">Preguntas Frecuentes</h2>
+            </header>
             <div class="preguntas">
-                <div class="card-pregunta">
-                    <h2>Pregunta 1</h2>
-                    <h2>+</h2>
-                </div>
-                <div class="card-pregunta">
-                    <h2>Pregunta 2</h2>
-                    <h2>+</h2>
-                </div>
-                <div class="card-pregunta">
-                    <h2>Pregunta 3</h2>
-                    <h2>+</h2>
-                </div>
-                <div class="card-pregunta">
-                    <h2>Pregunta 4</h2>
-                    <h2>+</h2>
-                </div>
+                <article class="card-pregunta">
+                    <h3>Pregunta 1</h3>
+                    <span>+</span>
+                </article>
+                <article class="card-pregunta">
+                    <h3>Pregunta 2</h3>
+                    <span>+</span>
+                </article>
+                <article class="card-pregunta">
+                    <h3>Pregunta 3</h3>
+                    <span>+</span>
+                </article>
+                <article class="card-pregunta">
+                    <h3>Pregunta 4</h3>
+                    <span>+</span>
+                </article>
             </div>
-        </div>
+        </section>
     </main>
-    <footer>
+
+    <footer id="footer">
         <div class="dudas">
             <div class="logo">
-                <img src="/DataSnap/config/images/logo.svg">
+                <img src="/config/icons/logo-solo.svg" alt="Logo pequeño" />
             </div>
             <div class="opcion-footer">
                 <h2>Ayuda</h2>
-                <p>
-                    Reportar algunn problema
-                </p>
-                <p>
-                    Como usar Datasnap
-                </p>
-                <p>
-                    Faq
-                </p>
+                <p>Reportar algún problema</p>
+                <p>Cómo usar Datasnap</p>
+                <p>FAQ</p>
             </div>
             <div class="opcion-footer">
                 <h2>Acerca de nosotros</h2>
-                <p>
-                    Quienes somos
-                </p>
-                <p>
-                    Acerca de la pagina
-                </p>
-                <p>
-                    Contactanos
-                </p>
+                <p>Quiénes somos</p>
+                <p>Acerca de la página</p>
+                <p>Contáctanos</p>
             </div>
             <div class="opcion-footer">
                 <h2>Nuestras Redes</h2>
@@ -192,7 +177,7 @@
             </div>
         </div>
         <div class="derechos">
-
+            
         </div>
     </footer>
 </body>
