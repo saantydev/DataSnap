@@ -22,7 +22,7 @@ body {
 .wave1 {
   background: #26AAB5;
   animation-duration: 30s;
-  z-index: -4;
+  z-index: -5;
   opacity: 0.7;
 }
 
