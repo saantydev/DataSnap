@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Fundadores - DATASNAP</title>
+    <link rel="stylesheet" href="../../config/css/estilo(nosotros).css">
+</head>
+<body>
+
+    <header>
+        <h1>Fundadores</h1>
+    </header>
+
+    <main>
+        <?php
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+        if (!$id) {
+            // Página principal con las tarjetas de los fundadores
+            echo '
+            <section class="fundadores">
+                <div class="card">
+                    <img src="../../config/images/Bernal.png" alt="Foto Santiago">
+                    <h2>Santiago Bernal Conde</h2>
+                    <a href="?id=1" class="btn">PERFIL</a>
+                </div>
+                <div class="card">
+                    <img src="../../config/images/Roman.png" alt="Foto Roman">
+                    <h2>Roman Ranucci</h2>
+                    <a href="?id=2" class="btn">PERFIL</a>
+                </div>
+                <div class="card">
+                    <img src="../../config/images/Ian.png" alt="Foto Ian">
+                    <h2>Ian Steinmeyer</h2>
+                    <a href="?id=3" class="btn">PERFIL</a>
+                </div>
+                <div class="card">
+                    <img src="../../config/images/Cris.png" alt="Foto Cristian">
+                    <h2>Cristian Cabral</h2>
+                    <a href="?id=4" class="btn">PERFIL</a>
+                </div>
+            </section>';
+        } else {
+            // Página de perfil individual
+            echo '<section class="perfil">';
+
+            switch ($id) {
+                case 1:
+                    echo '
+                    <img src="../../config/images/Bernal.png" alt="Foto Santiago" class="foto-perfil">
+                    <h2>Santiago Bernal Conde</h2>
+                    <div class="info">
+                        <div>
+                            <h3>Sobre mi</h3>
+                            <p>Soy Santiago, apasionado por el diseño y la innovación digital.</p>
+                        </div>
+                        <div>
+                            <h3>Conocimientos</h3>
+                            <p>HTML, CSS, diseño UI/UX, creatividad visual.</p>
+                        </div>
+                    </div>';
+                    break;
+                case 2:
+                    echo '
+                    <img src="../../config/images/Roman.png" alt="Foto Roman" class="foto-perfil">
+                    <h2>Roman Ranucci</h2>
+                    <div class="info">
+                        <div>
+                            <h3>Sobre mi</h3>
+                            <p>Me gusta resolver problemas y aprender nuevas tecnologías.</p>
+                        </div>
+                        <div>
+                            <h3>Conocimientos</h3>
+                            <p>PHP, MySQL, JavaScript, backend development.</p>
+                        </div>
+                    </div>';
+                    break;
+                case 3:
+                    echo '
+                    <img src="../../config/images/Ian.png" alt="Foto Ian" class="foto-perfil">
+                    <h2>Ian Steinmeyer</h2>
+                    <div class="info">
+                        <div>
+                            <h3>Sobre mi</h3>
+                            <p>Programador curioso, siempre buscando mejorar mis proyectos.</p>
+                        </div>
+                        <div>
+                            <h3>Conocimientos</h3>
+                            <p>Java, Python, estructuras de datos y algoritmos.</p>
+                        </div>
+                    </div>';
+                    break;
+                case 4:
+                    echo '
+                    <img src="../../config/images/Cris.png" alt="Foto Cristian" class="foto-perfil">
+                    <h2>Cristian Cabral</h2>
+                    <div class="info">
+                        <div>
+                            <h3>Sobre mi</h3>
+                            <p>Desarrollador con interés en proyectos colaborativos y prácticos.</p>
+                        </div>
+                        <div>
+                            <h3>Conocimientos</h3>
+                            <p>React, Node.js, integración de APIs, desarrollo web full stack.</p>
+                        </div>
+                    </div>';
+                    break;
+                default:
+                    echo '<h2>Perfil no encontrado.</h2>';
+                    break;
+            }
+
+            echo '
+            <div class="botones">
+                <a href="nosotros.html" class="btn">VOLVER</a>
+                <a href="#" class="btn">CV</a>
+                <a href="#" class="btn">CONTACTAME</a>
+            </div>
+            </section>';
+        }
+        ?>
+    </main>
+
+</body>
+</html>
