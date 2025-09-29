@@ -10,7 +10,28 @@
 
 <body>
 
-    <h2>Mis archivos</h2>
+    <div class="titulo">
+        <h1>Mis archivos</h1>
+        <div class="filter-bar">
+            <input type="text" placeholder="Filtrar por nombre...">
+            <select>
+                <option value="">Tipo</option>
+                <option value="op1">Opción 1</option>
+                <option value="op2">Opción 2</option>
+            </select>
+            <select>
+                <option value="">Antigüedad</option>
+                <option value="reciente">Más reciente</option>
+                <option value="antiguo">Más antiguo</option>
+            </select>
+            <button title="Ordenar">
+                <img src="../../config/icons/tabler_sort-ascending.svg">
+            </button>
+            <button title="Buscar">
+                <img src="../../config/icons/material-symbols_search.svg">
+            </button>
+        </div>
+    </div>
 
     <div class="tabs">
         <div class="tab">archivos originales</div>
