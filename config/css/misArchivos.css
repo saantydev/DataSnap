@@ -1,0 +1,147 @@
+body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fafafa;
+            margin: 40px;
+            color: #222;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .tab {
+            margin-right: 24px;
+            padding-bottom: 8px;
+            cursor: pointer;
+            color: #00b8bf;
+            border-bottom: 2px solid #00b8bf;
+        }
+
+        .tab.inactive {
+            color: #666;
+            border-bottom: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+            background: #fff;
+            box-shadow: 0 0 12px rgb(0 0 0 / 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead th {
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+            user-select: none;
+        }
+
+        tbody tr {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgb(0 0 0 / 0.03);
+        }
+
+        tbody tr td {
+            padding: 12px 20px;
+            vertical-align: middle;
+            font-size: 14px;
+            color: #222;
+        }
+
+        tbody tr:not(:last-child) {
+            border-bottom: 1px solid #eee;
+        }
+
+        
+        .file-icon {
+            display: inline-block;
+            width: 20px;
+            height: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+            background: url('data:image/svg+xml;utf8,<svg fill="%23999" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 2h8l4 4v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zM13 3.5V8h4.5L13 3.5z"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        
+        .tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: white;
+            text-transform: lowercase;
+            font-family: monospace;
+            user-select: none;
+        }
+
+        .tag.sql {
+            background-color: #ff5c5c;
+        }
+
+        .tag.csv {
+            background-color: #00aaa5;
+        }
+
+        .tag.txt {
+            background-color: #4353ff;
+        }
+
+        .tag.json {
+            background-color: #ffb541;
+            color: #fff;
+        }
+
+        
+        .btn-optimize {
+            background-color: #16a085;
+            border: none;
+            padding: 6px 14px;
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            user-select: none;
+        }
+
+        .btn-optimize svg {
+            margin-right: 6px;
+        }
+
+        
+        .btn-optimize svg {
+            fill: white;
+        }
+
+        
+        .actions {
+            width: 24px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .actions svg circle {
+            fill: #bbb;
+        }
+
+        .actions:hover svg circle {
+            fill: #666;
+        }
