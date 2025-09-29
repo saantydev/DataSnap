@@ -4,6 +4,7 @@
     font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 .body{
@@ -84,11 +85,12 @@ a{
 }
 
 .titulo{
-    font-size: clamp(2rem, -0.6667rem + 4.4444vw, 4rem);
+    font-size: clamp(2.3rem, -0.6667rem + 4.4444vw, 4rem);
 }
 
 .descripcion{
-    font-size: clamp(1.1rem, 0.0629rem + 1.8438vw, 2rem);
+    color: rgb(39, 39, 39);
+    font-size: clamp(1.1rem, 0.0629rem + 1.8438vw, 1.4rem);
 }
 
 .persona{
@@ -174,7 +176,7 @@ a{
 }
 
 .dispositivos img{
-    width: 100%;
+    width: 90%;
 }
 
 .faq{
@@ -229,4 +231,113 @@ footer{
 
 #btn-inicio{
     font-size: 1.5em;
+}
+
+@media screen and (orientation: portrait) {
+    .menu{
+        gap: 30px;
+    }
+
+    #opciones-menu-hamburguesa {
+        display: none;
+    }
+
+    #opciones-boton{
+        gap: 5px;
+        margin-left: 3vw;
+    }
+
+    .btn1, .btn2 {
+        justify-content: center;
+        padding: 10px 8px;
+        width: 93px;
+        font-size: 0.8em;
+    }
+
+    .persona{
+        display: none;
+    }
+
+    #btn-inicio{
+        font-size: 1.2em;
+    }
+
+    .dispositivos{
+        display: none;
+    }
+
+    .contenido{
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .caracteristicas{
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .caracteristica{
+        width: 150px;
+    }
+
+    #dispositivos2{
+        display: block;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px 10px;
+    }
+
+    .dudas {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    footer .logo {
+        width: 100px;
+        height: auto;
+    }
+
+    .logo img {
+        width: 100%;
+        height: auto;
+    }
+
+    .opcion-footer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .opcion-footer h2 {
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+    }
+
+    .opcion-footer p {
+        font-size: 1rem;
+    }
+
+    .derechos {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #aaa;
+    }
+
+    .preguntas{
+        width: 300px;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    #menu-hamburguesa{
+        display: none;
+    }
+
+    #dispositivos2{
+        display: none;
+    }
 }
