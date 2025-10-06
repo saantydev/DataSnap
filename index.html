@@ -1,208 +1,230 @@
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datasnap</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/config/css/landing.css">
     <link rel="shortcut icon" href="/config/icons/logo-solo.svg">
 </head>
+
 <body>
-    <main>
-        <nav class="menu">
+
+    <!-- Intro Animación -->
+    <div id="intro-bienvenida" class="display-flex flex-col center">
+        <img src="/config/icons/logo-solo.svg" class="intro-logo" alt="Logo">
+        <span class="intro-texto">DATASNAP</span>
+    </div>
+
+    <main class="display-flex flex-col">
+        <!-- menu -->>
+        <nav class="menu display-flex center">
             <div class="logo">
-                <img src="/config/icons/logo.svg">
+                <img src="/config/icons/logo.svg" alt="Logo">
             </div>
-            <div class="opciones" id="opciones-menu-hamburguesa">
-                <a href="#inicio">
-                    Inicios
-                </a>
-                <a href="#acerca">
-                    Acerca de Nosotros
-                </a>
-                <a href="#">
-                    Contactar
-                </a>
-                <a href="#">
-                    Faq
-                </a>
+            <div class="opciones display-flex" id="opciones-menu-hamburguesa">
+                <a href="#inicio">Inicio</a>
+                <a href="#acerca">Acerca de Nosotros</a>
+                <a href="#">Contactar</a>
+                <a href="#">Preguntas</a>
             </div>
-            <div class="opciones" id="opciones-boton">
-                <a href="/register" class="btn1">
-                    Registrarse
-                </a>
-                <a href="/login" class="btn2">
-                    Iniciar Sesion
-                </a>
+            <div class="opciones display-flex" id="opciones-boton">
+                <a href="/register" class="btn1">Registrarse</a>
+                <a href="/login" class="btn2">Iniciar Sesión</a>
             </div>
-            <div id="menu-hamburguesa">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            <div id="menu-hamburguesa" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </div>
         </nav>
-        <div class="inicio" id="inicio">
-            <div class="texto">
+
+        <!-- hero section -->
+        <section class="inicio display-flex center" id="inicio">
+            <div class="texto display-flex flex-col">
                 <h1 class="titulo">
                     Impulsá tu negocio con Datasnap
                 </h1>
                 <p class="descripcion">
-                    A través de inteligencia artificial, analizamos y optimizamos tus bases 
-                    de datos para automatizar procesos internos, corregir errores y mejorar la 
+                    A través de inteligencia artificial, analizamos y optimizamos tus bases
+                    de datos para automatizar procesos internos, corregir errores y mejorar la
                     eficiencia operativa.
                 </p>
-                <div class="opciones">
+                <div class="opciones display-flex">
                     <a href="/register" class="btn1" id="btn-inicio">
-                        COMENZAR
+                        Comenzar
                     </a>
                     <a href="#acerca" class="btn2" id="btn-inicio">
-                        ACERCA
+                        Acerca
                     </a>
                 </div>
             </div>
-            <div class="persona">
-                <img src="/config/images/Persona.png">
+            <div class="persona display-flex center">
+                <img src="/config/images/Persona.png" alt="Persona usando Datasnap">
             </div>
-        </div>
-        <img src="/config/icons/wave.svg" class="wave">
-        <div class="acerca centrar" id="acerca">
+        </section>
+
+        <!-- separador wave -->>
+        <svg viewBox="0 0 1440 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="wave">
+            <path d="M0 56.7508L34.4 64.3175C68.8 71.8167 137.6 86.9503 206.08 96.2736C274.72 105.597 342.88 109.245 411.52 104.516C480 99.7868 548.8 86.68 617.28 78.5728C685.92 70.4655 754.08 67.3577 822.72 70.9384C891.2 74.5191 960 84.9235 1028.48 98.3004C1097.12 111.677 1165.28 128.162 1233.92 129.851C1302.4 131.54 1371.2 118.433 1405.6 111.948L1440 105.394V0H1405.6C1371.2 0 1302.4 0 1233.92 0C1165.28 0 1097.12 0 1028.48 0C960 0 891.2 0 822.72 0C754.08 0 685.92 0 617.28 0C548.8 0 480 0 411.52 0C342.88 0 274.72 0 206.08 0C137.6 0 68.8 0 34.4 0H0V56.7508Z"/>
+        </svg>
+
+        <!-- acerca -->>
+        <section class="acerca centrar flex-col" id="acerca">
             <div class="texto">
                 <h1 class="titulo centrar">
                     Acerca de Datasnap
                 </h1>
-                <p class="descripcion centrar" >
+                <p class="descripcion centrar">
                     Datasnap integra actualmente diversas funcionalidades clave orientadas
-                    a la conversión, análisis y optimización de datos, entre las cuales se 
+                    a la conversión, análisis y optimización de datos, entre las cuales se
                     encuentran:
                 </p>
             </div>
-            <div class="contenido">
-                <div class="caracteristicas">
-                    <div class="caracteristica">
-                        <div class="icono">
-                            <img src="/config/icons/file.svg">
+            <div class="contenido display-flex flex-row">
+                <div class="caracteristicas display-flex flex-col centrar">
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="/config/icons/file.svg" alt="Lectura de Archivos">
                         </div>
-                        <div class="caracteristica-texto">
+                        <div class="caracteristica-texto display-flex flex-col">
                             <h1 class="centrar">
                                 Lectura de Archivos
                             </h1>
                             <p>
-                                puede procesar archivos csv, txt, json y sql
+                                Puede procesar archivos csv, txt, json y sql.
                             </p>
                         </div>
                     </div>
-                    <div class="caracteristica">
-                        <div class="icono">
-                            <img src="/config/icons/efficiency.svg">
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="/config/icons/efficiency.svg" alt="Corrección de Errores">
                         </div>
-                        <div class="caracteristica-texto">
+                        <div class="caracteristica-texto display-flex flex-col">
                             <h1 class="centrar">
-                                Correcion de Errores
+                                Corrección de Errores
                             </h1>
                             <p>
-                                eliminacion de datos repetidos y optimizacion
+                                Eliminación de datos repetidos y optimización.
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="dispositivos">
-                    <img src="/config/images/dispositivos.png">
+                <div class="dispositivos center">
+                    <img src="/config/images/dispositivos.png" alt="Dispositivos compatibles">
                 </div>
-                <div class="caracteristicas">
-                    <div class="caracteristica">
-                        <div class="icono">
-                            <img src="/config/icons/backup.svg">
+                <div class="caracteristicas display-flex flex-col centrar">
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="/config/icons/backup.svg" alt="Copias de Seguridad">
                         </div>
-                        <div class="caracteristica-texto">
+                        <div class="caracteristica-texto display-flex flex-col">
                             <h1 class="centrar">
                                 Copias de Seguridad
                             </h1>
                             <p>
-                                cada vez que se modifique <br> se guarda una copia de <br> respaldo
+                                Cada vez que se modifique se guarda una copia de respaldo.
                             </p>
                         </div>
                     </div>
-                    <div class="caracteristica">
-                        <div class="icono">
-                            <img src="/config/icons/statistics.svg">
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="/config/icons/statistics.svg" alt="Estadísticas">
                         </div>
-                        <div class="caracteristica-texto">
+                        <div class="caracteristica-texto display-flex flex-col">
                             <h1 class="centrar">
-                                Estadistcas
+                                Estadísticas
                             </h1>
                             <p>
-                                se puede analizar los datos <br> del archivo y otorga un informo de estadisticas
+                                Se puede analizar los datos del archivo y otorga un informe de estadísticas.
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="dispositivos" id="dispositivos2">
-                    <img src="/config/images/dispositivos.png">
+                <div class="dispositivos center" id="dispositivos2">
+                    <img src="/config/images/dispositivos.png" alt="Dispositivos compatibles">
                 </div>
             </div>
-        </div>
-        <div class="faq">
+        </section>
+
+        <!-- borrar despues -->>
+        <section class="faq center flex-col" id="faq">
             <div class="texto">
                 <h1 class="centrar">
-                    Preguntas Frecuentes 
+                    Preguntas Frecuentes
                 </h1>
             </div>
-            <div class="preguntas">
-                <div class="card-pregunta">
+            <div class="preguntas display-flex flex-col">
+                <div class="card-pregunta display-flex flex-row center">
                     <h2>Pregunta 1</h2>
                     <h2>+</h2>
                 </div>
-                <div class="card-pregunta">
+                <div class="card-pregunta display-flex flex-row center">
                     <h2>Pregunta 2</h2>
                     <h2>+</h2>
                 </div>
-                <div class="card-pregunta">
+                <div class="card-pregunta display-flex flex-row center">
                     <h2>Pregunta 3</h2>
                     <h2>+</h2>
                 </div>
-                <div class="card-pregunta">
+                <div class="card-pregunta display-flex flex-row center">
                     <h2>Pregunta 4</h2>
                     <h2>+</h2>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
     <footer>
-        <div class="dudas">
+        <div class="dudas display-flex flex-row">
             <div class="logo">
-                <img src="/config/icons/logo.svg">
+                <img src="/config/icons/logo-solo.svg" alt="Logo">
             </div>
-            <div class="opcion-footer">
+            <div class="opcion-footer display-flex flex-col">
                 <h2>Ayuda</h2>
-                <p>
-                    Reportar algunn problema
-                </p>
-                <p>
-                    Como usar Datasnap
-                </p>
-                <p>
-                    Faq
-                </p>
+                <p>Reportar algún problema</p>
+                <p>Cómo usar Datasnap</p>
+                <p>Preguntas</p>
             </div>
-            <div class="opcion-footer">
+            <div class="opcion-footer display-flex flex-col">
                 <h2>Acerca de nosotros</h2>
-                <p>
-                    Quienes somos
-                </p>
-                <p>
-                    Acerca de la pagina
-                </p>
-                <p>
-                    Contactanos
-                </p>
+                <p>Quiénes somos</p>
+                <p>Acerca de la página</p>
+                <p>Contáctanos</p>
             </div>
-            <div class="opcion-footer">
+            <div class="opcion-footer display-flex flex-col">
                 <h2>Nuestras Redes</h2>
-                
             </div>
         </div>
-        <div class="derechos">
-
-        </div>
+        <div class="derechos"></div>
     </footer>
 </body>
+<script>
+    // Animación de intro
+    const introDiv = document.getElementById('intro-bienvenida');
+    const introLogo = introDiv.querySelector('.intro-logo');
+    const introTexto = introDiv.querySelector('.intro-texto');
+
+    // 1. Aparecer logo con opacidad
+    setTimeout(() => {
+        introLogo.classList.add('visible');
+    }, 100);
+
+    // 2. Mostrar texto y mover logo después de 600ms
+    setTimeout(() => {
+        introTexto.classList.add('visible');
+        introLogo.classList.add('move-left');
+    }, 700);
+
+    // 3. Ocultar intro después de 2 segundos
+    setTimeout(() => {
+        introDiv.style.opacity = 0;
+        setTimeout(() => {
+            introDiv.remove();
+        }, 700);
+    }, 2100);
+</script>
 </html>
