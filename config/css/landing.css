@@ -1,29 +1,24 @@
-.body {
-    display: flex;
-    flex-direction: column;
+body{
+    overflow-x: hidden;
 }
 
 main {
-    display: flex;
-    flex-direction: column;
     background-color: var(--color-secundario);
 }
 
 .menu {
+    background-color: var(--color-fondo);
+    justify-content: space-between;
     position: sticky;
     top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 10px;
-    font-size: 1.2em;
-    background-color: var(--color-fondo);
+    font-size: 1em;
     z-index: 1;
 }
 
 .logo {
     width: 5rem;
-    height: 3.5rem;
+    height: 2.9rem;
 }
 
 .logo img {
@@ -36,11 +31,7 @@ main {
     gap: 20px;
 }
 
-
 .inicio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: calc(95vh - 64px);
     padding: 0 50px;
     gap: 50px;
@@ -66,9 +57,7 @@ main {
 }
 
 .persona {
-    width: 100vw;
-    display: flex;
-    justify-content: center;
+    width: 90vw;
 }
 
 .persona img {
@@ -77,8 +66,9 @@ main {
 }
 
 .wave {
-    width: 100%;
+    width: 200vw;
     fill: var(--color-fondo);
+    animation: animacionWave 7.5s  infinite alternate;
 }
 
 .acerca {
@@ -104,51 +94,23 @@ main {
     border-radius: 14px;
 }
 
-.centrar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 .caracteristicas {
-
-    display: flex;
-    flex-direction: column;
     width: 20vw;
     gap: 5rem;
 }
 
 .caracteristica {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
-}
-
-.caracteristica-texto {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .caracteristica-texto h1 {
     color: var(--color-texto);
-    width: 100%;
     font-size: 1.4em;
 }
 
 .caracteristica-texto p {
     color: var(--color-texto);
-    width: 100%;
     font-size: 1em;
-}
-
-.dispositivos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .dispositivos img {
@@ -156,10 +118,6 @@ main {
 }
 
 .faq {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 3rem;
     padding: 20px;
     height: 80vh;
@@ -167,8 +125,6 @@ main {
 }
 
 .preguntas {
-    display: flex;
-    flex-direction: column;
     gap: 2rem;
     width: 40%;
 }
@@ -178,8 +134,6 @@ main {
     color: var(--color-texto);
     padding: 15px 20px;
     border-radius: 14px;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -187,21 +141,16 @@ footer {
     display: flex;
     flex-direction: column;
     background-color: #1E1E1E;
-    color: var(--color-texto);
+    color: var(--color-texto-footer);
     padding: 20px;
     gap: 5px;
 }
 
 .dudas {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     gap: 4rem;
 }
 
 .opcion-footer {
-    display: flex;
-    flex-direction: column;
     gap: 0.5rem;
 }
 
@@ -210,9 +159,6 @@ footer {
 }
 
 #intro-bienvenida {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -265,6 +211,12 @@ footer {
 .intro-texto.visible {
     opacity: 1;
     transform: translateX(50px);
+}
+
+@keyframes animacionWave {
+    0%{
+        transform: translate(-50%);
+    }
 }
 
 @media screen and (orientation: portrait) {
