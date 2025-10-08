@@ -71,6 +71,7 @@ a {
 @media (prefers-color-scheme: dark) {
   :root {
     --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
     --color-secundario: #1F2937;
     --color-fondo: #111827;
     --color-texto: #FFFFFF;
@@ -81,6 +82,7 @@ a {
 @media (prefers-color-scheme: light) {
   :root {
     --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
     --color-secundario: #C8F5F9;
     --color-fondo: #FDFDFD;
     --color-texto: black;
