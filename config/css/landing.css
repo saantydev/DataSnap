@@ -14,7 +14,7 @@ main {
     top: 0;
     padding: 10px;
     font-size: 1em;
-    z-index: 1;
+    z-index: 3;
 }
 
 .logo {
@@ -66,6 +66,7 @@ main {
 
 .persona {
     width: 90vw;
+    z-index: 2;
 }
 
 .persona img {
@@ -73,10 +74,18 @@ main {
     height: auto;
 }
 
+.wave-div{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    line-height: 0;
+}
+
 .wave {
-    width: 200vw;
+    width: 100vw;
+    z-index: 2;
     fill: var(--color-fondo);
-    animation: animacionWave 7.5s  infinite alternate;
+    animation: animacionWave 5s  infinite alternate;
 }
 
 .acerca {
@@ -135,26 +144,6 @@ main {
     width: 90%;
 }
 
-.faq {
-    gap: 3rem;
-    padding: 20px;
-    height: 80vh;
-    background-color: var(--color-fondo);
-}
-
-.preguntas {
-    gap: 2rem;
-    width: 40%;
-}
-
-.card-pregunta {
-    background-color: var(--color-primario);
-    color: var(--color-texto);
-    padding: 15px 20px;
-    border-radius: 14px;
-    justify-content: space-between;
-}
-
 footer {
     display: flex;
     flex-direction: column;
@@ -176,21 +165,13 @@ footer {
     font-size: 1.5em;
 }
 
-#intro-bienvenida {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--color-fondo);
-}
 
 #intro-bienvenida {
     position: fixed;
     background: var(--color-fondo);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    z-index: 5;
+    width: 100vw;
+    height: 100vh;
     transition: opacity 0.7s;
 }
 
@@ -265,10 +246,12 @@ footer {
 
 @keyframes animacionWave {
     0%{
-        transform: translate(-50%);
+        transform: scale(1);
+        transform-origin: left;
     }
     100%{
-        transform: translate(0%);
+        transform: scale(1.5);
+        transform-origin: right;
     }
 }
 
@@ -330,6 +313,10 @@ footer {
 
     .persona {
         width: auto;
+    }
+
+    .wave-div{
+        height: 110px;
     }
 
     .btn1,
@@ -409,8 +396,13 @@ footer {
         color: #aaa;
     }
 
-    .preguntas {
-        width: 300px;
+    .funcionamiento-cards{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card{
+        min-height: 250px;
     }
 }
 
