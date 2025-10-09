@@ -262,6 +262,21 @@
             introDiv.remove();
         }, 700);
     }, 2100);
+
+    const menuHamburguesa = document.getElementById('menu-hamburguesa');
+    const opcionesMenu = document.getElementById('opciones-menu-hamburguesa');
+
+    // Crear clase activa para mostrar el menú
+    menuHamburguesa.addEventListener('click', () => {
+        opcionesMenu.classList.toggle('menu-activo');
+    });
+
+    // Cerrar el menú cuando se haga clic en un enlace
+    opcionesMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            opcionesMenu.classList.remove('menu-activo');
+        });
+    });
 </script>
 
 </html>
