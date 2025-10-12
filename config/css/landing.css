@@ -32,6 +32,26 @@ main {
     gap: 20px;
 }
 
+.tema-selector{
+    background-color: var(--color-fondo);
+}
+
+#tema-select {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    border: none;
+    padding: 0 8px;
+    font-size: 1em;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.4s, color 0.4s, border 0.3s;
+}
+
+#tema-icon svg{
+    fill: var(--color-texto);
+    width: 20px;
+}
+
 .inicio {
     height: calc(95vh - 64px);
     padding: 0 50px;
@@ -93,6 +113,7 @@ main {
     flex-direction: column;
     padding: 2.5rem;
     gap: 3.5rem;
+    margin-bottom: 4rem;
 }
 
 .contenido {
@@ -273,17 +294,6 @@ footer {
     }
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0; 
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1; 
-    transform: translateY(0);
-  }
-}
-
 @media screen and (orientation: portrait) {
     .menu {
         gap: 30px;
@@ -336,10 +346,7 @@ footer {
 
     .btn1,
     .btn2 {
-        justify-content: center;
-        padding: 10px 8px;
-        width: 93px;
-        font-size: 0.8em;
+        display: none;
     }
 
     #btn-inicio {
