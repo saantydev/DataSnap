@@ -1,1 +1,38 @@
-a
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página Reportar</title>
+  <link rel="stylesheet" href="../../config/css/reportar.css">
+</head>
+<body>
+  <header class="header">
+    <img src="../../config/icons/logo.svg" alt="Logo" class="logo">
+  </header>
+
+  <main class="container">
+    <section class="left-side">
+      <div class="content">
+        <h1>Reportar incidencia</h1>
+        <p>Ayudanos a mejorar notificando errores o problemas.</p>
+
+        <form class="report-form" action="#" onsubmit="return false;">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" placeholder="Describí el problema..."></textarea>
+
+          <div class="buttons">
+            <button class="btn btn-celeste">Enviar reporte</button>
+            <button class="btn btn-blanco">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="right-side">
+      <img src="../../config/icons/wave.svg" alt="Decoración celeste" class="wave">
+      <img src="../../config/icons/cable.svg" alt="Cable divisor" class="cable">
+    </section>
+  </main>
+</body>
+</html>
