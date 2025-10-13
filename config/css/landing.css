@@ -17,17 +17,17 @@ main {
     z-index: 3;
 }
 
-.logo{
+.logo {
     width: 5rem;
     height: 2.9rem;
 }
 
-.logo img{
+.logo img {
     width: 100%;
     height: 100%;
 }
 
-.opciones{
+.opciones {
     display: flex;
     gap: 20px;
 }
@@ -56,10 +56,10 @@ main {
     height: calc(95vh - 64px);
     padding: 0 50px;
     gap: 50px;
-    background-color: #FDFDFD;
+    background-color: var(--color-fondo);
 }
 
-.texto{
+.texto {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -73,15 +73,15 @@ main {
   animation: fadeIn 1s ease-out forwards;
 }
 
-.titulo{
+.titulo {
     font-size: clamp(2.3rem, -0.6667rem + 4.4444vw, 4rem);
     color: var(--color-texto);
     animation: fadeIn 1.5s ease-out forwards;
 }
 
-.descripcion{
-    color: rgb(39, 39, 39);
+.descripcion {
     font-size: clamp(1.1rem, 0.0629rem + 1.8438vw, 1.4rem);
+    color: var(--color-texto);
 }
 
 .persona {
@@ -89,7 +89,7 @@ main {
     z-index: 2;
 }
 
-.persona img{
+.persona img {
     width: 100%;
     height: auto;
 }
@@ -108,7 +108,7 @@ main {
     animation: animacionWave 5s  infinite alternate;
 }
 
-.acerca{
+.acerca {
     display: flex;
     flex-direction: column;
     padding: 2.5rem;
@@ -116,19 +116,19 @@ main {
     margin-bottom: 4rem;
 }
 
-.contenido{
+.contenido {
     display: flex;
     flex-direction: row;
     gap: 2rem;
 }
 
-.icono{
+.icono {
     display: flex;
     justify-content: center;
     align-items: center;
     width: fit-content;
     padding: 1rem;
-    background-color: var(--primario);
+    background-color: var(--color-primario);
     border-radius: 14px;
 }
 
@@ -160,11 +160,11 @@ main {
     animation: animacionBlob 8s infinite;
 }
 
-.dispositivos img{
+.dispositivos img {
     width: 90%;
 }
 
-footer{
+footer {
     display: flex;
     flex-direction: column;
     background-color: #1E1E1E;
@@ -181,7 +181,7 @@ footer{
     gap: 0.5rem;
 }
 
-#btn-inicio{
+#btn-inicio {
     font-size: 1.5em;
 }
 
@@ -294,7 +294,7 @@ footer{
 }
 
 @media screen and (orientation: portrait) {
-    .menu{
+    .menu {
         gap: 30px;
     }
 
@@ -347,33 +347,29 @@ footer{
         display: none;
     }
 
-    .persona{
-        display: none;
-    }
-
-    #btn-inicio{
+    #btn-inicio {
         font-size: 1.2em;
     }
 
-    .dispositivos{
+    .dispositivos {
         display: none;
     }
 
-    .contenido{
+    .contenido {
         flex-direction: column;
         justify-content: start;
     }
 
-    .caracteristicas{
+    .caracteristicas {
         width: 100%;
         flex-direction: row;
     }
 
-    .caracteristica{
+    .caracteristica {
         width: 150px;
     }
 
-    #dispositivos2{
+    #dispositivos2 {
         display: block;
     }
 
@@ -389,13 +385,12 @@ footer{
     }
 
     footer .logo {
-        width: 100px;
+        width: 50px;
         height: auto;
     }
 
     .logo img {
         width: 100%;
-        height: auto;
     }
 
     .opcion-footer {
@@ -431,11 +426,12 @@ footer{
 }
 
 @media screen and (orientation: landscape) {
-    #menu-hamburguesa{
+    #menu-hamburguesa {
         display: none;
+        background-color: var(--color-texto);
     }
 
-    #dispositivos2{
+    #dispositivos2 {
         display: none;
     }
 }
