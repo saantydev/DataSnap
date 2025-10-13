@@ -4,180 +4,404 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tabla de Archivos</title>
-    <link rel="stylesheet" href="../../config/css/misArchivos.css">
+    <title>Mis Archivos - Datasnap</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- CSRF token para fetch/form -->
+    <meta name="csrf-token" content="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? ''); ?>">
+    <link rel="stylesheet" href="/config/css/misArchivos.css">
 </head>
 
-<body>
+<body class="bg-white flex">
+    <?php $active = 'files'; include __DIR__ . '/partials/sidebar.php'; ?>
+    <main class="flex-1 ml-72 p-6">
 
-    <div class="titulo">
-        <h1>Mis archivos</h1>
-        <div class="filter-bar">
-            <input type="text" placeholder="Filtrar por nombre...">
-            <select>
-                <option value="">Tipo</option>
-                <option value="op1">Opción 1</option>
-                <option value="op2">Opción 2</option>
-            </select>
-            <select>
-                <option value="">Antigüedad</option>
-                <option value="reciente">Más reciente</option>
-                <option value="antiguo">Más antiguo</option>
-            </select>
-            <button title="Ordenar">
-                <img src="../../config/icons/tabler_sort-ascending.svg">
-            </button>
-            <button title="Buscar">
-                <img src="../../config/icons/material-symbols_search.svg">
-            </button>
+        <div class="titulo">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Mis archivos</h2>
+            <div class="filter-bar bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
+                <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+                    <div class="flex-1 min-w-0">
+                        <div class="relative">
+                            <input type="text" id="filterInput" placeholder="Buscar archivos..."
+                                   class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                            <img src="/config/icons/material-symbols_search.svg" alt="Buscar" class="absolute left-3 top-3 w-4 h-4 text-gray-400">
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-center">
+                        <select id="typeFilter" class="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm min-w-[120px]">
+                            <option value="">Todos</option>
+                            <option value="json">JSON</option>
+                            <option value="csv">CSV</option>
+                            <option value="sql">SQL</option>
+                            <option value="txt">TXT</option>
+                            <option value="xlsx">XLSX</option>
+                        </select>
+                        <select id="dateFilter" class="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm">
+                            <option value="">Fecha</option>
+                            <option value="reciente">Más reciente</option>
+                            <option value="antiguo">Más antiguo</option>
+                        </select>
+                        <button id="sortBtn" title="Cambiar orden"
+                                class="p-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all">
+                            <img id="sortIcon" src="/config/icons/tabler_sort-ascending.svg" alt="Ordenar" class="w-5 h-5">
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="tabs">
-        <div class="tab">archivos originales</div>
-        <div class="tab inactive">archivos modificados</div>
-    </div>
+        <div class="tabs mb-6">
+            <div class="tab active" data-tab="originales">Archivos originales</div>
+            <div class="tab inactive" data-tab="modificados">Archivos modificados</div>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>tipo</th>
-                <th>tamaño</th>
-                <th>fecha</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span class="file-icon"></span>documento.sql</td>
-                <td><span class="tag sql">sql</span></td>
-                <td>3 MB</td>
-                <td>9/9/25</td>
-                <td><button class="btn-optimize" aria-label="optimizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
-                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
-                        </svg> optimizar
-                    </button></td>
-                <td class="actions" title="Más opciones">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
-                        <circle cx="3" cy="3" r="3" />
-                        <circle cx="10" cy="3" r="3" />
-                        <circle cx="17" cy="3" r="3" />
-                    </svg>
-                </td>
-            </tr>
-            <tr>
-                <td><span class="file-icon"></span>documento.csv</td>
-                <td><span class="tag csv">csv</span></td>
-                <td>6 MB</td>
-                <td>23/2/25</td>
-                <td><button class="btn-optimize" aria-label="optimizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
-                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
-                        </svg> optimizar
-                    </button></td>
-                <td class="actions" title="Más opciones">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
-                        <circle cx="3" cy="3" r="3" />
-                        <circle cx="10" cy="3" r="3" />
-                        <circle cx="17" cy="3" r="3" />
-                    </svg>
-                </td>
-            </tr>
-            <tr>
-                <td><span class="file-icon"></span>documento.txt</td>
-                <td><span class="tag txt">txt</span></td>
-                <td>8 MB</td>
-                <td>5/4/25</td>
-                <td><button class="btn-optimize" aria-label="optimizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
-                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
-                        </svg> optimizar
-                    </button></td>
-                <td class="actions" title="Más opciones">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
-                        <circle cx="3" cy="3" r="3" />
-                        <circle cx="10" cy="3" r="3" />
-                        <circle cx="17" cy="3" r="3" />
-                    </svg>
-                </td>
-            </tr>
-            <tr>
-                <td><span class="file-icon"></span>documento.json</td>
-                <td><span class="tag json">json</span></td>
-                <td>10 MB</td>
-                <td>1/7/20</td>
-                <td><button class="btn-optimize" aria-label="optimizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
-                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
-                        </svg> optimizar
-                    </button></td>
-                <td class="actions" title="Más opciones">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
-                        <circle cx="3" cy="3" r="3" />
-                        <circle cx="10" cy="3" r="3" />
-                        <circle cx="17" cy="3" r="3" />
-                    </svg>
-                </td>
-            </tr>
-            <tr>
-                <td><span class="file-icon"></span>documento.json</td>
-                <td><span class="tag json">json</span></td>
-                <td>2 MB</td>
-                <td>1/7/20</td>
-                <td><button class="btn-optimize" aria-label="optimizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
-                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
-                        </svg> optimizar
-                    </button></td>
-                <td class="actions" title="Más opciones">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
-                        <circle cx="3" cy="3" r="3" />
-                        <circle cx="10" cy="3" r="3" />
-                        <circle cx="17" cy="3" r="3" />
-                    </svg>
-                </td>
-            </tr>
-            <tr>
-                <td><span class="file-icon"></span>documento.json</td>
-                <td><span class="tag json">json</span></td>
-                <td>16 MB</td>
-                <td>17/10/17</td>
-                <td><button class="btn-optimize" aria-label="optimizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
-                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
-                        </svg> optimizar
-                    </button></td>
-                <td class="actions" title="Más opciones">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
-                        <circle cx="3" cy="3" r="3" />
-                        <circle cx="10" cy="3" r="3" />
-                        <circle cx="17" cy="3" r="3" />
-                    </svg>
-                </td>
-            </tr>
-            <tr>
-                <td><span class="file-icon"></span>documento.json</td>
-                <td><span class="tag json">json</span></td>
-                <td>20 MB</td>
-                <td>27/9/23</td>
-                <td><button class="btn-optimize" aria-label="optimizar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
-                            <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" />
-                        </svg> optimizar
-                    </button></td>
-                <td class="actions" title="Más opciones">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
-                        <circle cx="3" cy="3" r="3" />
-                        <circle cx="10" cy="3" r="3" />
-                        <circle cx="17" cy="3" r="3" />
-                    </svg>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <!-- Estado vacío -->
+        <div id="emptyState" class="hidden text-center py-12">
+            <img src="/config/icons/file.svg" alt="No files" class="w-24 h-24 mx-auto mb-4 opacity-50">
+            <h3 class="text-xl font-medium text-gray-600 mb-2">No tienes archivos aún</h3>
+            <p class="text-gray-500">Sube tu primer archivo para comenzar a optimizarlo</p>
+        </div>
+
+        <!-- Tabla de archivos -->
+        <div id="filesTableContainer" class="hidden">
+            <table class="w-full">
+                <thead>
+                    <tr>
+                        <th class="text-left py-3 px-4">Nombre</th>
+                        <th class="text-left py-3 px-4">Tipo</th>
+                        <th class="text-left py-3 px-4">Tamaño</th>
+                        <th class="text-left py-3 px-4">Fecha</th>
+                        <th class="text-left py-3 px-4">Estado</th>
+                        <th class="text-center py-3 px-4 min-w-[200px]">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="filesTableBody">
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <script>
+        // Estado de ordenamiento
+        let sortOrder = 'asc'; // 'asc' o 'desc'
+
+        // Cargar archivos al iniciar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFiles();
+
+            // Configurar event listeners para filtros
+            setupFilters();
+
+            // Inicializar icono de ordenamiento
+            updateSortIcon();
+
+            // Mostrar archivos originales por defecto
+            setTimeout(() => filterFilesByTab('originales'), 100);
+        });
+
+        // Configurar filtros
+        function setupFilters() {
+            const filterInput = document.getElementById('filterInput');
+            const typeFilter = document.getElementById('typeFilter');
+            const dateFilter = document.getElementById('dateFilter');
+            const sortBtn = document.getElementById('sortBtn');
+
+            filterInput.addEventListener('input', applyFilters);
+            typeFilter.addEventListener('change', applyFilters);
+            dateFilter.addEventListener('change', applyFilters);
+            sortBtn.addEventListener('click', function(e) {
+                console.log('Sort button clicked');
+                toggleSort();
+            });
+        }
+
+        // Alternar ordenamiento
+        function toggleSort() {
+            sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+            updateSortIcon();
+            applyFilters();
+        }
+
+        // Actualizar icono de ordenamiento
+        function updateSortIcon() {
+            const sortIcon = document.getElementById('sortIcon');
+            if (sortIcon) {
+                const newSrc = sortOrder === 'asc'
+                    ? '/config/icons/tabler_sort-ascending.svg'
+                    : '/config/icons/tabler_sort-descending.svg';
+                console.log('Changing sort icon to:', newSrc, 'Current order:', sortOrder);
+                sortIcon.src = newSrc + '?t=' + Date.now(); // Cache buster
+                sortIcon.alt = sortOrder === 'asc' ? 'Orden ascendente' : 'Orden descendente';
+            } else {
+                console.error('Sort icon element not found');
+            }
+        }
+
+        // Aplicar filtros
+        function applyFilters() {
+            const filterText = document.getElementById('filterInput').value.toLowerCase();
+            const typeValue = document.getElementById('typeFilter').value;
+            const dateValue = document.getElementById('dateFilter').value;
+
+            const rows = document.querySelectorAll('#filesTableBody tr');
+
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                const type = row.cells[1].textContent.toLowerCase();
+                const date = row.cells[3].textContent;
+
+                let show = true;
+
+                // Filtro de texto
+                if (filterText && !name.includes(filterText)) {
+                    show = false;
+                }
+
+                // Filtro de tipo
+                if (typeValue && !type.includes(typeValue)) {
+                    show = false;
+                }
+
+                // Filtro de fecha (simplificado)
+                if (dateValue) {
+                    // Aquí podrías implementar lógica más compleja para fechas
+                    // Por ahora solo verifica si contiene el texto
+                }
+
+                row.style.display = show ? '' : 'none';
+            });
+        }
+
+        // Función para cargar archivos desde el servidor
+        function loadFiles() {
+            fetch('/files/list')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.archivos && data.archivos.length > 0) {
+                        populateTable(data.archivos);
+                        document.getElementById('filesTableContainer').classList.remove('hidden');
+                        document.getElementById('emptyState').classList.add('hidden');
+                    } else {
+                        document.getElementById('emptyState').classList.remove('hidden');
+                        document.getElementById('filesTableContainer').classList.add('hidden');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading files:', error);
+                    document.getElementById('emptyState').classList.remove('hidden');
+                    document.getElementById('filesTableContainer').classList.add('hidden');
+                });
+        }
+
+        // Función para poblar la tabla con los archivos
+        function populateTable(files) {
+            const tbody = document.getElementById('filesTableBody');
+            tbody.innerHTML = '';
+
+            files.forEach(file => {
+                const row = document.createElement('tr');
+                row.dataset.fileId = file.id;
+                row.dataset.fileStatus = file.estado || 'original';
+
+                // Formatear tamaño (asegurarse de que sea número)
+                const sizeBytes = parseInt(file.size) || 0;
+                const sizeMB = (sizeBytes / (1024 * 1024)).toFixed(2) + ' MB';
+
+                // Formatear fecha
+                const date = new Date(file.fecha_subida);
+                const formattedDate = date.toLocaleDateString('es-ES');
+
+                // Obtener tipo de archivo desde la extensión
+                const fileName = file.nombre || '';
+                const extension = fileName.split('.').pop()?.toLowerCase() || 'unknown';
+                const fileType = ['sql', 'csv', 'txt', 'json', 'xlsx', 'xls'].includes(extension) ? extension : 'file';
+
+                // Estado del archivo
+                let statusText = 'Original';
+                let actionButton = `<button class="btn-optimize inline-flex items-center px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" onclick="optimizeFile(${file.id})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="mr-1">
+                        <path d="M20.285 6.709l-11.025 11.187-5.561-5.561 1.414-1.414 4.147 4.147 9.611-9.61z" fill="currentColor"/>
+                    </svg> Optimizar
+                </button>`;
+
+                if (file.estado === 'optimizado') {
+                    statusText = 'Optimizado';
+                    actionButton = `<a href="/files/download?id=${file.id}" class="btn-download inline-flex items-center px-3 py-1 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="mr-1">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <polyline points="7,10 12,15 17,10" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="15" x2="12" y2="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                        </svg> Descargar
+                    </a>`;
+                } else if (file.estado === 'pendiente') {
+                    statusText = 'Procesando...';
+                    actionButton = '<span class="inline-flex items-center px-3 py-1 text-sm bg-gray-400 text-white rounded-md cursor-not-allowed">Procesando...</span>';
+                }
+
+                row.innerHTML = `
+                    <td class="py-3 px-4"><span class="file-icon"></span>${file.nombre}</td>
+                    <td class="py-3 px-4"><span class="tag ${fileType}">${fileType.toUpperCase()}</span></td>
+                    <td class="py-3 px-4">${sizeMB}</td>
+                    <td class="py-3 px-4">${formattedDate}</td>
+                    <td class="py-3 px-4">${statusText}</td>
+                    <td class="py-3 px-4">
+                        <div class="flex items-center justify-center space-x-2">
+                            ${actionButton}
+                            <div class="relative">
+                                <button class="dropdown-trigger p-1 rounded hover:bg-gray-100 transition-colors" title="Más opciones">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="6" viewBox="0 0 20 6">
+                                        <circle cx="3" cy="3" r="3" fill="currentColor" class="text-gray-400" />
+                                        <circle cx="10" cy="3" r="3" fill="currentColor" class="text-gray-400" />
+                                        <circle cx="17" cy="3" r="3" fill="currentColor" class="text-gray-400" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        }
+
+        // Función para optimizar archivo
+        function optimizeFile(fileId) {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+            fetch('/files/optimize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ id: fileId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Archivo enviado a optimización');
+                    // Recargar archivos después de un momento
+                    setTimeout(() => loadFiles(), 1000);
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al optimizar el archivo');
+            });
+        }
+
+        // Funcionalidad de las pestañas
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remover clase active de todas las pestañas
+                tabs.forEach(t => t.classList.remove('active'));
+                // Agregar clase inactive a todas
+                tabs.forEach(t => t.classList.add('inactive'));
+                // Activar la pestaña clickeada
+                this.classList.remove('inactive');
+                this.classList.add('active');
+
+                // Filtrar archivos según la pestaña
+                const tabType = this.dataset.tab; // 'originales' o 'modificados'
+                filterFilesByTab(tabType);
+            });
+        });
+
+        // Filtrar archivos por pestaña
+        function filterFilesByTab(tabType) {
+            const rows = document.querySelectorAll('#filesTableBody tr');
+
+            rows.forEach(row => {
+                const fileStatus = row.dataset.fileStatus;
+
+                if (tabType === 'originales') {
+                    // Mostrar solo archivos originales (no modificados)
+                    row.style.display = (fileStatus === 'original') ? '' : 'none';
+                } else if (tabType === 'modificados') {
+                    // Mostrar archivos modificados u optimizados
+                    row.style.display = (fileStatus === 'optimizado' || fileStatus === 'pendiente') ? '' : 'none';
+                }
+            });
+        }
+
+        // Funcionalidad del menú desplegable
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.dropdown-trigger')) {
+                const trigger = e.target.closest('.dropdown-trigger');
+                e.stopPropagation();
+
+                // Remover menús existentes
+                document.querySelectorAll('.dropdown-menu').forEach(menu => menu.remove());
+
+                // Crear menú desplegable
+                const menu = document.createElement('div');
+                menu.className = 'dropdown-menu fixed z-50 w-48 bg-white border border-gray-300 rounded-lg shadow-xl py-1';
+                menu.innerHTML = `
+                    <button class="flex items-center w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                        </svg>
+                        <span class="font-medium">Eliminar archivo</span>
+                    </button>
+                `;
+
+                // Posicionar el menú
+                document.body.appendChild(menu);
+                const rect = trigger.getBoundingClientRect();
+                menu.style.top = (rect.bottom + window.scrollY) + 'px';
+                menu.style.left = (rect.right - menu.offsetWidth + window.scrollX) + 'px';
+
+                // Agregar funcionalidad al botón de borrar
+                menu.querySelector('button').addEventListener('click', function() {
+                    const fileId = trigger.closest('tr').dataset.fileId;
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+                    if (confirm('¿Estás seguro de que quieres eliminar este archivo?')) {
+                        fetch('/files/delete?id=' + fileId, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-Token': csrfToken,
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Remover la fila de la tabla
+                                trigger.closest('tr').remove();
+                                alert('Archivo eliminado correctamente');
+                            } else {
+                                alert('Error al eliminar el archivo: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error al eliminar el archivo');
+                        });
+                    }
+                    menu.remove();
+                });
+
+                // Cerrar menú al hacer clic fuera
+                document.addEventListener('click', function closeMenu() {
+                    if (!menu.contains(event.target) && !trigger.contains(event.target)) {
+                        menu.remove();
+                        document.removeEventListener('click', closeMenu);
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 
