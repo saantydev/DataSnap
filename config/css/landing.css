@@ -151,9 +151,8 @@ main {
 }
 
 .caracteristica-texto p {
-    color: var(--color-texto);
+    color: var(--color-texto-secundario);
     font-size: 0.9rem;
-    opacity: 0.5;
 }
 
 .dispositivos{
@@ -261,8 +260,8 @@ footer {
 }
 
 .card-texto p{
+    color: var(--color-texto-secundario);
     font-size: 0.8rem;
-    opacity: 0.5;
 }
 
 @keyframes animacionWave {
@@ -344,8 +343,7 @@ footer {
         height: 110px;
     }
 
-    .btn1,
-    .btn2 {
+    #opciones-boton {
         display: none;
     }
 
@@ -437,4 +435,110 @@ footer {
     #dispositivos2 {
         display: none;
     }
+}
+
+@keyframes fadeInCustom {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.fade-in-activo {
+    animation-name: fadeInCustom;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(.77,0,.18,1);
+    /* Puedes modificar el tiempo aquí */
+    animation-duration: var(--fadein-duracion, 1s);
+    animation-delay: var(--fadein-delay, 0s);
+}
+
+.fade-titulo.fade-in-activo {
+    --fadein-delay: 0.2s;
+    --fadein-duracion: 1.2s;
+}
+.fade-descripcion.fade-in-activo {
+    --fadein-delay: 0.7s;
+    --fadein-duracion: 1.2s;
+}
+.fade-boton1.fade-in-activo {
+    --fadein-delay: 1.2s;
+    --fadein-duracion: 1.2s;
+}
+.fade-boton2.fade-in-activo {
+    --fadein-delay: 1.4s;
+    --fadein-duracion: 1.4s;
+}
+
+
+.fade-icon1.fade-in-activo {
+    --fadein-delay: 1s;
+    --fadein-duracion: 1s;
+}
+.fade-iconTitulo1.fade-in-activo {
+    --fadein-delay: 1.1s;
+    --fadein-duracion: 1.2s;
+}
+.fade-iconDescripcion1.fade-in-activo {
+    --fadein-delay: 1.3s;
+    --fadein-duracion: 1.3s;
+}
+
+
+.fade-icon2.fade-in-activo {
+    --fadein-delay: 1.4s;
+    --fadein-duracion: 1.4s;
+}
+.fade-iconTitulo2.fade-in-activo {
+    --fadein-delay: 1.5s;
+    --fadein-duracion: 1.5s;
+}
+.fade-iconDescripcion2.fade-in-activo {
+    --fadein-delay: 1.6s;
+    --fadein-duracion: 1.6s;
+}
+
+.fade-icon3.fade-in-activo {
+    --fadein-delay: 1.7s;
+    --fadein-duracion: 1.7s;
+}
+.fade-iconTitulo3.fade-in-activo {
+    --fadein-delay: 1.8s;
+    --fadein-duracion: 1.8s;
+}
+.fade-iconDescripcion3.fade-in-activo {
+    --fadein-delay: 1.9s;
+    --fadein-duracion: 1.9s;
+}
+
+.fade-icon4.fade-in-activo {
+    --fadein-delay: 2s;
+    --fadein-duracion: 2s;
+}
+.fade-iconTitulo4.fade-in-activo {
+    --fadein-delay: 2.1s;
+    --fadein-duracion: 2.1s;
+}
+.fade-iconDescripcion4.fade-in-activo {
+    --fadein-delay: 2.2s;
+    --fadein-duracion: 1.9s;
+}
+
+.fade-card1.fade-in-activo {
+    --fadein-delay: 0.3s;
+}
+.fade-card2.fade-in-activo {
+    --fadein-delay: 0.6s;
+}
+.fade-card3.fade-in-activo {
+    --fadein-delay: 0.9s;
 }
