@@ -1,11 +1,13 @@
+
 * {
   font-family: Arial, Helvetica, sans-serif;
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
+  transition: background-color 1s, color 2s;
 }
 
-.flex {
+.display-flex {
   display: flex;
 }
 
@@ -71,6 +73,7 @@ a {
 @media (prefers-color-scheme: dark) {
   :root {
     --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
     --color-secundario: #1F2937;
     --color-fondo: #111827;
     --color-texto: #FFFFFF;
@@ -81,9 +84,29 @@ a {
 @media (prefers-color-scheme: light) {
   :root {
     --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
     --color-secundario: #C8F5F9;
     --color-fondo: #FDFDFD;
     --color-texto: black;
     --color-texto-footer: #FFFFFF;
   }
+}
+
+:root[data-tema="light"] {
+    --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
+    --color-secundario: #C8F5F9;
+    --color-fondo: #FDFDFD;
+    --color-texto: black;
+    --color-texto-secundario: #00000080;
+    --color-texto-footer: #FFFFFF;
+}
+:root[data-tema="dark"] {
+    --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
+    --color-secundario: #1F2937;
+    --color-fondo: #111827;
+    --color-texto: #FFFFFF;
+    --color-texto-secundario: #ffffff80;
+    --color-texto-footer: #FFFFFF;
 }
