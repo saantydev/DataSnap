@@ -24,10 +24,6 @@ main {
     max-width: 900px;
 }
 
-.wave-div{
-    overflow: hidden;
-}
-
 .wave {
     fill: var(--color-primario);
     position: absolute;
@@ -43,7 +39,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #c8f1f1;
+    background: var(--color-secundario);
     width: 55%;
     padding: 40px;
     position: relative;
@@ -56,28 +52,24 @@ main {
 }
 
 .registrarse-boton button {
-    background: #00d6c2;
+    background: var(--color-primario);
     border: none;
-    border-radius: 20px;
+    border-radius: 6px;
     padding: 8px 16px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
-
 
 .login-titulo {
     text-align: center;
     margin-top: 60px;
     font-size: 2rem;
-    color: #333;
+    color: var(--color-texto);
 }
 
 .formulario {
     margin-top: 100px;
     margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
     width: 70%;
     gap: 15px;
     z-index: 1;
@@ -85,27 +77,35 @@ main {
 
 .formulario label {
     font-size: 1rem;
-    color: #444;
+    color: var(--color-texto-secundario);
 }
 
 .input-grupo {
     display: flex;
     align-items: center;
-    background: white;
+    color: var(--color-texto);
+    background: var(--color-fondo);
     border-radius: 6px;
-    border: 1px solid #ccc;
 }
 
 .input-grupo .icon {
-    background: white;
-    padding: 10px;
-    font-size: 1.2rem;
+    background: var(--color-fondo);
+    padding: 10px 0 10px 10px;
+}
+
+.icon svg{
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+    fill: var(--color-texto);
 }
 
 .input-grupo input {
-    border: none;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
     padding: 10px;
     flex: 1;
+    border: none;
     outline: none;
 }
 

@@ -61,9 +61,9 @@
                 </a>
             </div>
             <h1 class="login-titulo">Datasnap</h1>
-            <h2>Registrarme</h2>
+            <h2>Iniciar sesion</h2>
 
-            <?php if (!empty($successMessage)): ?>
+            <!-- <?php if (!empty($successMessage)): ?>
             <div class="success-message" style="
                 background-color: #efe;
                 border: 1px solid #cfc;
@@ -77,13 +77,13 @@
             ">
                 <?php echo htmlspecialchars($successMessage); ?>
             </div>
-            <?php endif; ?>
+            <?php endif; ?> -->
 
-            <form class="formulario" method="post">
+            <form class="formulario display-flex flex-col" method="post">
                 <label for="username">Nombre de usuario:</label>
-                <div class="input-grupo">
+                <div class="input-grupo display-flex">
                     <span class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                         </svg>
                     </span>
@@ -92,7 +92,7 @@
                 <label for="password">Contraseña:</label>
                 <div class="input-grupo">
                     <span class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
                         </svg>
                     </span>
@@ -108,7 +108,7 @@
                     <button type="submit" class="submit-boton" name="ingresar">Iniciar sesion</button>
                 </center>
             </form>
-            <?php if (!empty($errorMessage)): ?>
+            <!-- <?php if (!empty($errorMessage)): ?>
             <div class="error-message" style="
                 background-color: #fee;
                 border: 1px solid #fcc;
@@ -122,7 +122,7 @@
             ">
                 <?php echo htmlspecialchars($errorMessage); ?>
             </div>
-            <?php endif; ?>
+            <?php endif; ?> -->
         </div>
         <div id="mobile">
             <div class="logo">
