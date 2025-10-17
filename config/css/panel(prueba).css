@@ -16,24 +16,30 @@ body {
 }
 
 @media (max-width: 768px) {
-  .wave-div {
-    height: 200px;
+  .square {
+    width: 150px;
+    height: 150px;
   }
   
   .square span {
-    width: 60% !important;
-    height: 40% !important;
-    top: 20% !important;
-    left: 20% !important;
+    width: 60px !important;
+    height: 45px !important;
   }
+}
+
+.square {
+    position: relative;
+    width: 200px;
+    height: 200px;
 }
 
 .square span:nth-child(1) {
     position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 60px;
+    transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
     transition: 0.5s;
@@ -46,10 +52,11 @@ body {
 }
 .square span:nth-child(2) {
     position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 60px;
+    transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
     transition: 0.5s;
@@ -63,10 +70,11 @@ body {
 
 .square span:nth-child(3) {
     position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 60px;
+    transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
     transition: 0.5s;
@@ -80,19 +88,19 @@ body {
 
 @keyframes animate {
     0% {
-        transform: rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
     100% {
-        transform: rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
 @keyframes animate2 {
     0% {
-        transform: rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
     100% {
-        transform: rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 }
 
