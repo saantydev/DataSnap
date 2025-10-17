@@ -28,7 +28,7 @@ main {
 
 .panel-2 {
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: auto;
     background: var(--color-secundario);
     width: 55%;
     padding: 40px;
