@@ -28,6 +28,7 @@ main {
 
 .panel-2 {
     align-items: center;
+    overflow-y: scroll;
     background: var(--color-secundario);
     width: 55%;
     padding: 40px;
@@ -36,7 +37,7 @@ main {
 
 .login-titulo {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 2vh;
     font-size: 2.5rem;
     color: var(--color-texto);
     gap: 15px;
@@ -51,14 +52,14 @@ main {
 .subtitulo {
     margin-top: 10px;
     font-size: 1.4rem;
+    margin-bottom: 2vh;
     color: var(--color-texto-secundario);
 }
 
 .formulario {
     background-color: var(--color-fondo);
     padding: 40px;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 2vh;
     width: 70%;
     gap: 1.6em;
     border-radius: 9px;
