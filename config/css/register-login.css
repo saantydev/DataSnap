@@ -1,11 +1,11 @@
-html, body {
+html,
+body {
     overflow: hidden;
 }
 
 main {
     width: 100%;
     height: 100vh;
- 
 }
 
 .panel-1 {
@@ -13,15 +13,6 @@ main {
     width: 45%;
     padding: 40px;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.persona {
-    width: 90%;
-    max-width: 900px;
 }
 
 .wave {
@@ -32,12 +23,10 @@ main {
     width: 100vh;
     height: 100%;
     z-index: 0;
-    animation: animacionWave 2s  infinite alternate;
+    animation: animacionWave 2s infinite alternate;
 }
 
 .panel-2 {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     background: var(--color-secundario);
     width: 55%;
@@ -45,34 +34,38 @@ main {
     position: relative;
 }
 
-.registrarse-boton {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.registrarse-boton button {
-    background: var(--color-primario);
-    border: none;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .login-titulo {
     text-align: center;
     margin-top: 60px;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--color-texto);
+    gap: 15px;
+}
+
+.login-titulo svg {
+    fill: var(--color-texto);
+    width: 40px;
+    height: 40px;
+}
+
+.subtitulo {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    color: var(--color-texto-secundario);
 }
 
 .formulario {
-    margin-top: 100px;
-    margin-bottom: 50px;
+    background-color: var(--color-fondo);
+    padding: 40px;
+    margin-top: 50px;
     width: 70%;
-    gap: 15px;
+    gap: 1.6em;
+    border-radius: 9px;
     z-index: 1;
+}
+
+.campo {
+    gap: 8px;
 }
 
 .formulario label {
@@ -83,17 +76,16 @@ main {
 .input-grupo {
     display: flex;
     align-items: center;
-    color: var(--color-texto);
-    background: var(--color-fondo);
+    background: var(--color-secundario);
     border-radius: 6px;
 }
 
 .input-grupo .icon {
-    background: var(--color-fondo);
+    background: var(--color-secundario);
     padding: 10px 0 10px 10px;
 }
 
-.icon svg{
+.icon svg {
     width: 20px;
     height: 20px;
     opacity: 0.5;
@@ -101,7 +93,7 @@ main {
 }
 
 .input-grupo input {
-    background-color: var(--color-fondo);
+    background-color: var(--color-secundario);
     color: var(--color-texto);
     padding: 10px;
     flex: 1;
@@ -110,16 +102,91 @@ main {
 }
 
 .submit-boton {
+    color: var(--color-texto);
+    background-color: var(--color-primario);
     margin-top: 20px;
-    background-color: #3fb6b2;
-    border: none;
     padding: 12px;
-    color: white;
-    font-weight: bold;
-    border-radius: 20px;
-    cursor: pointer;
+    border-radius: 6px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    width: 150px;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 500ms ease;
+}
+
+.submit-boton:hover{
+    opacity: 0.80;
+}
+
+.recordar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
+    width: fit-content;
+}
+
+.recordar input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.recordar .box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-primario);
+    border-radius: 4px;
+    background: var(--color-fondo);
+    position: relative;
+    transition: background .18s, border-color .18s;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.recordar .box::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg) scale(0);
+    transform-origin: center;
+    transition: transform .12s;
+}
+
+.recordar input:checked+.box {
+    background: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.recordar input:checked+.box::after {
+    transform: rotate(45deg) scale(1);
+}
+
+.registro{
+    color: var(--color-texto);
+}
+
+#resaltar{
+    text-decoration: underline;
+    color: var(--color-primario);
+    transition: opacity 500ms ease;
+}
+
+#resaltar:hover{
+    opacity: 0.8;
 }
 
 #wave-2 {
@@ -242,19 +309,18 @@ main {
 
 /* Estilos para el botón de mostrar/ocultar contraseña */
 .toggle-password {
-    background: linear-gradient(135deg, #3fb6b2, #00d6c2);
+    background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--color-texto);
     border-radius: 50%;
     width: 32px;
     height: 32px;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(63, 182, 178, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -276,7 +342,6 @@ main {
 
 .toggle-password:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(63, 182, 178, 0.4);
 }
 
 .toggle-password:active {
@@ -284,7 +349,6 @@ main {
 }
 
 .toggle-password:focus {
-    outline: 2px solid #3fb6b2;
     outline-offset: 2px;
 }
 
@@ -386,30 +450,13 @@ main {
 }
 
 @keyframes animacionWave {
-    0%{
+    0% {
         transform: scale(1);
         transform-origin: top;
     }
-    100%{
-        transform: scale(1.15);
-        transform-origin: bottom;
-    }
-}
 
-@keyframes animacionBlob {
-    0% {
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    }
-    25% {
-        border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
-    }
-    50% {
-        border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
-    }
-    75% {
-        border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
-    }
     100% {
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        transform: scale(1.4);
+        transform-origin: bottom;
     }
 }

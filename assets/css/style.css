@@ -28,6 +28,14 @@
   text-align: center;
 }
 
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
 .gap-1 {
   gap: 1rem;
 }
