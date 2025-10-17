@@ -7,38 +7,18 @@ body {
   position: relative;
 }
 
-.wave-div {
-  align-items: center;
-  width: 100%;
-  height: 400px; 
-  overflow: hidden;
-  line-height: 0;
-}
-
-@media (max-width: 768px) {
-  .square {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .square span {
-    width: 60px !important;
-    height: 45px !important;
-  }
-}
-
 .square {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
 }
 
 .square span:nth-child(1) {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
-    width: 80px;
-    height: 60px;
+    width: 400px;
+    height: 150px;
     transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
@@ -50,12 +30,13 @@ body {
     border: none;
     background: #00b8bf;
 }
+
 .square span:nth-child(2) {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
-    width: 80px;
-    height: 60px;
+    width: 400px;
+    height: 150px;
     transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
@@ -70,10 +51,10 @@ body {
 
 .square span:nth-child(3) {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
-    width: 80px;
-    height: 60px;
+    width: 400px;
+    height: 150px;
     transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
@@ -104,3 +85,14 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+  .square {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .square span {
+    width: 250px !important;
+    height: 95px !important;
+  }
+}
