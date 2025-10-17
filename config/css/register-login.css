@@ -217,7 +217,7 @@ main {
 
 #wave-2 {
     position: absolute;
-    right: -90vh;
+    right: -93vh;
     top: 0;
     width: 100vh;
     height: 100%;
@@ -317,12 +317,25 @@ main {
         display: block;
         position: absolute;
         width: 100vw;
+        left: -15vh;
+        bottom: -13vh;
+        transform: rotateY(3.142rad);
+        fill: var(--color-secundario);
+        animation: animacionWave-2 2s infinite alternate;
+    }
+}
+
+@media (max-width: 550px) {
+    #wave-4 {
+        display: block;
+        position: absolute;
+        width: 100vw;
         left: 0;
         bottom: -15vh;
         transform: rotateY(3.142rad);
         fill: var(--color-secundario);
         animation: animacionWave-2 2s infinite alternate;
-    }
+    }    
 }
 
 @media screen and (orientation: landscape) {
