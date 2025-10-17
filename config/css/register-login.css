@@ -235,29 +235,29 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: 2DACB5;
+    background-color: var(--color-primario);
 }
 
 .tabs {
     display: flex;
-    color: gray;
+    color: var(--color-texto-secundario);
     gap: 30px;
 }
 
 .tabs a {
     text-decoration: none;
-    color: gray;
+    color: var(--color-texto-secundario);
 }
 
 #seleccionado {
-    color: black;
-    border-bottom: 5px solid black;
+    color: var(--color-texto);
+    border-bottom: 5px solid var(--color-texto);
     padding-bottom: 10px;
     border-radius: 2px;
 }
 
 #seleccionado a {
-    color: black;
+    color: var(--color-texto);
 }
 
 #wave-3 img {
@@ -265,12 +265,14 @@ main {
     width: 100px;
 }
 
-
-
 @media screen and (orientation: portrait) {
     body {
-        overflow: hidden;
         height: 100vh;
+        background-color: var(--color-primario);
+    }
+
+    .mobile{
+        width: 100vw;
     }
 
     .panel-1,
@@ -282,35 +284,25 @@ main {
         display: flex;
     }
 
-    .logo {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
+    .formulario{
+        margin-top: 2vh;
     }
 
-    .formulario {
-        margin-top: 30px;
+    .logo {
+        gap: 10px;
+        color: var(--color-texto);
     }
 
     .input-grupo .icon {
-        background: white;
+        background: var(--color-secundario);
         padding: 5px;
-        font-size: 1.2rem;
     }
 
     .input-grupo input {
         border: none;
-        padding: 5px;
+        padding: 10px;
         flex: 1;
         outline: none;
-    }
-
-    .submit-boton {
-        color: black;
-        background-color: transparent;
-        border: 2px solid black;
-        border-radius: 5px;
     }
 
     #wave-3 {
@@ -326,8 +318,16 @@ main {
         position: absolute;
         width: 100vw;
         left: 0;
-        bottom: -5vh;
+        bottom: -15vh;
         transform: rotateY(3.142rad);
+        fill: var(--color-secundario);
+        animation: animacionWave-2 2s infinite alternate;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    #mobile {
+        display: none;
     }
 }
 
@@ -465,12 +465,6 @@ main {
 .toggle-password:active::after {
     width: 100%;
     height: 100%;
-}
-
-@media screen and (orientation: landscape) {
-    #mobile {
-        display: none;
-    }
 }
 
 @keyframes animacionWave {
