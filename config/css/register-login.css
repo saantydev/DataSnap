@@ -216,18 +216,16 @@ main {
 
 #wave-2 {
     position: absolute;
-    right: -46vh;
+    right: -90vh;
     top: 0;
     width: 100vh;
     height: 100%;
-    transform: rotate(90deg);
     z-index: 0;
+    animation: animacionWave-2 2s infinite alternate;
 }
 
-#login-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+#wave-2 svg {
+    fill: var(--color-primario);
 }
 
 #mobile {
@@ -482,6 +480,18 @@ main {
 
     100% {
         transform: scale(1.4);
+        transform-origin: bottom;
+    }
+}
+
+@keyframes animacionWave-2 {
+    0% {
+        transform: scale(1);
+        transform-origin: top;
+    }
+
+    100% {
+        transform: scale(1.2);
         transform-origin: bottom;
     }
 }
