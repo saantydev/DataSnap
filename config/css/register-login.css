@@ -58,6 +58,7 @@ main {
     background-color: var(--color-fondo);
     padding: 40px;
     margin-top: 50px;
+    margin-bottom: 30px;
     width: 70%;
     gap: 1.6em;
     border-radius: 9px;
@@ -116,7 +117,7 @@ main {
     transition: opacity 500ms ease;
 }
 
-.submit-boton:hover{
+.submit-boton:hover {
     opacity: 0.80;
 }
 
@@ -175,18 +176,42 @@ main {
     transform: rotate(45deg) scale(1);
 }
 
-.registro{
+.registro {
     color: var(--color-texto);
 }
 
-#resaltar{
+#resaltar {
     text-decoration: underline;
     color: var(--color-primario);
     transition: opacity 500ms ease;
 }
 
-#resaltar:hover{
+#resaltar:hover {
     opacity: 0.8;
+}
+
+.success-message {
+    background-color: #efe;
+    border: 1px solid #cfc;
+    color: #363;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+}
+
+.error-message {
+    background-color: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
 }
 
 #wave-2 {

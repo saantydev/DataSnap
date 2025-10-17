@@ -42,22 +42,6 @@
             </h1>
             <h3 class="subtitulo">Iniciar sesion</h3>
 
-            <!-- <?php if (!empty($successMessage)): ?>
-            <div class="success-message" style="
-                background-color: #efe;
-                border: 1px solid #cfc;
-                color: #363;
-                padding: 10px;
-                border-radius: 5px;
-                margin-bottom: 20px;
-                text-align: center;
-                font-family: 'DM Sans', sans-serif;
-                font-size: 14px;
-            ">
-                <?php echo htmlspecialchars($successMessage); ?>
-            </div>
-            <?php endif; ?> -->
-
             <form class="formulario display-flex flex-col" method="post">
                 <div class="campo display-flex flex-col">
                     <label for="username">Nombre de usuario:</label>
@@ -102,21 +86,18 @@
                 <button type="submit" class="submit-boton" name="ingresar">Iniciar sesion</button>
                 <p class="registro display-flex center text-center gap-1">¿No tienes una cuenta?<a href="/register" id="resaltar"><b>Registrarse</b></a></p>
             </form>
-            <!-- <?php if (!empty($errorMessage)): ?>
-            <div class="error-message" style="
-                background-color: #fee;
-                border: 1px solid #fcc;
-                color: #c33;
-                padding: 10px;
-                border-radius: 5px;
-                margin-bottom: 20px;
-                text-align: center;
-                font-family: 'DM Sans', sans-serif;
-                font-size: 14px;
-            ">
+
+            <?php if (!empty($successMessage)): ?>
+            <div class="success-message">
+                <?php echo htmlspecialchars($successMessage); ?>
+            </div>
+            <?php endif; ?>
+            <?php if (!empty($errorMessage)): ?>
+            <div class="error-message">
+                
                 <?php echo htmlspecialchars($errorMessage); ?>
             </div>
-            <?php endif; ?> -->
+            <?php endif; ?>
         </div>
         <div id="mobile">
             <div class="logo">
