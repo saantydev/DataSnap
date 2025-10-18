@@ -8,6 +8,12 @@ body {
   background: #c9f5f7;
   text-align: center;
   min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body[data-theme="dark"] {
+  background: #1a1a1a;
+  color: #e0e0e0;
 }
 
 header h1 {
@@ -33,6 +39,12 @@ header h1 {
   text-align: center;
   width: 200px;
   max-width: 100%;
+  transition: background-color 0.3s;
+}
+
+body[data-theme="dark"] .card {
+  background: #2d2d2d;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
 }
 
 .card img {
@@ -75,6 +87,12 @@ header h1 {
   border-radius: 20px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   width: 90%;
+  transition: background-color 0.3s;
+}
+
+body[data-theme="dark"] .perfil {
+  background: #2d2d2d;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.4);
 }
 
 .foto-perfil {
