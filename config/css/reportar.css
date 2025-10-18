@@ -11,6 +11,12 @@ body {
   flex-direction: column;
   background-color: #ffffff;
   overflow: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body[data-theme="dark"] {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
 }
 
 .header {
@@ -43,6 +49,11 @@ body {
   justify-content: center;
   position: relative;
   z-index: 2;
+  transition: background-color 0.3s;
+}
+
+body[data-theme="dark"] .left-side {
+  background-color: #1a1a1a;
 }
 
 .content {
@@ -84,6 +95,12 @@ body {
   background: #f9fbff;
   color: #0f172a;
   transition: 0.2s ease;
+}
+
+body[data-theme="dark"] .report-form textarea {
+  background: #2d2d2d;
+  border-color: #404040;
+  color: #e0e0e0;
 }
 
 .report-form textarea:focus {
@@ -135,6 +152,11 @@ body {
   position: relative;
   background-color: #e0f2fe;
   overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+body[data-theme="dark"] .right-side {
+  background-color: #2d2d2d;
 }
 
 /* Imagen de la wave */
