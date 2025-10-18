@@ -306,11 +306,21 @@ main {
     }
 
     #wave-3 {
-        display: block;
         position: absolute;
-        width: 100vw;
+        width: 100%;
         left: 0;
-        bottom: -5vh;
+        bottom: 0;
+        overflow: hidden;
+        animation: animacionWave-2 2s infinite alternate;
+    }
+
+    #wave-3 svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        transform: rotateY(3.142rad);
+        fill: var(--color-secundario);
+        overflow: hidden;
     }
 
     #wave-4 {
