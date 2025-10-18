@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="/config/icons/logo-solo.svg">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/config/css/register-login.css">
+    <script src="/config/js/main.js"></script>
 </head>
 
 <body>
@@ -84,7 +85,7 @@
                     <a href="#" id="resaltar">¿Olvidaste tu contraseña?</a>
                 </div>
                 <button type="submit" class="submit-boton" name="ingresar">Iniciar sesion</button>
-                <p class="registro display-flex center text-center gap-1">¿No tienes una cuenta?<a href="/register" id="resaltar"><b>Registrarse</b></a></p>
+                <p class="registro display-flex center text-center gap-1">¿No tienes una cuenta?<a href="/register" id="resaltar"><b>Registrate</b></a></p>
             </form>
 
             <?php if (!empty($successMessage)): ?>
@@ -155,7 +156,7 @@
                         <span class="box" aria-hidden="true"></span>
                         <label for="recordarme">Recordarme</label>
                     </div>
-                    <a href="#" id="resaltar">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="text-align-end" id="resaltar">¿Olvidaste tu contraseña?</a>
                 </div>
                 <button type="submit" class="submit-boton" name="ingresar">Iniciar sesion</button>
             </form>
@@ -201,5 +202,6 @@
             });
         });
     </script>
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>
