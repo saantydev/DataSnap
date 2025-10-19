@@ -1,0 +1,343 @@
+*{
+    --primario: #2DACB5;
+    --secundario: #C8F5F9;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    background-color: #C8F5F9;
+}
+
+.menu{
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: 1.2em;
+    background-color: #FDFDFD;
+    z-index: 1;
+}
+
+.logo{
+    width: 5rem;
+    height: 3.5rem;
+}
+
+.logo img{
+    width: 100%;
+    height: 100%;
+}
+
+.opciones{
+    display: flex;
+    gap: 20px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.btn1{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 2.5px solid var(--primario);
+    border-radius: 14px;
+}
+
+.btn2{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #2DACB5;
+    border-radius: 14px;
+    color: white;
+}
+
+.inicio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(95vh - 64px);
+    padding: 0 50px;
+    gap: 50px;
+    background-color: #FDFDFD;
+}
+
+.texto{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+}
+
+.titulo{
+    font-size: clamp(2.3rem, -0.6667rem + 4.4444vw, 4rem);
+}
+
+.descripcion{
+    color: rgb(39, 39, 39);
+    font-size: clamp(1.1rem, 0.0629rem + 1.8438vw, 1.4rem);
+}
+
+.persona{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.persona img{
+    width: 100%;
+    height: auto;
+}
+
+.wave{
+    width: 100%;
+}
+
+.acerca{
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    gap: 3.5rem;
+}
+
+.contenido{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.icono{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 1rem;
+    background-color: var(--primario);
+    border-radius: 14px;
+}
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.caracteristicas{
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    gap: 5rem;
+}
+
+.caracteristica{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.caracteristica-texto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.caracteristica-texto h1{
+    width: 100%;
+    font-size: 1.4em;
+}
+
+.caracteristica-texto p{
+    width: 100%;
+    font-size: 1em;
+}
+
+.dispositivos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dispositivos img{
+    width: 90%;
+}
+
+.faq{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 20px;
+    height: 80vh;
+    background-color: white;
+}
+
+.preguntas{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 40%;
+}
+
+.card-pregunta{
+    background-color: var(--primario);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: #1E1E1E;
+    color: white;
+    padding: 20px;
+    gap: 5px;
+}
+
+.dudas{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+}
+
+.opcion-footer{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#btn-inicio{
+    font-size: 1.5em;
+}
+
+@media screen and (orientation: portrait) {
+    .menu{
+        gap: 30px;
+    }
+
+    #opciones-menu-hamburguesa {
+        display: none;
+    }
+
+    #opciones-boton{
+        gap: 5px;
+        margin-left: 3vw;
+    }
+
+    .btn1, .btn2 {
+        justify-content: center;
+        padding: 10px 8px;
+        width: 93px;
+        font-size: 0.8em;
+    }
+
+    .persona{
+        display: none;
+    }
+
+    #btn-inicio{
+        font-size: 1.2em;
+    }
+
+    .dispositivos{
+        display: none;
+    }
+
+    .contenido{
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .caracteristicas{
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .caracteristica{
+        width: 150px;
+    }
+
+    #dispositivos2{
+        display: block;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px 10px;
+    }
+
+    .dudas {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    footer .logo {
+        width: 100px;
+        height: auto;
+    }
+
+    .logo img {
+        width: 100%;
+        height: auto;
+    }
+
+    .opcion-footer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .opcion-footer h2 {
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+    }
+
+    .opcion-footer p {
+        font-size: 1rem;
+    }
+
+    .derechos {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #aaa;
+    }
+
+    .preguntas{
+        width: 300px;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    #menu-hamburguesa{
+        display: none;
+    }
+
+    #dispositivos2{
+        display: none;
+    }
+}

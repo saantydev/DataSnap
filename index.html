@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datasnap</title>
+    <style>
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 0;
+      margin: 0;
+      scroll-behavior: smooth;
+    }
+    .display-flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-row { flex-direction: row; }
+    .center { justify-content: center; align-items: center; }
+    .text-center { text-align: center; }
+    .gap-1 { gap: 1rem; }
+    .gap-2 { gap: 2rem; }
+    .gap-3 { gap: 3rem; }
+    .gap-4 { gap: 4rem; }
+    .gap-5 { gap: 5rem; }
+    a { color: var(--color-texto); text-decoration: none; }
+    .btn1 { display: flex; align-items: center; padding: 10px 20px; border: 2.5px solid var(--color-primario); border-radius: 14px; }
+    .btn2 { display: flex; align-items: center; padding: 10px 20px; background-color: var(--color-primario); border-radius: 14px; color: var(--color-texto); }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-primario: #2DACB5;
+        --color-secundario: #1F2937;
+        --color-fondo: #111827;
+        --color-texto: #FFFFFF;
+        --color-texto-footer: #FFFFFF;
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --color-primario: #2DACB5;
+        --color-secundario: #C8F5F9;
+        --color-fondo: #FDFDFD;
+        --color-texto: black;
+        --color-texto-footer: #FFFFFF;
+      }
+    }
+    body { overflow-x: hidden; color: var(--color-texto); }
+    main { background-color: var(--color-secundario); }
+    .menu { background-color: var(--color-fondo); justify-content: space-between; position: sticky; top: 0; padding: 10px; font-size: 1em; z-index: 3; }
+    .logo { width: 5rem; height: 2.9rem; }
+    .logo img { width: 100%; height: 100%; }
+    .opciones { display: flex; gap: 20px; }
+    .inicio { height: calc(95vh - 64px); padding: 0 50px; gap: 50px; background-color: var(--color-fondo); }
+    .texto { display: flex; flex-direction: column; width: 100%; gap: 2rem; color: var(--color-texto); }
+    .titulo { font-size: clamp(2.3rem, -0.6667rem + 4.4444vw, 4rem); color: var(--color-texto); }
+    .descripcion { font-size: clamp(1.1rem, 0.0629rem + 1.8438vw, 1.4rem); color: var(--color-texto); }
+    .persona { width: 90vw; z-index: 2; }
+    .persona img { width: 100%; height: auto; }
+    .wave-div { width: 100%; height: 200px; overflow: hidden; line-height: 0; }
+    .wave { width: 100vw; z-index: 2; fill: var(--color-fondo); }
+    .acerca { display: flex; flex-direction: column; padding: 2.5rem; gap: 3.5rem; }
+    .contenido { display: flex; flex-direction: row; gap: 2rem; }
+    .icono { display: flex; justify-content: center; align-items: center; width: fit-content; padding: 1rem; background-color: var(--color-primario); border-radius: 14px; }
+    .caracteristicas { width: 20vw; gap: 5rem; }
+    .caracteristica { gap: 1em; }
+    .caracteristica-texto { gap: 0.3em; }
+    .caracteristica-texto h1 { color: var(--color-texto); font-size: 1.2rem; }
+    .caracteristica-texto p { color: var(--color-texto); font-size: 0.9rem; opacity: 0.5; }
+    .dispositivos { background-color: var(--color-primario); }
+    .dispositivos img { width: 90%; }
+    footer { display: flex; flex-direction: column; background-color: #1E1E1E; color: var(--color-texto-footer); padding: 20px; gap: 5px; }
+    .dudas { gap: 4rem; }
+    .opcion-footer { gap: 0.5rem; }
+    #btn-inicio { font-size: 1.5em; }
+    #intro-bienvenida { position: fixed; background: var(--color-fondo); z-index: 5; width: 100vw; height: 100vh; transition: opacity 0.7s; }
+    .intro-logo { width: 100px; height: 100px; position: absolute; z-index: 3; left: 50%; transform: translateX(-50%); background-color: var(--color-fondo); opacity: 0; transition: opacity 0.9s cubic-bezier(.77, 0, .18, 1), transform 0.6s cubic-bezier(.77, 0, .18, 1); }
+    .intro-logo.visible { opacity: 1; }
+    .intro-logo.move-left { transform: translateX(-180px); }
+    .intro-texto { opacity: 0; transform: translateX(70px); font-size: 2.5rem; font-weight: bold; color: var(--color-texto); letter-spacing: 2px; position: relative; z-index: 1; transition: opacity 1s, transform 0.7s cubic-bezier(1, 0, .18, 1); }
+    .intro-texto.visible { opacity: 1; transform: translateX(50px); }
+    .funcionamiento-cards { padding: 3em; }
+    .card { background-color: var(--color-fondo); max-width: 13em; min-height: 200px; padding: 1em; border-radius: 14px; }
+    .card-icon { padding: 1em; background-color: var(--color-secundario); border-radius: 50%; color: var(--color-primario); width: 20px; }
+    .card-texto b { font-size: 1.2rem; }
+    .card-texto p { font-size: 0.8rem; opacity: 0.5; }
+    </style>
+    <link rel="shortcut icon" href="/config/icons/logo-solo.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+    <!-- Intro Animación -->
+    <div id="intro-bienvenida" class="display-flex flex-col center">
+        <img src="config/icons/logo-solo.svg" class="intro-logo" alt="Logo">
+        <span class="intro-texto">DATASNAP</span>
+    </div>
+
+    <main class="display-flex flex-col">
+        <!-- menu -->
+        <nav class="menu display-flex center">
+            <div class="logo">
+                <img src="config/icons/logo.svg" alt="Logo">
+            </div>
+            <div class="opciones display-flex" id="opciones-menu-hamburguesa">
+                <a href="#inicio">Inicio</a>
+                <a href="#acerca">Acerca de Nosotros</a>
+                <a href="#">Contactar</a>
+                <a href="#">Preguntas</a>
+            </div>
+            <div class="opciones display-flex" id="opciones-boton">
+                <a href="/register" class="btn1">Registrarse</a>
+                <a href="/login" class="btn2">Iniciar Sesión</a>
+            </div>
+            <div id="menu-hamburguesa" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                </svg>
+            </div>
+        </nav>
+
+        <!-- hero section -->
+        <section class="inicio display-flex center" id="inicio">
+            <div class="texto display-flex flex-col">
+                <h1 class="titulo">
+                    Impulsá tu negocio con Datasnap
+                </h1>
+                <p class="descripcion">
+                    A través de inteligencia artificial, analizamos y optimizamos tus bases
+                    de datos para automatizar procesos internos, corregir errores y mejorar la
+                    eficiencia operativa.
+                </p>
+                <div class="opciones display-flex">
+                    <a href="/register" class="btn1" id="btn-inicio">
+                        Comenzar
+                    </a>
+                    <a href="#acerca" class="btn2" id="btn-inicio">
+                        Acerca
+                    </a>
+                </div>
+            </div>
+            <div class="persona display-flex center">
+                <img src="config/images/Persona.png" alt="Persona usando Datasnap">
+            </div>
+        </section>
+
+        <!-- separador wave -->
+        <div class="wave-div">
+            <svg viewBox="0 0 1440 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="wave">
+                <path
+                    d="M0 56.7508L34.4 64.3175C68.8 71.8167 137.6 86.9503 206.08 96.2736C274.72 105.597 342.88 109.245 411.52 104.516C480 99.7868 548.8 86.68 617.28 78.5728C685.92 70.4655 754.08 67.3577 822.72 70.9384C891.2 74.5191 960 84.9235 1028.48 98.3004C1097.12 111.677 1165.28 128.162 1233.92 129.851C1302.4 131.54 1371.2 118.433 1405.6 111.948L1440 105.394V0H1405.6C1371.2 0 1302.4 0 1233.92 0C1165.28 0 1097.12 0 1028.48 0C960 0 891.2 0 822.72 0C754.08 0 685.92 0 617.28 0C548.8 0 480 0 411.52 0C342.88 0 274.72 0 206.08 0C137.6 0 68.8 0 34.4 0H0V56.7508Z" />
+            </svg>
+        </div>
+
+        <!-- acerca -->
+        <section class="acerca text-center flex-col" id="acerca">
+            <div class="texto">
+                <h1 class="titulo text-center">
+                    Acerca de Datasnap
+                </h1>
+                <p class="descripcion text-center">
+                    Datasnap integra actualmente diversas funcionalidades clave orientadas
+                    a la conversión, análisis y optimización de datos, entre las cuales se
+                    encuentran:
+                </p>
+            </div>
+            <div class="contenido display-flex flex-row">
+                <div class="caracteristicas display-flex flex-col text-center center">
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="config/icons/file.svg" alt="Lectura de Archivos">
+                        </div>
+                        <div class="caracteristica-texto display-flex flex-col">
+                            <h1 class="text-center">
+                                Lectura de Archivos
+                            </h1>
+                            <p>
+                                Puede procesar archivos csv, txt, json y sql.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="config/icons/efficiency.svg" alt="Corrección de Errores">
+                        </div>
+                        <div class="caracteristica-texto display-flex flex-col">
+                            <h1 class="text-center">
+                                Corrección de Errores
+                            </h1>
+                            <p>
+                                Eliminación de datos repetidos y optimización.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dispositivos center">
+                    <img src="/config/images/dispositivos.png" alt="Dispositivos compatibles">
+                </div>
+                <div class="caracteristicas display-flex flex-col text-center center">
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="/config/icons/backup.svg" alt="Copias de Seguridad">
+                        </div>
+                        <div class="caracteristica-texto display-flex flex-col">
+                            <h1 class="text-center">
+                                Copias de Seguridad
+                            </h1>
+                            <p>
+                                Cada vez que se modifique se guarda una copia de respaldo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="caracteristica display-flex flex-col center">
+                        <div class="icono center">
+                            <img src="/config/icons/statistics.svg" alt="Estadísticas">
+                        </div>
+                        <div class="caracteristica-texto display-flex flex-col">
+                            <h1 class="text-center">
+                                Estadísticas
+                            </h1>
+                            <p>
+                                Se puede analizar los datos del archivo y otorga un informe de estadísticas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dispositivos center" id="dispositivos2">
+                    <img src="/config/images/dispositivos.png" alt="Dispositivos compatibles">
+                </div>
+            </div>
+        </section>
+        
+        
+        <section class="funcionamiento">
+            <div class="texto">
+                <h1 class="titulo text-center">
+                    Como Funciona
+                </h1>
+                <p class="descripcion text-center">
+                    Nuestro proceso simplificado en 3 simples pasos, para optimizar tu tiempo en cuestion de minutos!
+                </p>
+            </div>
+            <div class="funcionamiento-cards display-flex flex-row gap-3 center">
+                <div class="card display-flex flex-col center gap-1">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
+                        </svg>
+                    </div>
+                    <div class="card-texto display-flex flex-col text-center gap-1">
+                        <b>
+                            1. Subida de archivo
+                        </b>
+                        <p>
+                            Subi tu archivo en nuestra aplicacion web. Todo encriptado de forma segura!
+                        </p>
+                    </div>
+                </div>
+                <div class="card display-flex flex-col center gap-1">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-robot" viewBox="0 0 16 16">
+                            <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.6 26.6 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.93.93 0 0 1-.765.935c-.845.147-2.34.346-4.235.346s-3.39-.2-4.235-.346A.93.93 0 0 1 3 9.219zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a25 25 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25 25 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135"/>
+                            <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2zM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5"/>
+                        </svg>
+                    </div>
+                    <div class="card-texto display-flex flex-col text-center gap-1">
+                        <b>
+                            2. Procesamiento IA
+                        </b>
+                        <p>
+                            Nuestra IA va a procesar tu archivo analizandolo, limpiando y estandarizando tus datos de forma automatica
+                        </p>
+                    </div>
+                </div>
+                <div class="card display-flex flex-col center gap-1">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg"fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+                        </svg>
+                    </div>
+                    <div class="card-texto display-flex flex-col text-center gap-1">
+                        <b>
+                            3. Obtener Resultados
+                        </b>
+                        <p>
+                            Visualizacion de informes, estadisticas y descarga tus datos optimizados
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="center">
+        <div class="dudas display-flex flex-row center">
+            <div class="logo">
+                <img src="/config/icons/logo-solo.svg" alt="Logo">
+            </div>
+            <div class="opcion-footer display-flex flex-col">
+                <h2>Ayuda</h2>
+                <p>Reportar algún problema</p>
+                <p>Cómo usar Datasnap</p>
+                <p>Preguntas</p>
+            </div>
+            <div class="opcion-footer display-flex flex-col">
+                <h2>Acerca de nosotros</h2>
+                <p>Quiénes somos</p>
+                <p>Acerca de la página</p>
+                <p>Contáctanos</p>
+            </div>
+            <div class="opcion-footer display-flex flex-col">
+                <h2>Nuestras Redes</h2>
+            </div>
+        </div>
+        <div class="derechos"></div>
+    </footer>
+</body>
+<script>
+    // declaracion del div, logo y texto
+    const introDiv = document.getElementById('intro-bienvenida');
+    const introLogo = introDiv.querySelector('.intro-logo');
+    const introTexto = introDiv.querySelector('.intro-texto');
+
+    // Aparecer logo con opacidad
+    setTimeout(() => {
+        introLogo.classList.add('visible');
+    }, 100);
+
+    // Mostrar texto y mover logo
+    setTimeout(() => {
+        introTexto.classList.add('visible');
+        introLogo.classList.add('move-left');
+    }, 700);
+
+    // Ocultar intro después de 2 segundos
+    setTimeout(() => {
+        introDiv.style.opacity = 0;
+        setTimeout(() => {
+            introDiv.remove();
+        }, 700);
+    }, 2100);
+
+    const menuHamburguesa = document.getElementById('menu-hamburguesa');
+    const opcionesMenu = document.getElementById('opciones-menu-hamburguesa');
+
+    // Crear clase activa para mostrar el menú
+    menuHamburguesa.addEventListener('click', () => {
+        opcionesMenu.classList.toggle('menu-activo');
+    });
+
+    // Cerrar el menú cuando se haga clic en un enlace
+    opcionesMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            opcionesMenu.classList.remove('menu-activo');
+        });
+    });
+</script>
+
+</html>

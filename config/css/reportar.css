@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+
+.logo {
+  width: 120px;      
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 10;
+
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* LADO IZQUIERDO */
+.left-side {
+  flex: 1;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.content {
+  max-width: 400px;
+}
+
+.content h1 {
+  font-size: 2.2rem;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.content p {
+  color: #475569;
+  margin-bottom: 20px;
+}
+
+/* FORMULARIO */
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.report-form label {
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.report-form textarea {
+  resize: none;
+  width: 100%;
+  height: 120px;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #dce4f2;
+  border-radius: 10px;
+  background: #f9fbff;
+  color: #0f172a;
+  transition: 0.2s ease;
+}
+
+.report-form textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* BOTONES */
+.buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.btn-celeste {
+  background-color: #38bdf8;
+  border: none;
+  color: white;
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+}
+
+.btn-celeste:hover {
+  background-color: #0ea5e9;
+}
+
+.btn-blanco {
+  background-color: white;
+  border: 2px solid #38bdf8;
+  color: #0ea5e9;
+}
+
+.btn-blanco:hover {
+  background-color: #e0f2fe;
+}
+
+/* LADO DERECHO */
+.right-side {
+  flex: 1;
+  position: relative;
+  background-color: #e0f2fe;
+  overflow: hidden;
+}
+
+/* Imagen de la wave */
+.wave{
+  position: absolute;
+  left: -40vh;
+  top:0;
+  width: 100vh;
+  height: 100%;
+  transform: rotate(-90deg);
+  z-index: 0;
+}
+
+/* Imagen del cable divisor */
+.cable {
+  position: absolute;
+  left: -60px;
+  transform: translateY(10%);
+  transform: translateX(-35%);
+  height: 80%;
+  max-height: 600px;
+  width: auto;
+  z-index: 3;
+  object-fit: contain;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .right-side {
+    display: none;
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+}

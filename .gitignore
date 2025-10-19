@@ -1,0 +1,16 @@
+# Variables de entorno
+.env
+
+# Credenciales
+secure/
+
+# Vendor (librerías)
+vendor/
+
+# Archivos temporales
+*.tmp
+*.log
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db

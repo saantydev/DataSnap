@@ -1,0 +1,259 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fafafa;
+    margin: 0;
+    color: #222;
+    display: flex;
+}
+
+main {
+    flex: 1;
+    margin-left: 288px;
+    padding: 40px;
+}
+
+h2 {
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+.tab {
+    margin-right: 24px;
+    padding-bottom: 8px;
+    cursor: pointer;
+    color: #00b8bf;
+    border-bottom: 2px solid #00b8bf;
+}
+
+.tab.inactive {
+    color: #666;
+    border-bottom: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    background: #fff;
+    box-shadow: 0 0 12px rgb(0 0 0 / 0.03);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead th {
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+    user-select: none;
+}
+
+tbody tr {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgb(0 0 0 / 0.03);
+    transition: background-color 0.2s ease-in-out;
+}
+
+tbody tr:hover {
+    background-color: #e7e7e7;
+}
+
+tbody tr td {
+    padding: 12px 20px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #222;
+}
+
+tbody tr:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+
+.file-icon {
+    display: inline-block;
+    width: 20px;
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+    background: url('data:image/svg+xml;utf8,<svg fill="%23999" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 2h8l4 4v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zM13 3.5V8h4.5L13 3.5z"/></svg>') no-repeat center;
+    background-size: contain;
+}
+
+
+.tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: white;
+    text-transform: lowercase;
+    font-family: monospace;
+    user-select: none;
+}
+
+.tag.sql {
+    background-color: #ff5c5c;
+}
+
+.tag.csv {
+    background-color: #00aaa5;
+}
+
+.tag.txt {
+    background-color: #4353ff;
+}
+
+.tag.json {
+    background-color: #ffb541;
+    color: #fff;
+}
+
+
+.btn-optimize {
+    background-color: #16a085;
+    border: none;
+    padding: 6px 14px;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.btn-optimize svg {
+    margin-right: 6px;
+}
+
+
+.btn-optimize svg {
+    fill: white;
+}
+
+/* Botón de previsualización */
+.btn-preview {
+    background-color: #8b5cf6;
+    border: none;
+    padding: 6px 14px;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-preview:hover {
+    background-color: #7c3aed;
+}
+
+.btn-preview svg {
+    margin-right: 6px;
+    fill: white;
+    stroke: white;
+}
+
+/* Botón de descarga */
+.btn-download {
+    background-color: #10b981;
+    border: none;
+    padding: 6px 14px;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-download:hover {
+    background-color: #059669;
+}
+
+.btn-download svg {
+    margin-right: 6px;
+    fill: white;
+    stroke: white;
+}
+
+
+.actions {
+    width: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.actions svg circle {
+    fill: #bbb;
+}
+
+.actions:hover svg circle {
+    fill: #666;
+}
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    height: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.filter-bar input, .filter-bar select {
+    border: none;
+    padding: 8px 12px;
+    outline: none;
+    font-size: 14px;
+}
+
+.filter-bar input {
+    width: 180px;
+}
+
+.filter-bar select {
+    cursor: pointer;
+    border-left: 1px solid #ddd;
+}
+
+.filter-bar button {
+    background: white;
+    border: none;
+    border-left: 1px solid #ddd;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+}
+
+.filter-bar button:hover {
+    background: #f5f5f5;
+}

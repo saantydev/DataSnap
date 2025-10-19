@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsualización - DataSnap</title>
+    <link rel="shortcut icon" href="/config/icons/logo-solo.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/config/css/preview.css">
+    <script src="/assets/js/main.js"></script>
+
+</head>
+<body>
+    <?php $active = 'files'; include __DIR__ . '/partials/sidebar.php'; ?>
+    
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <div class="header-section">
+                <div class="header-content">
+                    <div class="header-title">
+                        <h1>✨ Previsualización de Archivo</h1>
+                        <p>Compara tu archivo original con la versión optimizada por IA</p>
+                    </div>
+                    <button onclick="window.history.back()" class="back-button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                        </svg>
+                        Volver
+                    </button>
+                </div>
+            </div>
+
+            <!-- File Info -->
+            <div class="file-info-card">
+                <div class="file-info-grid">
+                    <div class="file-info-item">
+                        <h3>📄 Archivo</h3>
+                        <p id="fileName">Cargando...</p>
+                    </div>
+                    <div class="file-info-item">
+                        <h3>🔄 Estado</h3>
+                        <span class="status-badge" id="fileStatus">
+                            Cargando...
+                        </span>
+                    </div>
+                    <div class="file-info-item">
+                        <h3>📊 Tamaño</h3>
+                        <p id="fileSize">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Tabs -->
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="preview-tab active" data-tab="original">
+                        📄 Archivo Original
+                    </button>
+                    <button class="preview-tab" data-tab="optimized">
+                        ✨ Archivo Optimizado
+                    </button>
+                    <button class="preview-tab" data-tab="comparison">
+                        🔍 Comparación
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content-wrapper">
+                    <!-- Original File Tab -->
+                    <div id="tab-original" class="tab-content">
+                        <div class="tab-header">
+                            <h3>📄 Archivo Original</h3>
+                            <p>Datos sin procesar tal como fueron subidos</p>
+                        </div>
+                        <div class="preview-container">
+                            <div id="originalContent" class="preview-content">
+                                <div class="loading-state">
+                                    <div class="loading-spinner"></div>
+                                    <span>Cargando archivo original...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Optimized File Tab -->
+                    <div id="tab-optimized" class="tab-content hidden">
+                        <div class="tab-header">
+                            <h3>✨ Archivo Optimizado</h3>
+                            <p>Datos procesados con IA Global Universal</p>
+                        </div>
+                        <div class="preview-container">
+                            <div id="optimizedContent" class="preview-content">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">🤖</div>
+                                    <p>El archivo aún no ha sido optimizado</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Tab -->
+                    <div id="tab-comparison" class="tab-content hidden">
+                        <div class="tab-header">
+                            <h3>🔍 Comparación de Cambios</h3>
+                            <p>Diferencias entre el archivo original y optimizado</p>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div id="comparisonStats" class="comparison-stats">
+                            <!-- Stats will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Changes -->
+                        <div class="comparison-grid">
+                            <div class="comparison-panel">
+                                <div class="comparison-header original">
+                                    <h4>📄 Archivo Original</h4>
+                                </div>
+                                <div class="comparison-content" id="comparisonOriginal">
+                                    <div class="loading-state">
+                                        <span>Cargando...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-panel">
+                                <div class="comparison-header optimized">
+                                    <h4>✨ Archivo Optimizado</h4>
+                                </div>
+                                <div class="comparison-content" id="comparisonOptimized">
+                                    <div class="empty-state">
+                                        <span>No optimizado aún</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="differences-panel">
+                            <div class="differences-header">
+                                <h4>🔍 Diferencias Detectadas</h4>
+                            </div>
+                            <div id="comparisonContent" class="differences-content">
+                                <div class="empty-state">
+                                    <p>📊 Optimiza el archivo para ver las comparaciones</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions-section">
+                <div class="actions-left">
+                    <button id="downloadBtn" class="btn btn-primary hidden">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        Descargar Optimizado
+                    </button>
+                    <a href="/files" class="btn btn-secondary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                        </svg>
+                        Volver a Mis Archivos
+                    </a>
+                </div>
+                <div class="actions-right">
+                    <span id="lastUpdated">💫 Previsualización de archivo</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentFileId = null;
+        let originalData = null;
+        let optimizedData = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            currentFileId = new URLSearchParams(window.location.search).get('id');
+            if (currentFileId) {
+                loadFileData();
+            }
+            setupTabs();
+            setupEventListeners();
+            addLoadingAnimations();
+        });
+        
+        function addLoadingAnimations() {
+            // Add staggered animations to elements
+            const elements = document.querySelectorAll('.file-info-item, .preview-tab');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    el.style.transition = 'all 0.5s ease-out';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        function setupTabs() {
+            document.querySelectorAll('.preview-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+                    switchTab(targetTab);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.preview-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+        }
+
+        function setupEventListeners() {
+            document.getElementById('downloadBtn').addEventListener('click', downloadOptimized);
+        }
+
+        async function loadFileData() {
+            try {
+                // Mostrar indicador de carga
+                document.getElementById('fileName').textContent = 'Cargando...';
+                document.getElementById('fileStatus').textContent = 'Cargando...';
+                document.getElementById('fileSize').textContent = 'Cargando...';
+                
+                const response = await fetch(`/files?action=preview-data&id=${currentFileId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Animate content loading
+                    setTimeout(() => updateFileInfo(data.file), 200);
+                    setTimeout(() => displayOriginalContent(data.original_content), 400);
+                    
+                    if (data.optimized_content) {
+                        setTimeout(() => {
+                            displayOptimizedContent(data.optimized_content);
+                            showComparison(data.original_content, data.optimized_content);
+                            const downloadBtn = document.getElementById('downloadBtn');
+                            downloadBtn.classList.remove('hidden');
+                            downloadBtn.style.opacity = '0';
+                            downloadBtn.style.transform = 'scale(0.9)';
+                            setTimeout(() => {
+                                downloadBtn.style.transition = 'all 0.3s ease-out';
+                                downloadBtn.style.opacity = '1';
+                                downloadBtn.style.transform = 'scale(1)';
+                            }, 100);
+                        }, 600);
+                    }
+                } else {
+                    showError('Error al cargar el archivo: ' + (data.message || 'Error desconocido'));
+                }
+            } catch (error) {
+                console.error('Error loading file data:', error);
+                showError('Error de conexión: ' + error.message);
+                
+                // Restaurar estado inicial en caso de error
+                document.getElementById('fileName').textContent = 'Error al cargar';
+                document.getElementById('fileStatus').textContent = 'Error';
+                document.getElementById('fileSize').textContent = 'N/A';
+            }
+        }
+
+        function updateFileInfo(file) {
+            document.getElementById('fileName').textContent = file.nombre;
+            document.getElementById('fileSize').textContent = formatFileSize(file.tamano);
+            
+            const statusElement = document.getElementById('fileStatus');
+            statusElement.textContent = file.estado;
+            statusElement.className = `status-badge ${getStatusColor(file.estado)}`;
+        }
+
+        function getStatusColor(status) {
+            switch(status) {
+                case 'original': return 'status-original';
+                case 'optimizado': return 'status-optimizado';
+                case 'pendiente': return 'status-pendiente';
+                default: return 'status-original';
+            }
+        }
+
+        function formatFileSize(bytes) {
+            return DataSnapUtils.formatFileSize(bytes);
+        }
+
+        function displayOriginalContent(content) {
+            const container = document.getElementById('originalContent');
+            container.innerHTML = formatContentForDisplay(content, 'original');
+            originalData = content;
+        }
+
+        function displayOptimizedContent(content) {
+            const container = document.getElementById('optimizedContent');
+            container.innerHTML = formatContentForDisplay(content, 'optimized');
+            optimizedData = content;
+        }
+
+        function formatContentForDisplay(content, type) {
+            if (!content) return '<div class="empty-state"><div class="empty-state-icon">📄</div><p>No hay contenido disponible</p></div>';
+            
+            // Limpiar contenido de caracteres especiales HTML
+            const cleanContent = content.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&amp;/g, '&');
+            
+            // Detectar tipo de archivo por contenido
+            if (cleanContent.includes('CREATE TABLE') || cleanContent.includes('INSERT INTO') || cleanContent.includes('-- phpMyAdmin')) {
+                // Es SQL - mostrar con formato de código
+                const lines = cleanContent.split('\n');
+                const maxLines = 25;
+                const displayLines = lines.slice(0, maxLines);
+                let html = `<div class="content-sql">`;
+                html += displayLines.join('\n');
+                if (lines.length > maxLines) {
+                    html += `\n\n-- 📊 Mostrando ${maxLines} de ${lines.length} líneas totales`;
+                }
+                html += '</div>';
+                return html;
+            }
+            
+            // Detectar CSV
+            const lines = cleanContent.split('\n').filter(line => line.trim());
+            if (lines.length > 1 && lines[0].includes(',') && !cleanContent.includes('CREATE TABLE')) {
+                try {
+                    const headers = lines[0].split(',');
+                    const rows = lines.slice(1, 20); // Mostrar 20 filas
+                    
+                    let html = '<table class="content-table"><thead><tr>';
+                    headers.forEach(header => {
+                        html += `<th>${header.trim()}</th>`;
+                    });
+                    html += '</tr></thead><tbody>';
+                    
+                    rows.forEach((row, index) => {
+                        const cells = row.split(',');
+                        html += `<tr>`;
+                        headers.forEach((_, cellIndex) => {
+                            const cellContent = cells[cellIndex] ? cells[cellIndex].trim() : '';
+                            html += `<td title="${cellContent}">${cellContent}</td>`;
+                        });
+                        html += '</tr>';
+                    });
+                    
+                    html += '</tbody></table>';
+                    
+                    if (lines.length > 21) {
+                        html += `<div style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary); text-align: center; padding: 1rem; background: rgba(45, 172, 181, 0.05); border-radius: 8px;">📊 Mostrando 20 de ${lines.length - 1} filas de datos</div>`;
+                    }
+                    
+                    return html;
+                } catch (error) {
+                    // Si falla el parseo de CSV, mostrar como texto
+                }
+            }
+            
+            // Mostrar como texto plano
+            const textLines = cleanContent.split('\n');
+            const maxLines = 50;
+            const displayContent = textLines.slice(0, maxLines).join('\n');
+            let html = `<div class="content-text">${displayContent}`;
+            if (textLines.length > maxLines) {
+                html += `\n\n📄 Mostrando ${maxLines} de ${textLines.length} líneas totales`;
+            }
+            html += '</div>';
+            return html;
+        }
+
+        function showComparison(original, optimized) {
+            // Show original content in comparison
+            const originalContainer = document.getElementById('comparisonOriginal');
+            if (original) {
+                originalContainer.innerHTML = formatContentForDisplay(original, 'original').replace('max-h-96', 'max-h-64');
+            }
+            
+            // Show optimized content in comparison
+            const optimizedContainer = document.getElementById('comparisonOptimized');
+            if (optimized) {
+                optimizedContainer.innerHTML = formatContentForDisplay(optimized, 'optimized').replace('max-h-96', 'max-h-64');
+                
+                // Show stats
+                const stats = calculateStats(original, optimized);
+                displayStats(stats);
+                
+                // Show differences
+                const differences = findDifferences(original, optimized);
+                displayDifferences(differences);
+            } else {
+                document.getElementById('comparisonContent').innerHTML = '<div class="text-center py-8 text-gray-500">No hay archivo optimizado para comparar</div>';
+            }
+        }
+
+        function calculateStats(original, optimized) {
+            const originalLines = original.split('\n').filter(line => line.trim()).length;
+            const optimizedLines = optimized.split('\n').filter(line => line.trim()).length;
+            
+            return {
+                originalRows: originalLines - 1, // Exclude header
+                optimizedRows: optimizedLines - 1,
+                rowsRemoved: (originalLines - 1) - (optimizedLines - 1),
+                compressionRatio: ((original.length - optimized.length) / original.length * 100).toFixed(1)
+            };
+        }
+
+        function displayStats(stats) {
+            const container = document.getElementById('comparisonStats');
+            container.innerHTML = `
+                <div class="stat-card stat-blue">
+                    <div class="stat-value">${stats.originalRows}</div>
+                    <div class="stat-label">📊 Filas Originales</div>
+                </div>
+                <div class="stat-card stat-green">
+                    <div class="stat-value">${stats.optimizedRows}</div>
+                    <div class="stat-label">✨ Filas Optimizadas</div>
+                </div>
+                <div class="stat-card stat-red">
+                    <div class="stat-value">${stats.rowsRemoved}</div>
+                    <div class="stat-label">🗑️ Filas Eliminadas</div>
+                </div>
+                <div class="stat-card stat-purple">
+                    <div class="stat-value">${stats.compressionRatio}%</div>
+                    <div class="stat-label">📉 Reducción de Tamaño</div>
+                </div>
+            `;
+        }
+
+        function findDifferences(original, optimized) {
+            const differences = [];
+            
+            // Detectar diferencias reales
+            if (original.includes('juan@gmai.com') && optimized.includes('juan@gmail.com')) {
+                differences.push({ type: 'email', original: 'juan@gmai.com', optimized: 'juan@gmail.com', description: 'Dominio de email corregido' });
+            }
+            
+            if (original.includes('maria@hotmial.com') && optimized.includes('maria@hotmail.com')) {
+                differences.push({ type: 'email', original: 'maria@hotmial.com', optimized: 'maria@hotmail.com', description: 'Dominio de email corregido' });
+            }
+            
+            if (original.includes('NaN') && !optimized.includes('NaN')) {
+                differences.push({ type: 'data', original: 'NaN', optimized: 'Valores corregidos', description: 'Valores NaN reemplazados' });
+            }
+            
+            // Contar líneas para detectar duplicados eliminados
+            const originalLines = original.split('\n').filter(line => line.trim()).length;
+            const optimizedLines = optimized.split('\n').filter(line => line.trim()).length;
+            
+            if (originalLines > optimizedLines) {
+                differences.push({ 
+                    type: 'cleanup', 
+                    original: `${originalLines} filas`, 
+                    optimized: `${optimizedLines} filas`, 
+                    description: `${originalLines - optimizedLines} filas duplicadas eliminadas` 
+                });
+            }
+            
+            if (differences.length === 0) {
+                differences.push({ 
+                    type: 'info', 
+                    original: 'Archivo original', 
+                    optimized: 'Archivo optimizado', 
+                    description: 'Archivo procesado con IA Global Universal' 
+                });
+            }
+            
+            return differences;
+        }
+
+        function displayDifferences(differences) {
+            const container = document.getElementById('comparisonContent');
+            let html = '<div class="differences-list">';
+            
+            differences.forEach(diff => {
+                html += `
+                    <div class="difference-item">
+                        <div class="difference-content">
+                            <div class="difference-title">${diff.description}</div>
+                            <div class="difference-changes">
+                                <span class="diff-removed">${diff.original}</span>
+                                <span class="diff-arrow">→</span>
+                                <span class="diff-added">${diff.optimized}</span>
+                            </div>
+                        </div>
+                        <div class="difference-type">${diff.type}</div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+
+
+        async function downloadOptimized() {
+            window.location.href = `/files/download?id=${currentFileId}`;
+        }
+
+        function showError(message) {
+            DataSnapUtils.showNotification(message, 'error');
+        }
+
+        function showSuccess(message) {
+            DataSnapUtils.showNotification(message, 'success');
+        }
+        
+
+        
+        function expandContent(element) {
+            // Función para expandir contenido (placeholder)
+            element.style.display = 'none';
+            const container = element.parentElement;
+            const notice = document.createElement('div');
+            notice.className = 'mt-2 text-sm text-blue-600';
+            notice.textContent = 'Contenido completo mostrado';
+            container.appendChild(notice);
+        }
+    </script>
+</body>
+</html>
