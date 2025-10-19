@@ -49,9 +49,10 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
     </div>
 
     <nav class="space-y-2">
-        <?php ds_nav_item('#', 'Subir Archivo', 'add', 'panel', $active); ?>
-        <?php ds_nav_item('#', 'Mis Bases de Datos', 'storage', 'files', $active); ?>
-        <div class="flex items-center justify-between p-3 rounded-lg shadow-sm bg-white">
+        <?php ds_nav_item('/panel', 'Subir Archivo', 'add', 'panel', $active); ?>
+        <?php ds_nav_item('/files', 'Mis Bases de Datos', 'storage', 'files', $active); ?>
+        <?php ds_nav_item('/configuracion', 'Configuración', 'settings', 'settings', $active); ?>
+                <div class="flex items-center justify-between p-3 rounded-lg shadow-sm bg-white">
             <span class="font-medium text-gray-700">Tema</span>
             <div class="tema-selector">
                 <select id="tema-select" class="text-sm border rounded px-2 py-1">
@@ -59,9 +60,8 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
                     <option value="light">Claro</option>
                     <option value="dark">Oscuro</option>
                 </select>
-            </div>
+            </div>  
         </div>
-        <?php ds_nav_item('./configuracion.php', 'Configuración', 'settings', 'settings', $active); ?>
     </nav>
 
     <div class="mt-auto pt-4 border-t border-gray-200">
