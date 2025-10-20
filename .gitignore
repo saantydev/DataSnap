@@ -1,21 +1,45 @@
-
+# Variables de entorno
+.env
+config/env.php
 
 # Credenciales
 secure/
-vendor/
+config/credentials.php
 
+# Vendor (librerías)
+vendor/
+composer.phar
+
+# Node modules
 node_modules/
 
-# Archivos de configuración local
-.env
-config/database.php
-
-# Archivos temporales
+# Archivos temporales y procesados
 uploads/*
 !uploads/.gitkeep
-
-# Logs
+processed/
+__pycache__/
+*.tmp
 *.log
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+
+# Archivos de debug y test
+debug*.php
+test_*.php
+test_*.py
+test_*.sql
+
+# Archivos de deploy
+deploy.bat
+sync.bat
 
 # Cache
 cache/
+public_html/

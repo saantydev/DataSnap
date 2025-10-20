@@ -13,7 +13,10 @@ require_once __DIR__ . '/src/Core/Csrf.php';
 require_once __DIR__ . '/src/Core/ErrorHandler.php';
 require_once __DIR__ . '/src/Core/Migrations.php';
 require_once __DIR__ . '/src/Core/Config.php';
+<<<<<<< HEAD
 require_once __DIR__ . '/src/Core/Encryption.php';
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
 // Incluir controladores
 require_once __DIR__ . '/src/Controllers/HomeController.php';
@@ -21,7 +24,10 @@ require_once __DIR__ . '/src/Controllers/LoginController.php';
 require_once __DIR__ . '/src/Controllers/RegisterController.php';
 require_once __DIR__ . '/src/Controllers/FileController.php';
 require_once __DIR__ . '/src/Controllers/PanelController.php';
+<<<<<<< HEAD
 require_once __DIR__ . '/src/Controllers/ChatbotController.php';
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
 // Incluir modelos
 require_once __DIR__ . '/src/Models/UserModel.php';

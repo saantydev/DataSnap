@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "datasnap/datasnap",
     "description": "DataSnap - Plataforma de procesamiento de datos",
     "require": {
@@ -10,3 +11,9 @@
         ]
     }
 }
+=======
+    "require": {
+        "google/apiclient": "^2.15"
+    }
+}
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925

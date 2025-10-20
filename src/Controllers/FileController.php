@@ -8,7 +8,10 @@ require_once __DIR__ . '/../../config/env.php';
 use Models\FileModel;
 use Models\UserModel;
 use Core\Database;
+<<<<<<< HEAD
 use Core\Encryption;
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 use Google\Client;
 use Google\Service\Drive;
 
@@ -202,8 +205,15 @@ class FileController
                             $driveId = $renderResponse['drive_id'];
                             $driveLink = $renderResponse['drive_link'];
                             
+<<<<<<< HEAD
                             // Usar el nuevo método que cifra automáticamente
                             $this->fileModel->updateDriveData($idArchivo, $userId, $driveId, $driveLink, 'original');
+=======
+                            $this->db->query(
+                                "UPDATE archivos SET drive_id_original = ?, drive_link_original = ? WHERE id = ?",
+                                [$driveId, $driveLink, $idArchivo]
+                            );
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
                             
                             error_log("File uploaded via Render API successfully. ID: $driveId");
                         } else {
@@ -266,7 +276,11 @@ class FileController
                 return;
             }
 
+<<<<<<< HEAD
             $file = $this->fileModel->getFileById((int)$fileId, $userId);
+=======
+            $file = $this->fileModel->getFileById((int)$fileId);
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             if (!$file || $file['user_id'] != $userId || $file['estado'] == 'borrado') {
                 $this->jsonResponse(['success' => false, 'message' => 'Archivo no encontrado, no autorizado o eliminado'], 403);
                 return;
@@ -388,7 +402,11 @@ class FileController
                 return;
             }
 
+<<<<<<< HEAD
             $file = $this->fileModel->getFileById((int)$fileId, $userId);
+=======
+            $file = $this->fileModel->getFileById((int)$fileId);
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             if (!$file || $file['user_id'] != $userId || $file['estado'] !== 'optimizado') {
                 $this->show404();
                 return;
@@ -572,7 +590,11 @@ class FileController
                 return;
             }
 
+<<<<<<< HEAD
             $file = $this->fileModel->getFileById((int)$fileId, $userId);
+=======
+            $file = $this->fileModel->getFileById((int)$fileId);
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             if (!$file || $file['user_id'] != $userId || $file['estado'] == 'borrado') {
                 $this->show404();
                 return;
@@ -608,7 +630,11 @@ class FileController
                 return;
             }
 
+<<<<<<< HEAD
             $file = $this->fileModel->getFileById((int)$fileId, $userId);
+=======
+            $file = $this->fileModel->getFileById((int)$fileId);
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             if (!$file || $file['user_id'] != $userId || $file['estado'] == 'borrado') {
                 $this->jsonResponse(['success' => false, 'message' => 'Archivo no encontrado'], 404);
                 return;

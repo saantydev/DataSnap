@@ -13,7 +13,10 @@
 namespace Models;
 
 use Core\Database;
+<<<<<<< HEAD
 use Core\Encryption;
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
 class FileModel
 {
@@ -196,18 +199,25 @@ class FileModel
             // First, reset any pending files that have been pending for more than 5 seconds
             $this->resetExpiredPendingFiles($userId);
 
+<<<<<<< HEAD
             $sql = "SELECT id, ruta, nombre, tamano, estado, fecha_subida, drive_link_optimizado, drive_link_original, drive_id_original, drive_id_optimizado
+=======
+            $sql = "SELECT id, ruta, nombre, tamano, estado, fecha_subida, drive_link_optimizado, drive_link_original
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
                     FROM archivos
                     WHERE user_id = ? AND estado != 'borrado'
                     ORDER BY fecha_subida DESC";
             $stmt = $this->db->query($sql, [$userId]);
             $files = $stmt->fetchAll();
 
+<<<<<<< HEAD
             // Descifrar los campos sensibles para el usuario propietario
             foreach ($files as &$file) {
                 $file = Encryption::decryptFileData($file, $userId);
             }
 
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             return [
                 'success' => true,
                 'files' => $files
@@ -261,21 +271,30 @@ class FileModel
      * Obtiene un archivo por su ID
      *
      * @param int $fileId ID del archivo
+<<<<<<< HEAD
      * @param int|null $userId ID del usuario (para descifrar datos si es propietario)
      * @return array|null Datos del archivo o null si no existe
      */
     public function getFileById(int $fileId, ?int $userId = null): ?array
+=======
+     * @return array|null Datos del archivo o null si no existe
+     */
+    public function getFileById(int $fileId): ?array
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
     {
         try {
             $sql = "SELECT * FROM archivos WHERE id = ?";
             $stmt = $this->db->query($sql, [$fileId]);
             $file = $stmt->fetch();
 
+<<<<<<< HEAD
             if ($file && $userId && $file['user_id'] == $userId) {
                 // Solo descifrar si el usuario es el propietario
                 $file = Encryption::decryptFileData($file, $userId);
             }
 
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             return $file ?: null;
         } catch (\Exception $e) {
             error_log("Error al obtener archivo por ID: " . $e->getMessage(), 0);
@@ -292,7 +311,11 @@ class FileModel
      */
     public function isFileOwner(int $fileId, int $userId): bool
     {
+<<<<<<< HEAD
         $file = $this->getFileById($fileId); // Sin descifrar para verificación
+=======
+        $file = $this->getFileById($fileId);
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
         return $file && $file['user_id'] == $userId;
     }
 
@@ -421,6 +444,7 @@ class FileModel
     }
 
     /**
+<<<<<<< HEAD
      * Actualiza los datos de Google Drive de un archivo (cifrados)
      *
      * @param int $fileId ID del archivo
@@ -458,6 +482,8 @@ class FileModel
     }
 
     /**
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
      * Genera un nombre único para un archivo
      *
      * @param string $originalName Nombre original del archivo

@@ -934,6 +934,7 @@ main::before {
     background: linear-gradient(135deg, #4b5563, #374151);
 }
 
+<<<<<<< HEAD
 .btn-chat {
     background: linear-gradient(135deg, #14b8a6, #0d9488);
     color: white;
@@ -943,6 +944,8 @@ main::before {
     background: linear-gradient(135deg, #0d9488, #0f766e);
 }
 
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 .actions-right {
     color: var(--text-muted);
     font-size: 0.75rem;

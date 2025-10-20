@@ -1,9 +1,12 @@
 <?php
 
 require_once __DIR__ . '/conexion.php';
+<<<<<<< HEAD
 require_once __DIR__ . '/../Core/Encryption.php';
 
 use Core\Encryption;
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
 /**
  * Función para insertar un nuevo archivo en la base de datos.
@@ -99,10 +102,16 @@ function eliminarArchivo($id) {
 /**
  * Función para obtener un archivo por su ID.
  * @param int $id El ID del archivo.
+<<<<<<< HEAD
  * @param int|null $user_id El ID del usuario (para descifrar si es propietario).
  * @return array|false El array asociativo del archivo si se encuentra, false en caso contrario.
  */
 function obtenerArchivoPorId($id, $user_id = null) {
+=======
+ * @return array|false El array asociativo del archivo si se encuentra, false en caso contrario.
+ */
+function obtenerArchivoPorId($id) {
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
     global $conn;
 
     $stmt = mysqli_prepare($conn, "SELECT * FROM archivos WHERE id = ?");
@@ -118,11 +127,14 @@ function obtenerArchivoPorId($id, $user_id = null) {
     $archivo = mysqli_fetch_assoc($resultado);
     mysqli_stmt_close($stmt);
 
+<<<<<<< HEAD
     // Descifrar datos si el usuario es el propietario
     if ($archivo && $user_id && $archivo['user_id'] == $user_id) {
         $archivo = Encryption::decryptFileData($archivo, $user_id);
     }
 
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
     return $archivo;
 }
 
@@ -134,7 +146,11 @@ function obtenerArchivoPorId($id, $user_id = null) {
 function obtenerArchivosPorUsuario($user_id) {
     global $conn;
 
+<<<<<<< HEAD
     $stmt = mysqli_prepare($conn, "SELECT id, nombre, ruta, tamano, estado, fecha_subida, drive_id_original, drive_link_original, drive_id_optimizado, drive_link_optimizado FROM archivos WHERE user_id = ? AND estado != 'borrado' AND nombre != '' AND nombre IS NOT NULL ORDER BY fecha_subida DESC");
+=======
+    $stmt = mysqli_prepare($conn, "SELECT id, nombre, ruta, tamano, estado, fecha_subida FROM archivos WHERE user_id = ? AND estado != 'borrado' AND nombre != '' AND nombre IS NOT NULL ORDER BY fecha_subida DESC");
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
     if ($stmt === false) {
         error_log("Error al preparar la consulta (obtenerArchivosPorUsuario): " . mysqli_error($conn));
@@ -146,7 +162,11 @@ function obtenerArchivosPorUsuario($user_id) {
     $resultado = mysqli_stmt_get_result($stmt);
     $archivos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
     
+<<<<<<< HEAD
     // Calcular tamaño si no existe en BD y descifrar datos sensibles
+=======
+    // Calcular tamaño si no existe en BD
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
     foreach ($archivos as &$archivo) {
         if (($archivo['tamano'] === null || $archivo['tamano'] == 0) && !empty($archivo['ruta'])) {
             // Construir ruta completa correctamente
@@ -162,9 +182,12 @@ function obtenerArchivosPorUsuario($user_id) {
                 $archivo['tamano'] = 0;
             }
         }
+<<<<<<< HEAD
         
         // Descifrar datos sensibles para el usuario propietario
         $archivo = Encryption::decryptFileData($archivo, $user_id);
+=======
+>>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
     }
     mysqli_stmt_close($stmt);
 
