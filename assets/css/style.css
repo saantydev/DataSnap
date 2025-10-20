@@ -28,6 +28,26 @@
   text-align: center;
 }
 
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end{
+  align-items: end;
+}
+
+.text-align-end{
+  text-align: end;
+}
+
 .gap-1 {
   gap: 1rem;
 }
@@ -77,6 +97,7 @@ a {
     --color-secundario: #1F2937;
     --color-fondo: #111827;
     --color-texto: #FFFFFF;
+    --color-texto-secundario: #ffffff80;
     --color-texto-footer: #FFFFFF;
   }
 }
@@ -88,6 +109,7 @@ a {
     --color-secundario: #C8F5F9;
     --color-fondo: #FDFDFD;
     --color-texto: black;
+    --color-texto-secundario: #00000080;
     --color-texto-footer: #FFFFFF;
   }
 }
