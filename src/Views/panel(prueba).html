@@ -16,26 +16,30 @@
 
 </head>
 
-<body class="bg-white flex">
-    <section max-height: 100vh, max-weight: 100vh>
-       <div class="wave-div">
-            <div class="wave wave1"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
-            <div class2="wave wave4"></div>
-        </div>
-    </section>
-     <?php $active = 'panel'; include __DIR__ . '/partials/sidebar.php'; ?>
-    <main class="flex-1 relative ml-72">
+<body class="bg-white">
+    <?php $active = 'panel'; include __DIR__ . '/partials/sidebar.php'; ?>
+    
+    <div class="md:ml-72">
+        <main class="min-h-screen">
         
-        <div class="flex flex-col items-center justify-center h-full -mt-16">
-            <div class="w-full h-40 bg-[#26AAB5] absolute top-16"
+        <div class="flex flex-col items-center justify-center min-h-screen px-4 pt-16 md:pt-0 relative">
+            <div class="w-full h-32 md:h-40 bg-[#26AAB5] absolute top-16 md:top-16"
                 style="clip-path: ellipse(80% 50% at 50% 0%); z-index: 0;"></div>
+            
+            <!-- Blobs animados detrás del botón -->
+            <div class="absolute inset-0 flex items-center justify-center z-5">
+                <div class="square blobs relative">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
             <div class="flex flex-col items-center justify-center z-10">
-                <button id="uploadBtn" class="bg-white p-8 rounded-full shadow-lg mb-6 hover:bg-gray-50 transition-colors cursor-pointer">
-                    <span class="material-icons text-5xl text-gray-800">add</span>
+                <button id="uploadBtn" class="bg-white p-6 md:p-8 rounded-full shadow-lg mb-6 hover:bg-gray-50 transition-colors cursor-pointer">
+                    <span class="material-icons text-4xl md:text-5xl text-gray-800">add</span>
                 </button>
-                <p class="text-xl font-medium text-gray-700">Añadir archivo nuevo a optimizar</p>
+                <p class="text-lg md:text-xl font-medium text-gray-700 text-center">Añadir archivo nuevo a optimizar</p>
             </div>
         </div>
 
@@ -80,14 +84,8 @@
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
-            <button
-                class="flex items-center justify-center bg-gray-800 text-white px-8 py-3 rounded-full shadow-lg text-lg">
-                indicaciones extras
-                <span class="material-icons ml-4 bg-gray-600 rounded-full p-1">keyboard_arrow_up</span>
-            </button>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
         // Elementos del DOM

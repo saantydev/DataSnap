@@ -299,7 +299,7 @@ class UserModel
     public function findById(int $userId): ?array
     {
         try {
-            $sql = "SELECT user_id, username, email, created_at, last_login_at, google_refresh_token
+            $sql = "SELECT user_id, username, email, created_at, last_login_at
                     FROM users
                     WHERE user_id = ?";
             $stmt = $this->db->query($sql, [$userId]);
@@ -310,29 +310,6 @@ class UserModel
             error_log("Error al obtener usuario por ID: " . $e->getMessage(), 0);
             return null;
         }
-    }
-
-    /**
-     * Alias para findById para compatibilidad
-     *
-     * @param int $userId ID del usuario
-     * @return array|null Datos del usuario o null si no existe
-     */
-    public function getUserById(int $userId): ?array
-    {
-        return $this->findById($userId);
-    }
-
-    /**
-     * Verifica si un usuario tiene autorización de Google
-     *
-     * @param int $userId ID del usuario
-     * @return bool True si tiene refresh token
-     */
-    public function hasGoogleAuth(int $userId): bool
-    {
-        $user = $this->findById($userId);
-        return $user && !empty($user['google_refresh_token']);
     }
 
     /**

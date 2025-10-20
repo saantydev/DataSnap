@@ -13,10 +13,6 @@
 namespace Models;
 
 use Core\Database;
-<<<<<<< HEAD
-use Core\Encryption;
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
 class FileModel
 {
@@ -25,6 +21,11 @@ class FileModel
      * @var Database
      */
     private $db;
+    /**
+     * Cache de existencia de columnas para evitar consultas repetidas
+     * @var array&lt;string,bool&gt;
+     */
+    private array $columnCache = [];
 
     /**
      * Tipos MIME permitidos para archivos
@@ -43,7 +44,7 @@ class FileModel
      * Extensiones de archivo permitidas
      * @var array
      */
-    private const ALLOWED_EXTENSIONS = ['json', 'csv', 'xlsx', 'xls', 'sql', 'txt'];
+    private const ALLOWED_EXTENSIONS = ['json', 'csv', 'xlsx', 'xls', 'sql'];
 
     /**
      * Estados posibles de un archivo
@@ -83,7 +84,7 @@ class FileModel
                 ];
             }
 
-            // Insertar archivo en la base de datos con tamaño
+            // Insertar archivo en la base de datos (solo con columnas que existen)
             $result = $this->insertFile($userId, $filePath, $originalName, $fileSize);
 
             if ($result['success']) {
@@ -161,14 +162,9 @@ class FileModel
      * @param int $fileSize Tamaño en bytes
      * @return array Resultado de la inserción
      */
-    private function insertFile(int $userId, string $filePath, string $originalName, int $fileSize = 0): array
+    private function insertFile(int $userId, string $filePath, string $originalName, ?int $fileSize = null): array
     {
         try {
-            // Obtener tamaño del archivo si no se proporciona
-            if ($fileSize === 0 && file_exists($filePath)) {
-                $fileSize = filesize($filePath);
-            }
-            
             $sql = "INSERT INTO archivos (user_id, ruta, nombre, tamano, estado, fecha_subida)
                     VALUES (?, ?, ?, ?, 'original', NOW())";
             $stmt = $this->db->query($sql, [$userId, $filePath, $originalName, $fileSize]);
@@ -196,28 +192,13 @@ class FileModel
     public function getUserFiles(int $userId): array
     {
         try {
-            // First, reset any pending files that have been pending for more than 5 seconds
-            $this->resetExpiredPendingFiles($userId);
-
-<<<<<<< HEAD
-            $sql = "SELECT id, ruta, nombre, tamano, estado, fecha_subida, drive_link_optimizado, drive_link_original, drive_id_original, drive_id_optimizado
-=======
-            $sql = "SELECT id, ruta, nombre, tamano, estado, fecha_subida, drive_link_optimizado, drive_link_original
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
+            $sql = "SELECT id, ruta, nombre, estado, fecha_subida
                     FROM archivos
                     WHERE user_id = ? AND estado != 'borrado'
                     ORDER BY fecha_subida DESC";
             $stmt = $this->db->query($sql, [$userId]);
             $files = $stmt->fetchAll();
 
-<<<<<<< HEAD
-            // Descifrar los campos sensibles para el usuario propietario
-            foreach ($files as &$file) {
-                $file = Encryption::decryptFileData($file, $userId);
-            }
-
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             return [
                 'success' => true,
                 'files' => $files
@@ -233,68 +214,18 @@ class FileModel
     }
 
     /**
-     * Resetea archivos pendientes que han estado en ese estado por más de 5 segundos
-     *
-     * @param int $userId ID del usuario
-     */
-    private function resetExpiredPendingFiles(int $userId): void
-    {
-        try {
-            // Reset pending files with timestamp older than 5 seconds
-            $sql1 = "UPDATE archivos
-                     SET estado = 'original', pending_timestamp = NULL
-                     WHERE user_id = ? AND estado = 'pendiente'
-                     AND pending_timestamp IS NOT NULL
-                     AND (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(pending_timestamp)) > 5";
-            $stmt1 = $this->db->query($sql1, [$userId]);
-            $affected1 = $stmt1->rowCount();
-
-            // Reset old pending files without timestamp (stuck from before the change)
-            $sql2 = "UPDATE archivos
-                     SET estado = 'original'
-                     WHERE user_id = ? AND estado = 'pendiente'
-                     AND pending_timestamp IS NULL
-                     AND fecha_subida < DATE_SUB(NOW(), INTERVAL 1 HOUR)";
-            $stmt2 = $this->db->query($sql2, [$userId]);
-            $affected2 = $stmt2->rowCount();
-
-            $totalAffected = $affected1 + $affected2;
-            if ($totalAffected > 0) {
-                error_log("Reseteados $totalAffected archivos pendientes expirados para usuario $userId", 0);
-            }
-        } catch (\Exception $e) {
-            error_log("Error al resetear archivos pendientes expirados: " . $e->getMessage(), 0);
-        }
-    }
-
-    /**
      * Obtiene un archivo por su ID
      *
      * @param int $fileId ID del archivo
-<<<<<<< HEAD
-     * @param int|null $userId ID del usuario (para descifrar datos si es propietario)
-     * @return array|null Datos del archivo o null si no existe
-     */
-    public function getFileById(int $fileId, ?int $userId = null): ?array
-=======
      * @return array|null Datos del archivo o null si no existe
      */
     public function getFileById(int $fileId): ?array
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
     {
         try {
             $sql = "SELECT * FROM archivos WHERE id = ?";
             $stmt = $this->db->query($sql, [$fileId]);
             $file = $stmt->fetch();
 
-<<<<<<< HEAD
-            if ($file && $userId && $file['user_id'] == $userId) {
-                // Solo descifrar si el usuario es el propietario
-                $file = Encryption::decryptFileData($file, $userId);
-            }
-
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             return $file ?: null;
         } catch (\Exception $e) {
             error_log("Error al obtener archivo por ID: " . $e->getMessage(), 0);
@@ -311,11 +242,7 @@ class FileModel
      */
     public function isFileOwner(int $fileId, int $userId): bool
     {
-<<<<<<< HEAD
-        $file = $this->getFileById($fileId); // Sin descifrar para verificación
-=======
         $file = $this->getFileById($fileId);
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
         return $file && $file['user_id'] == $userId;
     }
 
@@ -334,8 +261,7 @@ class FileModel
         }
 
         try {
-            $pendingTimestamp = ($newState === 'pendiente') ? 'NOW()' : 'NULL';
-            $sql = "UPDATE archivos SET estado = ?, pending_timestamp = $pendingTimestamp WHERE id = ?";
+            $sql = "UPDATE archivos SET estado = ? WHERE id = ?";
             $stmt = $this->db->query($sql, [$newState, $fileId]);
 
             if ($stmt->rowCount() > 0) {
@@ -444,46 +370,6 @@ class FileModel
     }
 
     /**
-<<<<<<< HEAD
-     * Actualiza los datos de Google Drive de un archivo (cifrados)
-     *
-     * @param int $fileId ID del archivo
-     * @param int $userId ID del usuario propietario
-     * @param string|null $driveId ID de Google Drive
-     * @param string|null $driveLink Link de Google Drive
-     * @param string $type Tipo: 'original' o 'optimizado'
-     * @return bool True si se actualizó correctamente
-     */
-    public function updateDriveData(int $fileId, int $userId, ?string $driveId, ?string $driveLink, string $type = 'original'): bool
-    {
-        try {
-            // Cifrar los datos antes de guardar
-            $encryptedId = $driveId ? Encryption::encrypt($driveId, $userId) : null;
-            $encryptedLink = $driveLink ? Encryption::encrypt($driveLink, $userId) : null;
-            
-            if ($type === 'optimizado') {
-                $sql = "UPDATE archivos SET drive_id_optimizado = ?, drive_link_optimizado = ? WHERE id = ? AND user_id = ?";
-            } else {
-                $sql = "UPDATE archivos SET drive_id_original = ?, drive_link_original = ? WHERE id = ? AND user_id = ?";
-            }
-            
-            $stmt = $this->db->query($sql, [$encryptedId, $encryptedLink, $fileId, $userId]);
-            
-            if ($stmt->rowCount() > 0) {
-                error_log("Datos de Google Drive actualizados para archivo $fileId (tipo: $type)");
-                return true;
-            }
-            
-            return false;
-        } catch (\Exception $e) {
-            error_log("Error al actualizar datos de Google Drive: " . $e->getMessage(), 0);
-            return false;
-        }
-    }
-
-    /**
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
      * Genera un nombre único para un archivo
      *
      * @param string $originalName Nombre original del archivo

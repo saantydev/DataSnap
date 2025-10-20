@@ -28,8 +28,7 @@ class Migrations
             'drive_link_original'  => "ALTER TABLE archivos ADD COLUMN drive_link_original VARCHAR(500) NULL",
             'drive_id_optimizado'  => "ALTER TABLE archivos ADD COLUMN drive_id_optimizado VARCHAR(255) NULL",
             'drive_link_optimizado'=> "ALTER TABLE archivos ADD COLUMN drive_link_optimizado VARCHAR(500) NULL",
-            'tamano'               => "ALTER TABLE archivos ADD COLUMN tamano BIGINT UNSIGNED NULL",
-            'pending_timestamp'    => "ALTER TABLE archivos ADD COLUMN pending_timestamp TIMESTAMP NULL"
+            'tamano'               => "ALTER TABLE archivos ADD COLUMN tamano BIGINT UNSIGNED NULL"
         ];
 
         foreach ($columns as $col => $ddl) {

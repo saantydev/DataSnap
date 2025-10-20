@@ -84,9 +84,6 @@ class PanelController
                 'last_login' => $user['last_login_at']
             ];
 
-            // Verificar si tiene autorización de Google
-            $hasGoogleAuth = !empty($user['google_refresh_token']);
-
             // Incluir la vista del panel con los datos del usuario
             require_once __DIR__ . '/../Views/panel(prueba).html';
 

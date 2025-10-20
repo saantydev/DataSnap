@@ -24,7 +24,15 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
 }
 ?>
 
-<aside class="fixed top-0 left-0 w-72 bg-gray-100 h-screen p-4 flex flex-col shadow-md z-40">
+<!-- Botón hamburguesa para móviles -->
+<button id="mobile-menu-btn" class="fixed top-4 left-4 z-50 md:hidden bg-white p-2 rounded-lg shadow-md">
+    <span class="material-icons text-gray-700">menu</span>
+</button>
+
+<!-- Overlay para cerrar menú en móviles -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+<aside id="sidebar" class="fixed top-0 left-0 w-72 bg-gray-100 h-screen p-4 flex flex-col shadow-md z-40 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
     <div class="flex items-center mb-8">
         <div>
             <img src="/config/icons/logo-solo.svg" alt="Logo Datasnap" class="w-10 h-10">
@@ -43,8 +51,17 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
     <nav class="space-y-2">
         <?php ds_nav_item('/panel', 'Subir Archivo', 'add', 'panel', $active); ?>
         <?php ds_nav_item('/files', 'Mis Bases de Datos', 'storage', 'files', $active); ?>
-        <?php ds_nav_item('#', 'Historial', 'history', 'history', $active); ?>
-        <?php ds_nav_item('#', 'Configuración', 'settings', 'settings', $active); ?>
+        <?php ds_nav_item('/configuracion', 'Configuración', 'settings', 'settings', $active); ?>
+                <div class="flex items-center justify-between p-3 rounded-lg shadow-sm bg-white">
+            <span class="font-medium text-gray-700">Tema</span>
+            <div class="tema-selector">
+                <select id="tema-select" class="text-sm border rounded px-2 py-1">
+                    <option value="auto">Auto</option>
+                    <option value="light">Claro</option>
+                    <option value="dark">Oscuro</option>
+                </select>
+            </div>  
+        </div>
     </nav>
 
     <div class="mt-auto pt-4 border-t border-gray-200">
@@ -58,3 +75,18 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
         </div>
     </div>
 </aside>
+
+<script>
+// Control del menú hamburguesa
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+function toggleSidebar() {
+    sidebar.classList.toggle('-translate-x-full');
+    sidebarOverlay.classList.toggle('hidden');
+}
+
+mobileMenuBtn?.addEventListener('click', toggleSidebar);
+sidebarOverlay?.addEventListener('click', toggleSidebar);
+</script>
