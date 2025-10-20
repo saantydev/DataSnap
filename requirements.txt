@@ -1,0 +1,11 @@
+flask==2.2.5
+flask-cors==4.0.0
+pandas>=2.1.0
+mysql-connector-python==8.1.0
+number-parser==0.3.2
+sqlparse==0.4.4
+openpyxl==3.0.10
+gunicorn==20.1.0
+google-api-python-client==2.88.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.5.3

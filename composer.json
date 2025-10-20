@@ -1,0 +1,12 @@
+{
+    "name": "datasnap/datasnap",
+    "description": "DataSnap - Plataforma de procesamiento de datos",
+    "require": {
+        "php": ">=7.4"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "echo 'Instalación completada'"
+        ]
+    }
+}

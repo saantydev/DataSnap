@@ -30,7 +30,7 @@ HTML_FORM = '''
 <div class="panel">
   <h2>Subí tu archivo para procesarlo con DataSnap</h2>
   <form action="/procesar" method="post" enctype="multipart/form-data">
-      <input type="file" name="archivo" accept=".csv,.txt,.json" required>
+      <input type="file" name="archivo" accept=".csv,.txt,.json,.xlsx,.sql" required>
       <button type="submit">Procesar</button>
   </form>
 </div>
@@ -127,27 +127,3 @@ def procesar():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>DataSnap - Subir Archivo</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css') }}">
-</head>
-<div class="panel">
-  <h2>Subí tu archivo para procesarlo con DataSnap</h2>
-  <form action="/procesar" method="post" enctype="multipart/form-data">
-      <input type="file" name="archivo" accept=".csv,.txt,.json" required>
-      <button type="submit">Procesar</button>
-  </form>
-</div>
-
-</html>

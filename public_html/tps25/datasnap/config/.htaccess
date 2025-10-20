@@ -1,0 +1,10 @@
+# Desactivar completamente el rewrite para esta carpeta
+RewriteEngine Off
+
+# Configurar tipos MIME
+AddType text/css .css
+AddType application/javascript .js
+AddType image/svg+xml .svg
+AddType image/png .png
+AddType image/jpeg .jpg
+AddType image/gif .gif
