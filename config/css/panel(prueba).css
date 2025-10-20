@@ -1,109 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+
 body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
 }
-.wave {
-  position:absolute;
-  width: 100%;
-  height: 90%;
-  bottom: 0;
-  top: 0px;
-  left: -100px;
-  background: #e6cb92;
-  z-index: -10;
-  border-radius: 10% 10% 10% 10% / 10% 10% 10% 10%;
-  opacity: 0.6;
-  animation: waveMove 90s linear infinite;
-  transform: translateX(1); 
+
+.square {
+    position: relative;
+    width: 300px;
+    height: 300px;
 }
 
-.wave-div{
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    line-height: 0;
+.square span:nth-child(1) {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
+    transition: 0.5s;
+    animation: animate 6s linear infinite;
 }
 
-.wave1 {
-  background: #26AAB5;
-  animation-duration: 30s;
-  z-index: -5;
-  opacity: 0.7;
+.blobs:hover span:nth-child(1) {
+    border: none;
+    background: #00b8bf;
 }
 
-.wave2 {
-  background: #26AAB5;
-  animation-duration: 25s;
-  z-index: -3;
-  opacity: 0.5;
+.square span:nth-child(2) {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    transition: 0.5s;
+    animation: animate 4s linear infinite;
 }
 
-.wave3 {
-  background: #26AAB5;
-  animation-duration: 20s;
-  z-index: -2;
-  opacity: 0.3;
+.blobs:hover span:nth-child(2) {
+    border: none;
+    background: #00b8bf;
 }
 
-.wave4 {
-  background: #26AAB5;
-  animation-duration: 15s;
-  z-index: -1; 
-  opacity: 0.1;
+.square span:nth-child(3) {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
+    transition: 0.5s;
+    animation: animate2 10s linear infinite;
 }
 
-@keyframes waveMove {
-  0% {
-    transform: translateX(0%) rotate(1deg);
-  }
-  100% {
-    transform: translateX(0%) rotate(360deg);
-  }
+.blobs:hover span:nth-child(3) {
+    border: none;
+    background: #00b8bf;
 }
 
-/* Estilos para layout con sidebar fijo */
-main {
-  transition: margin-left 0.3s ease;
+@keyframes animate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
-main.ml-72 {
-  margin-left: 18rem; /* 288px = 18rem */
+@keyframes animate2 {
+    0% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
 }
 
-/* Ajustes para el modal de subida de archivos */
-#uploadModal {
-  z-index: 60; /* Asegurar que esté por encima del sidebar */
-}
-
-/* Ajustes para el modal de progreso */
-#progressModal {
-  z-index: 60;
-}
-
-/* Ajustes para el modal de eliminación */
-#deleteModal {
-  z-index: 60;
-}
-
-/* Ajustes para el modal de confirmación */
-#confirmModal {
-  z-index: 60;
-}
-
-/* Ajustes responsivos */
 @media (max-width: 768px) {
-  main.ml-72 {
-    margin-left: 0;
+  .square {
+    width: 200px;
+    height: 200px;
   }
-
-  aside {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  aside.show {
-    transform: translateX(0);
+  
+  .square span {
+    width: 250px !important;
+    height: 95px !important;
   }
 }
