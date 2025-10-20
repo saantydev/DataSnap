@@ -1,0 +1,13 @@
+1	Ana	25	30000.0	2020-01-15
+2	Beto	treinta	45000.5	15/02/2021
+2	Beto	30	45000.5	2021-02-15
+ABC	Carla	28	38000.0	2022/03/01
+5	Diego	None	nan	March 5, 2023
+6	Elena	35	52000.0	None
+7	Fede	40	48000.0	2024-08	Gala	cuarenta	47000.0	019	Hugo	29	31000.0	2024-09-10
+10	Irene	31	33000.0	2024-10-01
+2	Beto	30	45000.ABC	Carla	28	38000.0	2022/03/01
+5	Diego	None	nan	March 5, 2023
+@@@###CORRUPT_LINE###@@@
+id;;nombre;;edad
+broken_line_incomplete

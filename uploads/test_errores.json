@@ -1,0 +1,65 @@
+[
+  {
+    "nombre": "juan perez",
+    "email": "juan@gmai.com",
+    "edad": 25,
+    "precio": "150.50",
+    "activo": "si"
+  },
+  {
+    "nombre": "MARIA GARCIA",
+    "email": "maria@hotmial.com",
+    "edad": null,
+    "precio": 200,
+    "activo": 1
+  },
+  {
+    "nombre": "Pedro López",
+    "email": "pedro@yahoo.co",
+    "edad": "30",
+    "precio": "abc",
+    "activo": true
+  },
+  {
+    "nombre": "",
+    "email": "ana@gmail.com",
+    "edad": 22,
+    "precio": 75.25,
+    "activo": ""
+  },
+  {
+    "nombre": "Carlos Ruiz",
+    "email": "carlos",
+    "edad": 35,
+    "precio": 300.00,
+    "activo": false
+  },
+  {
+    "nombre": "   Sofia Martinez   ",
+    "email": "sofia@outlok.com",
+    "edad": 28,
+    "precio": null,
+    "activo": "activo"
+  },
+  {
+    "nombre": null,
+    "email": null,
+    "edad": null,
+    "precio": null,
+    "activo": null
+  },
+  {
+    "nombre": "Luis Fernandez",
+    "email": "luis@gmail.com",
+    "edad": 40,
+    "precio": 500.99,
+    "activo": "no"
+  },
+  {
+    "nombre": "Luis Fernandez",
+    "email": "luis@gmail.com",
+    "edad": 40,
+    "precio": 500.99,
+    "activo": "no"
+  }
+]

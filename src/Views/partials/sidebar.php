@@ -19,7 +19,7 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
 
     echo '<a href="' . htmlspecialchars($href) . '" class="' . $base . ' ' . $class . '">
             <span class="font-medium">' . htmlspecialchars($label) . '</span>
-            <i class="material-icons sidebar-icon ' . $iconClass . '">' . htmlspecialchars($icon) . '</i>
+            <span class="material-icons sidebar-icon ' . $iconClass . '">' . htmlspecialchars($icon) . '</span>
           </a>';
 }
 ?>
@@ -36,7 +36,7 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
     </div>
 
     <div class="flex items-center space-x-2 px-4 py-2 mb-4 rounded-md bg-white shadow-sm">
-        <i class="material-icons text-gray-600">account_circle</i>
+        <span class="material-icons text-gray-600">account_circle</span>
         <span class="font-medium text-gray-700"><?php echo htmlspecialchars($userData['username'] ?? 'Usuario'); ?></span>
     </div>
 
@@ -50,7 +50,7 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
     <div class="mt-auto pt-4 border-t border-gray-200">
         <div class="flex justify-around">
             <a class="text-gray-500 hover:text-gray-800" href="/logout" title="Cerrar Sesión">
-                <i class="material-icons">logout</i>
+                <span class="material-icons">logout</span>
             </a>
         </div>
         <div class="p-4 text-center text-xs text-gray-500">

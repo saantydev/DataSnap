@@ -1,311 +1,235 @@
-html,
-body {
-    overflow: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-main {
+main{
     width: 100%;
     height: 100vh;
+    display: flex;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #333;
 }
 
 .panel-1 {
-    background-color: var(--color-primario);
+    background-color: #3fb6b2;
     width: 45%;
     padding: 40px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.wave {
-    fill: var(--color-primario);
+.panel-1 .logo {
+    display: flex;
+    align-items: center;
+    color: #646464;
+    justify-content: center;
+}
+
+.persona{
+    width: 90%;
+    max-width: 900px;
+}
+
+.wave{
     position: absolute;
     left: -50vh;
-    top: 0;
+    top:0;
     width: 100vh;
     height: 100%;
+    transform: rotate(-90deg);
     z-index: 0;
-    animation: animacionWave 2s infinite alternate;
 }
 
-.panel-2 {
+.panel-2{
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    overflow: hidden;
-    background: var(--color-secundario);
+    background: #c8f1f1;
     width: 55%;
     padding: 40px;
     position: relative;
 }
 
+.registrarse-boton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.registrarse-boton button {
+    background: #00d6c2;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
 .login-titulo {
     text-align: center;
-    margin-top: 2vh;
-    font-size: 2.5rem;
-    color: var(--color-texto);
-    gap: 15px;
-}
-
-.login-titulo svg {
-    fill: var(--color-texto);
-    width: 40px;
-    height: 40px;
-}
-
-.subtitulo {
-    margin-top: 10px;
-    font-size: 1.4rem;
-    margin-bottom: 2vh;
-    color: var(--color-texto-secundario);
+    margin-top: 60px;
+    font-size: 2rem;
+    color: #333;
 }
 
 .formulario {
-    background-color: var(--color-fondo);
-    padding: 40px;
-    margin-bottom: 2vh;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
     width: 70%;
-    gap: 1.6em;
-    border-radius: 9px;
+    gap: 15px;
     z-index: 1;
-}
-
-.campo {
-    gap: 8px;
 }
 
 .formulario label {
     font-size: 1rem;
-    color: var(--color-texto-secundario);
+    color: #444;
 }
 
 .input-grupo {
     display: flex;
     align-items: center;
-    background: var(--color-secundario);
+    background: white;
     border-radius: 6px;
+    border: 1px solid #ccc;
 }
 
 .input-grupo .icon {
-    background: var(--color-secundario);
-    padding: 10px 0 10px 10px;
-}
-
-.icon svg {
-    width: 20px;
-    height: 20px;
-    opacity: 0.5;
-    fill: var(--color-texto);
+    background: white;
+    padding: 10px;
+    font-size: 1.2rem;
 }
 
 .input-grupo input {
-    background-color: var(--color-secundario);
-    color: var(--color-texto);
+    border: none;
     padding: 10px;
     flex: 1;
-    border: none;
     outline: none;
 }
 
 .submit-boton {
-    color: var(--color-texto);
-    background-color: var(--color-primario);
     margin-top: 20px;
-    padding: 12px;
-    border-radius: 6px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    font-size: 1rem;
+    background-color: #3fb6b2;
     border: none;
+    padding: 12px;
+    color: white;
     font-weight: bold;
+    border-radius: 20px;
     cursor: pointer;
-    transition: opacity 500ms ease;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    width: 150px;
 }
 
-.submit-boton:hover {
-    opacity: 0.80;
-}
-
-.recordar {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    position: relative;
-    width: fit-content;
-}
-
-.recordar input {
+#wave-2{
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 2;
-}
-
-.recordar .box {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--color-primario);
-    border-radius: 4px;
-    background: var(--color-fondo);
-    position: relative;
-    transition: background .18s, border-color .18s;
-    display: inline-block;
-    box-sizing: border-box;
-}
-
-.recordar .box::after {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 0px;
-    width: 6px;
-    height: 12px;
-    border-right: 2px solid white;
-    border-bottom: 2px solid white;
-    transform: rotate(45deg) scale(0);
-    transform-origin: center;
-    transition: transform .12s;
-}
-
-.recordar input:checked+.box {
-    background: var(--color-primario);
-    border-color: var(--color-primario);
-}
-
-.recordar input:checked+.box::after {
-    transform: rotate(45deg) scale(1);
-}
-
-.registro {
-    color: var(--color-texto);
-}
-
-#resaltar {
-    text-decoration: underline;
-    color: var(--color-primario);
-    transition: opacity 500ms ease;
-}
-
-#resaltar:hover {
-    opacity: 0.8;
-}
-
-.success-message {
-    background-color: #efe;
-    border: 1px solid #cfc;
-    color: #363;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-}
-
-.error-message {
-    background-color: #fee;
-    border: 1px solid #fcc;
-    color: #c33;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-}
-
-#wave-2 {
-    position: absolute;
-    right: -93vh;
-    top: 0;
+    right: -46vh;
+    top:0;
     width: 100vh;
     height: 100%;
+    transform: rotate(90deg);
     z-index: 0;
-    animation: animacionWave-2 2s infinite alternate;
 }
 
-#wave-2 svg {
-    fill: var(--color-primario);
+#login-button{
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
-#mobile {
+#mobile{
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-primario);
+    background-color: 2DACB5;
 }
 
-.tabs {
+.tabs{
     display: flex;
-    color: var(--color-texto-secundario);
+    color: gray;
     gap: 30px;
 }
 
-.tabs a {
+.tabs a{
     text-decoration: none;
-    color: var(--color-texto-secundario);
+    color: gray;
 }
 
-#seleccionado {
-    color: var(--color-texto);
-    border-bottom: 5px solid var(--color-texto);
+#seleccionado{
+    color: black;
+    border-bottom: 5px solid black;
     padding-bottom: 10px;
     border-radius: 2px;
 }
 
-#seleccionado a {
-    color: var(--color-texto);
+#seleccionado a{
+    color: black;
 }
 
-#wave-3 img {
+#wave-3 img{
     display: none;
     width: 100px;
 }
 
+
+
 @media screen and (orientation: portrait) {
-    body {
+    body{
+        overflow: hidden;
         height: 100vh;
-        background-color: var(--color-primario);
     }
 
-    .mobile{
-        width: 100vw;
-    }
-
-    .panel-1,
-    .panel-2 {
+    .panel-1, .panel-2{
         display: none;
     }
 
-    .panel-3 {
+    .panel-3{
         display: flex;
     }
 
-    .formulario{
-        margin-top: 2vh;
+    .logo{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
     }
 
-    .logo {
-        gap: 10px;
-        color: var(--color-texto);
+    .formulario{
+        margin-top: 30px;
     }
 
     .input-grupo .icon {
-        background: var(--color-secundario);
+        background: white;
         padding: 5px;
+        font-size: 1.2rem;
     }
-
+    
     .input-grupo input {
         border: none;
-        padding: 10px;
+        padding: 5px;
         flex: 1;
         outline: none;
     }
+    
+    .submit-boton{
+        color: black;
+        background-color: transparent;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
 
-    #wave-3 {
+    #wave-3{
         display: block;
         position: absolute;
         width: 100vw;
@@ -313,51 +237,31 @@ main {
         bottom: -5vh;
     }
 
-    #wave-4 {
-        display: block;
-        position: absolute;
-        width: 100vw;
-        left: -15vh;
-        bottom: -13vh;
-        transform: rotateY(3.142rad);
-        fill: var(--color-secundario);
-        animation: animacionWave-2 2s infinite alternate;
-    }
-}
-
-@media (max-width: 550px) {
-    #wave-4 {
+    #wave-4{
         display: block;
         position: absolute;
         width: 100vw;
         left: 0;
-        bottom: -15vh;
+        bottom: -5vh;
         transform: rotateY(3.142rad);
-        fill: var(--color-secundario);
-        animation: animacionWave-2 2s infinite alternate;
-    }    
-}
-
-@media screen and (orientation: landscape) {
-    #mobile {
-        display: none;
     }
 }
 
 /* Estilos para el botón de mostrar/ocultar contraseña */
 .toggle-password {
-    background-color: transparent;
+    background: linear-gradient(135deg, #3fb6b2, #00d6c2);
     border: none;
     cursor: pointer;
     padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-texto);
+    color: white;
     border-radius: 50%;
     width: 32px;
     height: 32px;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(63, 182, 178, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -379,6 +283,7 @@ main {
 
 .toggle-password:hover {
     transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(63, 182, 178, 0.4);
 }
 
 .toggle-password:active {
@@ -386,6 +291,7 @@ main {
 }
 
 .toggle-password:focus {
+    outline: 2px solid #3fb6b2;
     outline-offset: 2px;
 }
 
@@ -419,17 +325,9 @@ main {
 
 /* Animación de pulso sutil */
 @keyframes pulse {
-    0% {
-        box-shadow: 0 2px 8px rgba(63, 182, 178, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 4px 12px rgba(63, 182, 178, 0.5);
-    }
-
-    100% {
-        box-shadow: 0 2px 8px rgba(63, 182, 178, 0.3);
-    }
+    0% { box-shadow: 0 2px 8px rgba(63, 182, 178, 0.3); }
+    50% { box-shadow: 0 4px 12px rgba(63, 182, 178, 0.5); }
+    100% { box-shadow: 0 2px 8px rgba(63, 182, 178, 0.3); }
 }
 
 .toggle-password:hover {
@@ -451,8 +349,7 @@ main {
 }
 
 .input-grupo input {
-    padding-right: 50px;
-    /* Espacio para el botón */
+    padding-right: 50px; /* Espacio para el botón */
     transition: border-color 0.3s ease;
 }
 
@@ -480,26 +377,8 @@ main {
     height: 100%;
 }
 
-@keyframes animacionWave {
-    0% {
-        transform: scale(1);
-        transform-origin: top;
-    }
-
-    100% {
-        transform: scale(1.4);
-        transform-origin: bottom;
-    }
-}
-
-@keyframes animacionWave-2 {
-    0% {
-        transform: scale(1);
-        transform-origin: top;
-    }
-
-    100% {
-        transform: scale(1.2);
-        transform-origin: bottom;
+@media screen and (orientation: landscape) {
+    #mobile{
+        display: none;
     }
 }

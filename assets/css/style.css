@@ -28,14 +28,6 @@
   text-align: center;
 }
 
-.justify-space-between {
-  justify-content: space-between;
-}
-
-.align-center {
-  align-items: center;
-}
-
 .gap-1 {
   gap: 1rem;
 }
@@ -85,7 +77,6 @@ a {
     --color-secundario: #1F2937;
     --color-fondo: #111827;
     --color-texto: #FFFFFF;
-    --color-texto-secundario: #ffffff80;
     --color-texto-footer: #FFFFFF;
   }
 }
@@ -97,7 +88,6 @@ a {
     --color-secundario: #C8F5F9;
     --color-fondo: #FDFDFD;
     --color-texto: black;
-    --color-texto-secundario: #00000080;
     --color-texto-footer: #FFFFFF;
   }
 }

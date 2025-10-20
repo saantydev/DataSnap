@@ -12,11 +12,6 @@ require_once __DIR__ . '/src/Core/Router.php';
 require_once __DIR__ . '/src/Core/Csrf.php';
 require_once __DIR__ . '/src/Core/ErrorHandler.php';
 require_once __DIR__ . '/src/Core/Migrations.php';
-require_once __DIR__ . '/src/Core/Config.php';
-<<<<<<< HEAD
-require_once __DIR__ . '/src/Core/Encryption.php';
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
 // Incluir controladores
 require_once __DIR__ . '/src/Controllers/HomeController.php';
@@ -24,36 +19,14 @@ require_once __DIR__ . '/src/Controllers/LoginController.php';
 require_once __DIR__ . '/src/Controllers/RegisterController.php';
 require_once __DIR__ . '/src/Controllers/FileController.php';
 require_once __DIR__ . '/src/Controllers/PanelController.php';
-<<<<<<< HEAD
-require_once __DIR__ . '/src/Controllers/ChatbotController.php';
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
 
 // Incluir modelos
 require_once __DIR__ . '/src/Models/UserModel.php';
 require_once __DIR__ . '/src/Models/FileModel.php';
 
-use Controllers\FileController;
-
-// Inicializar la base de datos con configuración forzada
-$dbConfig = [
-    'host' => 'localhost',
-    'dbname' => 'u214138677_datasnap',
-    'username' => 'u214138677_datasnap',
-    'password' => 'Rasa@25ChrSt',
-    'charset' => 'utf8mb4'
-];
-$db = \Core\Database::getInstance($dbConfig);
-
-// Ejecutar migraciones para asegurar que el esquema esté actualizado
-\Core\Migrations::run($db);
-
-if (strpos($_SERVER['REQUEST_URI'], '/auth/google/callback') === 0) {
-    $controller = FileController::create($db);
-    $controller->googleCallback();
-    exit;
-}
 try {
+    // Inicializar la base de datos
+    $db = \Core\Database::getInstance();
 
     // Inicializar el router con la conexión a la base de datos
     $router = \Core\Router::init($db);

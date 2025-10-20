@@ -1,0 +1,11 @@
+nombre,email,edad,precio,activo
+Juan Perez,juan@gmai.com,25,150.50,si
+maria garcia,maria@hotmial.com,,200,1
+Pedro López,pedro@yahoo.co,30,abc,true
+,ana@gmail.com,22,75.25,
+Carlos Ruiz,carlos,35,300.00,false
+Sofia Martinez,sofia@outlok.com,28,   ,activo
+   ,   ,   ,   ,   
+Luis Fernandez,luis@gmail.com,40,500.99,no
+Ana Torres,ana@gmail.com,22,75.25,si
+Luis Fernandez,luis@gmail.com,40,500.99,no

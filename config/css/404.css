@@ -68,6 +68,25 @@
     height: auto;
   }
   
+   .img-derrotado{
+    width: 220px;
+    height: auto;
+  }
+
+   .img-llama{
+    width: 220px;
+    height: auto;
+  }
+
+  .img-arrestado{
+    width: 220px;
+    height: auto;
+  } 
+  
+  .img-policia{
+    width: 220px;
+    height: auto;
+  }
   .center-content {
     display: flex;
     flex-direction: column;
@@ -81,7 +100,17 @@
     width: 200px;
     height: auto;
   }
+
+   .img-401 {
+    width: 200px;
+    height: auto;
+  }
   
+  .img-500 {
+    width: 200px;
+    height: auto;
+  }
+
   .title {
     font-size: 24px;
     font-weight: 700;
@@ -133,12 +162,4 @@
       flex: 0 0 auto;
     }
   
-    .img-pensante {
-      width: 180px;
-    }
-  
-    .img-404 {
-      width: 180px;
-    }
   }
-  

@@ -1,0 +1,21 @@
+ID,Nombre,Categoría,Precio,Stock
+P001,Auriculares Bluetooth,Electrónica,25.99,120
+P002,Mouse Gamer,Informática,15.5,80
+P003,Teclado Mecánico,Informática,45.0,60
+P004,Smartwatch Deportivo,Electrónica,55.75,50
+P005,Cargador USB-C,Accesorios,9.99,200
+P005,Cargador USB-C,Accesorios,9.99,200
+P006,Silla Ergonómica,Muebles,120.0,15
+P007,Monitor 24 pulgadas,Informática,,25
+P008,Webcam HD,Informática,29.99,90
+P009,Parlantes Estéreo,Electrónica,39.5,70
+P010,Disco SSD 1TB,,85.99,40
+P011,Memoria RAM 16GB,Informática,65.75,35
+P012,Cámara IP,Seguridad,49.99,55
+P013,Base para Laptop,Accesorios,19.99,150
+P014,Impresora Multifunción,Oficina,99.9,20
+P015,Router WiFi 6,Redes,89.99,30
+P016,Micrófono USB,Audio,59.0,45
+P017,Trípode Fotográfico,Accesorios,22.5,75
+P018,Cinta LED RGB,Decoración,14.99,
+P019,Tablet 10 pulgadas,Electrónica,180.0,18

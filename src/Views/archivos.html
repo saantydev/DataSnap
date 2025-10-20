@@ -5,9 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mis Archivos - Datasnap</title>
-    <link rel="shortcut icon" href="/config/icons/logo-solo.svg" type="image/svg+xml">
-    <link rel="icon" href="/config/icons/logo-solo.svg" type="image/svg+xml">
-    <link rel="shortcut icon" href="/config/icons/logo-solo.svg" type="image/svg+xml">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -27,11 +24,10 @@
             <div class="filter-bar bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
                 <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
                     <div class="flex-1 min-w-0">
-                        <div style="position: relative;">
-                            <input type="text" id="filterInput" placeholder="Buscar archivos..." style="width: 100%; padding: 10px 16px 10px 40px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; outline: none; transition: all 0.2s;" onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)'" onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='none'">
-                            <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; border: 2px solid #9ca3af; border-radius: 50%; pointer-events: none;">
-                                <span style="position: absolute; top: 11px; left: 11px; width: 6px; height: 2px; background: #9ca3af; transform: rotate(45deg); border-radius: 1px;"></span>
-                            </span>
+                        <div class="relative">
+                            <input type="text" id="filterInput" placeholder="Buscar archivos..."
+                                   class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                            <img src="/config/icons/material-symbols_search.svg" alt="Buscar" class="absolute left-3 top-3 w-4 h-4 text-gray-400">
                         </div>
                     </div>
                     <div class="flex gap-3 items-center">
@@ -48,11 +44,9 @@
                             <option value="reciente">Más reciente</option>
                             <option value="antiguo">Más antiguo</option>
                         </select>
-                        <button id="sortBtn" title="Cambiar orden" style="padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; background: white; cursor: pointer; transition: all 0.2s;">
-                            <span id="sortIcon" style="display: inline-block; width: 20px; height: 20px; position: relative;">
-                                <span style="position: absolute; top: 2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 6px solid #666;"></span>
-                                <span style="position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid #ccc;"></span>
-                            </span>
+                        <button id="sortBtn" title="Cambiar orden"
+                                class="p-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all">
+                            <img id="sortIcon" src="/config/icons/tabler_sort-ascending.svg" alt="Ordenar" class="w-5 h-5">
                         </button>
                     </div>
                 </div>
@@ -60,8 +54,7 @@
         </div>
 
         <div class="tabs mb-6">
-            <div class="tab active" data-tab="todos">Todos los archivos</div>
-            <div class="tab inactive" data-tab="originales">Archivos originales</div>
+            <div class="tab active" data-tab="originales">Archivos originales</div>
             <div class="tab inactive" data-tab="modificados">Archivos modificados</div>
         </div>
 
@@ -106,8 +99,8 @@
             // Inicializar icono de ordenamiento
             updateSortIcon();
 
-            // Mostrar todos los archivos por defecto
-            setTimeout(() => filterFilesByTab('todos'), 100);
+            // Mostrar archivos originales por defecto
+            setTimeout(() => filterFilesByTab('originales'), 100);
         });
 
         // Configurar filtros
@@ -124,14 +117,6 @@
                 console.log('Sort button clicked');
                 toggleSort();
             });
-            
-            // Agregar hover effect
-            sortBtn.addEventListener('mouseenter', function() {
-                this.style.backgroundColor = '#f9fafb';
-            });
-            sortBtn.addEventListener('mouseleave', function() {
-                this.style.backgroundColor = 'white';
-            });
         }
 
         // Alternar ordenamiento
@@ -145,19 +130,14 @@
         function updateSortIcon() {
             const sortIcon = document.getElementById('sortIcon');
             if (sortIcon) {
-                if (sortOrder === 'asc') {
-                    // Ascendente: triángulo superior activo
-                    sortIcon.innerHTML = `
-                        <span style="position: absolute; top: 2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 6px solid #2563eb;"></span>
-                        <span style="position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid #ccc;"></span>
-                    `;
-                } else {
-                    // Descendente: triángulo inferior activo
-                    sortIcon.innerHTML = `
-                        <span style="position: absolute; top: 2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 6px solid #ccc;"></span>
-                        <span style="position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid #2563eb;"></span>
-                    `;
-                }
+                const newSrc = sortOrder === 'asc'
+                    ? '/config/icons/tabler_sort-ascending.svg'
+                    : '/config/icons/tabler_sort-descending.svg';
+                console.log('Changing sort icon to:', newSrc, 'Current order:', sortOrder);
+                sortIcon.src = newSrc + '?t=' + Date.now(); // Cache buster
+                sortIcon.alt = sortOrder === 'asc' ? 'Orden ascendente' : 'Orden descendente';
+            } else {
+                console.error('Sort icon element not found');
             }
         }
 
@@ -228,7 +208,7 @@
                 row.dataset.fileStatus = file.estado || 'original';
 
                 // Formatear tamaño (asegurarse de que sea número)
-                const sizeBytes = parseInt(file.tamano) || 0;
+                const sizeBytes = parseInt(file.size) || 0;
                 const sizeMB = (sizeBytes / (1024 * 1024)).toFixed(2) + ' MB';
 
                 // Formatear fecha
@@ -270,13 +250,6 @@
                     <td class="py-3 px-4">${statusText}</td>
                     <td class="py-3 px-4">
                         <div class="flex items-center justify-center space-x-2">
-                            <button class="btn-preview inline-flex items-center px-3 py-1 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors" onclick="previewFile(${file.id})" title="Previsualizar archivo">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                                Ver
-                            </button>
                             ${actionButton}
                             <div class="relative">
                                 <button class="dropdown-trigger p-1 rounded hover:bg-gray-100 transition-colors" title="Más opciones">
@@ -298,18 +271,6 @@
         // Función para optimizar archivo
         function optimizeFile(fileId) {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-            const button = document.querySelector(`[onclick="optimizeFile(${fileId})"]`);
-            const originalText = button.innerHTML;
-
-            // Mostrar loading spinner
-            button.innerHTML = `
-                <svg class="animate-spin mr-1" width="14" height="14" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-                    <path fill="currentColor" class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Procesando...
-            `;
-            button.disabled = true;
 
             fetch('/files/optimize', {
                 method: 'POST',
@@ -323,45 +284,16 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Mostrar estadísticas si están disponibles
-                    if (data.estadisticas) {
-                        let statsMessage = 'Archivo optimizado exitosamente!\n\nEstadísticas:\n';
-                        if (data.estadisticas.filas_originales !== undefined) {
-                            statsMessage += `Filas originales: ${data.estadisticas.filas_originales}\n`;
-                        }
-                        if (data.estadisticas.filas_limpias !== undefined) {
-                            statsMessage += `Filas después de limpieza: ${data.estadisticas.filas_limpias}\n`;
-                        }
-                        if (data.estadisticas.anomalias && Object.keys(data.estadisticas.anomalias).length > 0) {
-                            statsMessage += `Anomalías detectadas: ${JSON.stringify(data.estadisticas.anomalias, null, 2)}\n`;
-                        }
-                        if (data.estadisticas.tablas_procesadas !== undefined) {
-                            statsMessage += `Tablas procesadas: ${data.estadisticas.tablas_procesadas}\n`;
-                        }
-                        alert(statsMessage);
-                    } else {
-                        alert('Archivo enviado a optimización');
-                    }
+                    alert('Archivo enviado a optimización');
                     // Recargar archivos después de un momento
                     setTimeout(() => loadFiles(), 1000);
                 } else {
-                    // Verificar si es un error de token expirado
-                    if (data.redirect) {
-                        alert('Tu sesión de Google ha expirado. Serás redirigido para reautorizar.');
-                        window.location.href = data.redirect;
-                    } else {
-                        alert('Error: ' + data.message);
-                    }
+                    alert('Error: ' + data.message);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Error al optimizar el archivo');
-            })
-            .finally(() => {
-                // Restaurar botón original
-                button.innerHTML = originalText;
-                button.disabled = false;
             });
         }
 
@@ -390,10 +322,7 @@
             rows.forEach(row => {
                 const fileStatus = row.dataset.fileStatus;
 
-                if (tabType === 'todos') {
-                    // Mostrar todos los archivos
-                    row.style.display = '';
-                } else if (tabType === 'originales') {
+                if (tabType === 'originales') {
                     // Mostrar solo archivos originales (no modificados)
                     row.style.display = (fileStatus === 'original') ? '' : 'none';
                 } else if (tabType === 'modificados') {
@@ -403,17 +332,6 @@
             });
         }
 
-        // Función para previsualizar archivo
-        function previewFile(fileId) {
-            // Redirigir a la página de previsualización
-            window.location.href = `/files/preview?id=${fileId}`;
-        }
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
         // Funcionalidad del menú desplegable
         document.addEventListener('click', function(e) {
             if (e.target.closest('.dropdown-trigger')) {

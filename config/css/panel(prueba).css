@@ -1,157 +1,109 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
-
 body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
 }
-
-.wave-div {
-  align-items: center;
-  width: 10S0%;
-  height: 400px; 
-  overflow: hidden;
-  line-height: 0;
+.wave {
+  position:absolute;
+  width: 100%;
+  height: 90%;
+  bottom: 0;
+  top: 0px;
+  left: -100px;
+  background: #e6cb92;
+  z-index: -10;
+  border-radius: 10% 10% 10% 10% / 10% 10% 10% 10%;
+  opacity: 0.6;
+  animation: waveMove 90s linear infinite;
+  transform: translateX(1); 
 }
 
-/* Botón de subir archivos - estilos específicos */
-#uploadBtn {
-  position: relative;
-  z-index: 10;
-  transform: scale(1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.wave-div{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    line-height: 0;
 }
 
-#uploadBtn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+.wave1 {
+  background: #26AAB5;
+  animation-duration: 30s;
+  z-index: -5;
+  opacity: 0.7;
 }
 
-#uploadBtn:active {
-  transform: scale(0.98);
+.wave2 {
+  background: #26AAB5;
+  animation-duration: 25s;
+  z-index: -3;
+  opacity: 0.5;
 }
 
-.square span:nth-child(1) {
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
-    border: 2px solid black;
-    border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
-    transition: 0.5s;
-    animation: animate 6s linear infinite;
+.wave3 {
+  background: #26AAB5;
+  animation-duration: 20s;
+  z-index: -2;
+  opacity: 0.3;
 }
 
-.blobs:hover span:nth-child(1) {
-    border: none;
-    background: #00b8bf;
-}
-.square span:nth-child(2) {
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
-    border: 2px solid black;
-    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-    transition: 0.5s;
-    animation: animate 4s linear infinite;
+.wave4 {
+  background: #26AAB5;
+  animation-duration: 15s;
+  z-index: -1; 
+  opacity: 0.1;
 }
 
-.blobs:hover span:nth-child(2) {
-    border: none;
-    background: #00b8bf;
+@keyframes waveMove {
+  0% {
+    transform: translateX(0%) rotate(1deg);
+  }
+  100% {
+    transform: translateX(0%) rotate(360deg);
+  }
 }
 
-.square span:nth-child(3) {
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
-    border: 2px solid black;
-    border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
-    transition: 0.5s;
-    animation: animate2 10s linear infinite;
-}
-
-.blobs:hover span:nth-child(3) {
-    border: none;
-    background: #00b8bf;
-}
-
-@keyframes animate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes animate2 {
-    0% {
-        transform: rotate(360deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-
-/* Modal de subida - estilos mejorados */
-#uploadModal {
-  backdrop-filter: blur(4px);
-}
-
-#uploadModal .bg-white {
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-/* Contenedor principal del panel */
+/* Estilos para layout con sidebar fijo */
 main {
-  position: relative;
-  z-index: 5;
+  transition: margin-left 0.3s ease;
 }
 
-/* Asegurar que el contenido esté por encima de las animaciones */
-.flex.flex-col.items-center.justify-center {
-  position: relative;
-  z-index: 10;
+main.ml-72 {
+  margin-left: 18rem; /* 288px = 18rem */
 }
 
-/* Botón de Google Drive - estilos mejorados */
-#googleDriveBtn {
-  position: relative;
-  z-index: 10;
-  transform: scale(1);
-  transition: all 0.2s ease;
+/* Ajustes para el modal de subida de archivos */
+#uploadModal {
+  z-index: 60; /* Asegurar que esté por encima del sidebar */
 }
 
-#googleDriveBtn:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* Ajustes para el modal de progreso */
+#progressModal {
+  z-index: 60;
 }
 
-/* Responsividad */
+/* Ajustes para el modal de eliminación */
+#deleteModal {
+  z-index: 60;
+}
+
+/* Ajustes para el modal de confirmación */
+#confirmModal {
+  z-index: 60;
+}
+
+/* Ajustes responsivos */
 @media (max-width: 768px) {
-  #uploadBtn {
-    padding: 1.5rem;
+  main.ml-72 {
+    margin-left: 0;
   }
-  
-  #uploadBtn .material-icons {
-    font-size: 3rem;
-  }
-  
-  .text-xl {
-    font-size: 1.125rem;
-  }
-}
 
-/* Animaciones suaves para elementos interactivos */
-.transition-all {
-  transition: all 0.2s ease-in-out;
+  aside {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  aside.show {
+    transform: translateX(0);
+  }
 }

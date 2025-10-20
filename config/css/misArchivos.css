@@ -1,15 +1,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #fafafa;
-    margin: 0;
+    margin: 40px;
     color: #222;
-    display: flex;
-}
-
-main {
-    flex: 1;
-    margin-left: 288px;
-    padding: 40px;
 }
 
 h2 {
@@ -141,59 +134,6 @@ tbody tr:not(:last-child) {
 
 .btn-optimize svg {
     fill: white;
-}
-
-/* Botón de previsualización */
-.btn-preview {
-    background-color: #8b5cf6;
-    border: none;
-    padding: 6px 14px;
-    color: white;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
-    transition: background-color 0.2s ease;
-}
-
-.btn-preview:hover {
-    background-color: #7c3aed;
-}
-
-.btn-preview svg {
-    margin-right: 6px;
-    fill: white;
-    stroke: white;
-}
-
-/* Botón de descarga */
-.btn-download {
-    background-color: #10b981;
-    border: none;
-    padding: 6px 14px;
-    color: white;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-.btn-download:hover {
-    background-color: #059669;
-}
-
-.btn-download svg {
-    margin-right: 6px;
-    fill: white;
-    stroke: white;
 }
 
 
