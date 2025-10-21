@@ -135,7 +135,7 @@ a {
 
 /* Estilos del Sidebar */
 .sidebar-bg {
-    background-color: var(--color-secundario);
+    background-color: var(--color-fondo);
 }
 
 .sidebar-title {
