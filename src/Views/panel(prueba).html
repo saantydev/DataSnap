@@ -5,8 +5,6 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Datasnap</title>
-    <link rel="shortcut icon" href="/config/icons/logo-solo.svg" type="image/svg+xml">
-    <link rel="icon" href="/config/icons/logo-solo.svg" type="image/svg+xml">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -18,29 +16,32 @@
 
 </head>
 
-<body class="bg-white flex">
-    <section max-height: 100vh, max-weight: 100vh>
-        <div class="wave-div">
-            <div class="square blobs">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </section>
-     <?php $active = 'panel'; include __DIR__ . '/partials/sidebar.php'; ?>
-    <main class="flex-1 ml-72">
+<body class="bg-white">
+    <?php $active = 'panel'; include __DIR__ . '/partials/sidebar.php'; ?>
+    
+    <div class="md:ml-72">
+        <main class="min-h-screen">
         
-        <div class="flex flex-col items-center justify-center min-h-screen relative">
-            <div class="w-full h-40 bg-[#26AAB5] absolute top-0 left-0"
-                style="clip-path: ellipse(80% 50% at 50% 0%); z-index: 1;"></div>
-            <div class="flex flex-col items-center justify-center z-20 relative">
-                <button id="uploadBtn" class="bg-white p-8 rounded-full shadow-lg mb-6 hover:bg-gray-50 transition-all duration-200 cursor-pointer border-2 border-transparent hover:border-blue-200">
-                    <span class="material-icons text-5xl text-gray-800">add</span>
+        <div class="flex flex-col items-center justify-center min-h-screen px-4 pt-16 md:pt-0 relative">
+            <div class="w-full h-32 md:h-40 bg-[#26AAB5] absolute top-16 md:top-16"
+                style="clip-path: ellipse(80% 50% at 50% 0%); z-index: 0;"></div>
+            
+            <!-- Blobs animados detrás del botón -->
+            <div class="absolute inset-0 flex items-center justify-center z-5">
+                <div class="square blobs relative">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center justify-center z-10">
+                <button id="uploadBtn" class="bg-white p-6 md:p-8 rounded-full shadow-lg mb-6 hover:bg-gray-50 transition-colors cursor-pointer">
+                    <span class="material-icons text-4xl md:text-5xl text-gray-800">add</span>
                 </button>
-                <p class="text-xl font-medium text-gray-700 mb-8">Añadir archivo nuevo a optimizar</p>
-                
-                <!-- Botón de Google Drive -->
+                <p class="text-lg md:text-xl font-medium text-gray-700 text-center">Añadir archivo nuevo a optimizar</p>
+            
+                                <!-- Botón de Google Drive -->
                 <div class="flex flex-col items-center">
                     <?php if (!isset($hasGoogleAuth) || !$hasGoogleAuth): ?>
                     <button id="googleDriveBtn" class="flex items-center bg-white border-2 border-gray-200 hover:border-blue-400 px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 mb-3">
@@ -63,6 +64,7 @@
                     <p class="text-sm text-green-600 text-center max-w-xs">Tus archivos se guardarán automáticamente en Google Drive</p>
                     <?php endif; ?>
                 </div>
+            
             </div>
         </div>
 
@@ -82,10 +84,10 @@
                             Seleccionar archivo (JSON, CSV, XLSX, SQL)
                         </label>
                         <input type="file" id="archivo" name="archivo"
-                               accept=".json,.csv,.xlsx,.xls,.sql,.txt"
+                               accept=".json,.csv,.xlsx,.xls,.sql"
                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                required>
-                        <p class="text-xs text-gray-500 mt-1">Tipos permitidos: JSON, CSV, XLSX, SQL, TXT (sin límite de tamaño)</p>
+                        <p class="text-xs text-gray-500 mt-1">Tipos permitidos: JSON, CSV, XLSX, SQL (sin límite de tamaño)</p>
                     </div>
 
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? ''); ?>">
@@ -107,14 +109,8 @@
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
-            <button
-                class="flex items-center justify-center bg-gray-800 text-white px-8 py-3 rounded-full shadow-lg text-lg">
-                indicaciones extras
-                <span class="material-icons ml-4 bg-gray-600 rounded-full p-1">keyboard_arrow_up</span>
-            </button>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
         // Elementos del DOM
@@ -125,7 +121,6 @@
         const uploadForm = document.getElementById('uploadForm');
         const messageArea = document.getElementById('messageArea');
         const messageContent = document.getElementById('messageContent');
-        const googleDriveBtn = document.getElementById('googleDriveBtn');
         const CSRF_TOKEN = (document.querySelector('meta[name="csrf-token"]')?.content) || '';
 
         // Función para mostrar/ocultar modal
@@ -149,24 +144,6 @@
         uploadBtn.addEventListener('click', () => toggleModal(true));
         closeModal.addEventListener('click', () => toggleModal(false));
         cancelBtn.addEventListener('click', () => toggleModal(false));
-        
-        // Botón de Google Drive
-        if (googleDriveBtn) {
-            googleDriveBtn.addEventListener('click', () => {
-                // Mostrar loading
-                googleDriveBtn.disabled = true;
-                googleDriveBtn.innerHTML = `
-                    <svg class="animate-spin w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span class="text-gray-700 font-medium">Conectando...</span>
-                `;
-                
-                // Redirigir a la autorización de Google
-                window.location.href = '/auth/google';
-            });
-        }
 
         // Cerrar modal al hacer clic fuera
         uploadModal.addEventListener('click', (e) => {
