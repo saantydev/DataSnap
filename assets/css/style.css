@@ -132,3 +132,75 @@ a {
     --color-texto-secundario: #ffffff80;
     --color-texto-footer: #FFFFFF;
 }
+
+/* Estilos del Sidebar */
+.sidebar-bg {
+    background-color: var(--color-secundario);
+}
+
+.sidebar-title {
+    color: var(--color-texto);
+}
+
+.sidebar-subtitle {
+    color: var(--color-texto-secundario);
+}
+
+.user-info {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.nav-item {
+    color: var(--color-texto);
+}
+
+.nav-item-active {
+    background-color: rgba(var(--color-primario-rgb), 0.2);
+    color: var(--color-primario);
+}
+
+.nav-item-inactive {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.nav-item-inactive:hover {
+    background-color: rgba(var(--color-primario-rgb), 0.1);
+}
+
+.theme-selector {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.theme-select {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    border-color: var(--color-texto-secundario);
+}
+
+.sidebar-footer {
+    border-top: 1px solid var(--color-texto-secundario);
+}
+
+.logout-btn {
+    color: var(--color-texto-secundario);
+    transition: color 0.3s;
+}
+
+.logout-btn:hover {
+    color: var(--color-primario);
+}
+
+.footer-text {
+    color: var(--color-texto-secundario);
+}
+
+.mobile-menu-btn {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
