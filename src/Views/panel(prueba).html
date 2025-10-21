@@ -144,6 +144,14 @@
         uploadBtn.addEventListener('click', () => toggleModal(true));
         closeModal.addEventListener('click', () => toggleModal(false));
         cancelBtn.addEventListener('click', () => toggleModal(false));
+        
+        // Google Drive button
+        const googleDriveBtn = document.getElementById('googleDriveBtn');
+        if (googleDriveBtn) {
+            googleDriveBtn.addEventListener('click', () => {
+                window.location.href = '/auth/google';
+            });
+        }
 
         // Cerrar modal al hacer clic fuera
         uploadModal.addEventListener('click', (e) => {
