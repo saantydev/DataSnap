@@ -1,43 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    
+    /* 🔹 Fondo degradado + imagen */
+    background: url('../images/background.png') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #26AAB5; /* color de respaldo si no carga la imagen */
+  }
+  
 
-.wave-div {
-  align-items: center;
-  width: 10S0%;
-  height: 400px; 
-  overflow: hidden;
-  line-height: 0;
-}
-
-/* Botón de subir archivos - estilos específicos */
-#uploadBtn {
-  position: relative;
-  z-index: 10;
-  transform: scale(1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#uploadBtn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-#uploadBtn:active {
-  transform: scale(0.98);
+.square {
+    position: relative;
+    width: 300px;
+    height: 300px;
 }
 
 .square span:nth-child(1) {
     position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
+    top: 70%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
     transition: 0.5s;
@@ -48,12 +37,14 @@ body {
     border: none;
     background: #00b8bf;
 }
+
 .square span:nth-child(2) {
     position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
+    top: 70%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
     transition: 0.5s;
@@ -67,10 +58,11 @@ body {
 
 .square span:nth-child(3) {
     position: absolute;
-    top: 30%;
-    left: 30%;
-    width: 40%;
-    height: 30%;
+    top: 70%;
+    left: 50%;
+    width: 400px;
+    height: 150px;
+    transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
     transition: 0.5s;
@@ -84,74 +76,38 @@ body {
 
 @keyframes animate {
     0% {
-        transform: rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
     100% {
-        transform: rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
 @keyframes animate2 {
     0% {
-        transform: rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
     100% {
-        transform: rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 }
 
-
-/* Modal de subida - estilos mejorados */
-#uploadModal {
-  backdrop-filter: blur(4px);
-}
-
-#uploadModal .bg-white {
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-/* Contenedor principal del panel */
-main {
-  position: relative;
-  z-index: 5;
-}
-
-/* Asegurar que el contenido esté por encima de las animaciones */
-.flex.flex-col.items-center.justify-center {
-  position: relative;
-  z-index: 10;
-}
-
-/* Botón de Google Drive - estilos mejorados */
-#googleDriveBtn {
-  position: relative;
-  z-index: 10;
-  transform: scale(1);
-  transition: all 0.2s ease;
-}
-
-#googleDriveBtn:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsividad */
 @media (max-width: 768px) {
-  #uploadBtn {
-    padding: 1.5rem;
+  .square {
+    width: 200px;
+    height: 200px;
   }
   
-  #uploadBtn .material-icons {
-    font-size: 3rem;
-  }
-  
-  .text-xl {
-    font-size: 1.125rem;
+  .square span {
+    width: 250px !important;
+    height: 95px !important;
   }
 }
 
-/* Animaciones suaves para elementos interactivos */
-.transition-all {
-  transition: all 0.2s ease-in-out;
-}
+@media (max-width: 768px) {
+    body {
+      background-attachment: scroll;
+      background-position: center;
+    }
+  }
+  
