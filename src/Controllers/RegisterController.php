@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Models\UserModel;
 use Core\Database;
+use Core\DebugEmailService;
 
 class RegisterController
 {
@@ -90,11 +91,27 @@ class RegisterController
             $registerResult = $this->userModel->register($username, $email, $password);
 
             if ($registerResult['success']) {
+                // Enviar email de verificación
+                $emailService = new DebugEmailService();
+                $emailSent = $emailService->sendVerificationEmail(
+                    $registerResult['email'], 
+                    $registerResult['username'], 
+                    $registerResult['verification_code']
+                );
+                
+                if (!$emailSent) {
+                    error_log("Error enviando email de verificación a: $email", 0);
+                }
+                
+                // Guardar email en sesión para verificación
+                $_SESSION['pending_verification_email'] = $email;
+                
                 // Log de registro exitoso
                 error_log("Registro exitoso para usuario: $username ($email)", 0);
 
-                // Redirigir al login con mensaje de éxito
-                $this->redirectToLoginWithSuccess('Usuario registrado exitosamente. Por favor, inicia sesión.');
+                // Redirigir a página de verificación
+                header('Location: /verify-code');
+                exit();
             } else {
                 // Log de registro fallido
                 error_log("Registro fallido para usuario: $username ($email) - " . $registerResult['message'], 0);

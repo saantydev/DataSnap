@@ -70,14 +70,20 @@ class UserModel
                 ];
             }
 
+            // Generar código de verificación de 6 dígitos
+            $verificationCode = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+            
             // Insertar usuario en la base de datos
-            $result = $this->insertUser($username, $email, $hashedPassword);
+            $result = $this->insertUser($username, $email, $hashedPassword, $verificationCode);
 
             if ($result) {
                 error_log("Usuario registrado exitosamente: $username ($email)", 0);
                 return [
                     'success' => true,
-                    'message' => 'Usuario registrado exitosamente'
+                    'message' => 'Usuario registrado. Revisa tu email para el código de verificación.',
+                    'verification_code' => $verificationCode,
+                    'email' => $email,
+                    'username' => $username
                 ];
             } else {
                 return [
@@ -234,13 +240,15 @@ class UserModel
      * @param string $username Nombre de usuario
      * @param string $email Correo electrónico
      * @param string $hashedPassword Contraseña hasheada
+     * @param string $verificationToken Token de verificación
      * @return bool True si se insertó correctamente
      */
-    private function insertUser(string $username, string $email, string $hashedPassword): bool
+    private function insertUser(string $username, string $email, string $hashedPassword, string $verificationCode): bool
     {
         try {
-            $sql = "INSERT INTO users (username, email, password_hash, created_at) VALUES (?, ?, ?, NOW())";
-            $stmt = $this->db->query($sql, [$username, $email, $hashedPassword]);
+            $sql = "INSERT INTO users (username, email, password_hash, verification_code, verification_code_expires, created_at) 
+                    VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 15 MINUTE), NOW())";
+            $stmt = $this->db->query($sql, [$username, $email, $hashedPassword, $verificationCode]);
 
             return $stmt->rowCount() > 0;
         } catch (\Exception $e) {
@@ -299,7 +307,7 @@ class UserModel
     public function findById(int $userId): ?array
     {
         try {
-            $sql = "SELECT user_id, username, email, created_at, last_login_at
+            $sql = "SELECT user_id, username, email, created_at, last_login_at, google_refresh_token
                     FROM users
                     WHERE user_id = ?";
             $stmt = $this->db->query($sql, [$userId]);
@@ -313,6 +321,29 @@ class UserModel
     }
 
     /**
+     * Alias para findById para compatibilidad
+     *
+     * @param int $userId ID del usuario
+     * @return array|null Datos del usuario o null si no existe
+     */
+    public function getUserById(int $userId): ?array
+    {
+        return $this->findById($userId);
+    }
+
+    /**
+     * Verifica si un usuario tiene autorización de Google
+     *
+     * @param int $userId ID del usuario
+     * @return bool True si tiene refresh token
+     */
+    public function hasGoogleAuth(int $userId): bool
+    {
+        $user = $this->findById($userId);
+        return $user && !empty($user['google_refresh_token']);
+    }
+
+    /**
      * Verifica si un usuario está activo/suspendido
      *
      * @param int $userId ID del usuario
@@ -322,6 +353,97 @@ class UserModel
     {
         $user = $this->findById($userId);
         return $user !== null;
+    }
+
+    /**
+     * Verifica email con código
+     */
+    public function verifyEmailWithCode(string $email, string $code): array
+    {
+        try {
+            $sql = "UPDATE users SET email_verified = TRUE, verification_code = NULL, verification_code_expires = NULL 
+                    WHERE email = ? AND verification_code = ? AND verification_code_expires > NOW()";
+            $stmt = $this->db->query($sql, [$email, $code]);
+            
+            if ($stmt->rowCount() > 0) {
+                return ['success' => true, 'message' => 'Email verificado correctamente'];
+            }
+            return ['success' => false, 'message' => 'Código inválido o expirado'];
+        } catch (\Exception $e) {
+            error_log("Error verificando email: " . $e->getMessage(), 0);
+            return ['success' => false, 'message' => 'Error interno'];
+        }
+    }
+    
+    /**
+     * Genera token para recuperar contraseña
+     */
+    public function generatePasswordResetToken(string $email): array
+    {
+        try {
+            // Verificar que el email existe y está verificado
+            $checkSql = "SELECT user_id, username FROM users WHERE email = ? AND email_verified = TRUE";
+            $checkStmt = $this->db->query($checkSql, [$email]);
+            $user = $checkStmt->fetch();
+            
+            if (!$user) {
+                return ['success' => false, 'message' => 'Email no encontrado o no verificado'];
+            }
+            
+            $token = bin2hex(random_bytes(32));
+            $sql = "UPDATE users SET reset_code = ?, reset_code_expires = DATE_ADD(NOW(), INTERVAL 1 HOUR) 
+                    WHERE email = ?";
+            $stmt = $this->db->query($sql, [$token, $email]);
+            
+            if ($stmt->rowCount() > 0) {
+                return ['success' => true, 'token' => $token, 'username' => $user['username']];
+            }
+            return ['success' => false, 'message' => 'Error al generar token'];
+        } catch (\Exception $e) {
+            error_log("Error generando token reset: " . $e->getMessage(), 0);
+            return ['success' => false, 'message' => 'Error interno'];
+        }
+    }
+    
+    /**
+     * Valida token de reset y obtiene email del usuario
+     */
+    public function validateResetToken(string $token): array
+    {
+        try {
+            $sql = "SELECT email, username FROM users WHERE reset_code = ? AND reset_code_expires > NOW()";
+            $stmt = $this->db->query($sql, [$token]);
+            $user = $stmt->fetch();
+            
+            if ($user) {
+                return ['success' => true, 'email' => $user['email'], 'username' => $user['username']];
+            }
+            return ['success' => false, 'message' => 'Token inválido o expirado'];
+        } catch (\Exception $e) {
+            error_log("Error validando token: " . $e->getMessage(), 0);
+            return ['success' => false, 'message' => 'Error interno'];
+        }
+    }
+    
+    /**
+     * Restablece contraseña con token y validación de email
+     */
+    public function resetPasswordWithToken(string $token, string $email, string $newPassword): array
+    {
+        try {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $sql = "UPDATE users SET password_hash = ?, reset_code = NULL, reset_code_expires = NULL 
+                    WHERE reset_code = ? AND email = ? AND reset_code_expires > NOW()";
+            $stmt = $this->db->query($sql, [$hashedPassword, $token, $email]);
+            
+            if ($stmt->rowCount() > 0) {
+                return ['success' => true, 'message' => 'Contraseña actualizada'];
+            }
+            return ['success' => false, 'message' => 'Token inválido, expirado o email incorrecto'];
+        } catch (\Exception $e) {
+            error_log("Error reseteando contraseña: " . $e->getMessage(), 0);
+            return ['success' => false, 'message' => 'Error interno'];
+        }
     }
 
     /**

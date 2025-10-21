@@ -6,6 +6,10 @@ use Controllers\LoginController;
 use Controllers\RegisterController;
 use Controllers\FileController;
 use Controllers\PanelController;
+use Controllers\ChatbotController;
+use Controllers\EmailVerificationController;
+use Controllers\PasswordResetController;
+use Controllers\VerificationController;
 
 class Router
 {
@@ -29,22 +33,37 @@ class Router
             '/panel' => ['controller' => 'PanelController', 'method' => 'index'],
             '/files' => ['controller' => 'FileController', 'method' => 'index'],
             '/files/list' => ['controller' => 'FileController', 'method' => 'list'],
+            '/files/preview' => ['controller' => 'FileController', 'method' => 'preview'],
+            '/chatbot' => ['controller' => 'ChatbotController', 'method' => 'index'],
             '/logout' => ['controller' => 'LoginController', 'method' => 'logout'],
+            '/auth/google' => ['controller' => 'FileController', 'method' => 'googleAuth'],
+            '/verify-email' => ['controller' => 'EmailVerificationController', 'method' => 'verifyEmail'],
+            '/verify-code' => ['controller' => 'VerificationController', 'method' => 'showVerificationForm'],
+            '/resend-code' => ['controller' => 'VerificationController', 'method' => 'resendCode'],
+            '/forgot-password' => ['controller' => 'PasswordResetController', 'method' => 'showForgotPasswordForm'],
+            '/reset-password' => ['controller' => 'PasswordResetController', 'method' => 'showResetPasswordForm'],
         ];
 
         // POST
         $this->routes['POST'] = [
             '/login' => ['controller' => 'LoginController', 'method' => 'processLogin'],
             '/register' => ['controller' => 'RegisterController', 'method' => 'processRegister'],
-            '/files/upload' => ['controller' => 'FileController', 'method' => 'upload'],
+            '/files/upload' => ['controller' => 'FileController', 'method' => 'uploadWithDrive'],
             '/files/optimize' => ['controller' => 'FileController', 'method' => 'optimize'],
             '/files/delete' => ['controller' => 'FileController', 'method' => 'delete'],
             '/panel/upload' => ['controller' => 'PanelController', 'method' => 'upload'],
             '/panel/stats' => ['controller' => 'PanelController', 'method' => 'stats'],
+            '/chatbot/query' => ['controller' => 'ChatbotController', 'method' => 'query'],
+            '/auth/google/callback' => ['controller' => 'FileController', 'method' => 'googleCallback'],
+            '/verify-code' => ['controller' => 'VerificationController', 'method' => 'processVerification'],
+            '/forgot-password' => ['controller' => 'PasswordResetController', 'method' => 'processForgotPassword'],
+            '/reset-password' => ['controller' => 'PasswordResetController', 'method' => 'processResetPassword'],
         ];
 
         // Rutas con parámetros
         $this->routes['GET']['/files/download'] = ['controller' => 'FileController', 'method' => 'download'];
+        $this->routes['GET']['/files/preview/{id}'] = ['controller' => 'FileController', 'method' => 'previewData'];
+        $this->routes['GET']['/api/files/preview/{id}'] = ['controller' => 'FileController', 'method' => 'previewData'];
     }
 
     private function initializeSession(): void
@@ -59,15 +78,6 @@ class Router
 
             session_start();
             error_log("Router::initializeSession - Session started with ID: " . session_id());
-
-            // Generar token CSRF por sesión y exponer cookie de ayuda (no httpOnly) para clientes si fuese necesario.
-            // Nota: la verificación real se hace contra el token guardado en sesión.
-            \Core\Csrf::generate();
-            $token = \Core\Csrf::token();
-            if ($token !== '' && (!isset($_COOKIE['XSRF-TOKEN']) || $_COOKIE['XSRF-TOKEN'] !== $token)) {
-                // path=/, secure si HTTPS, httpOnly=false (el header real va en X-CSRF-Token), SameSite=Lax por configuración global
-                setcookie('XSRF-TOKEN', $token, 0, '/', '', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on', false);
-            }
         } else {
             error_log("Router::initializeSession - Session already active with ID: " . session_id());
         }
@@ -90,6 +100,7 @@ class Router
                 return;
             }
 
+            $params = [];
             foreach ($this->routes[$requestMethod] as $pattern => $route) {
                 if ($this->matchRoute($pattern, $requestUri, $params)) {
                     $this->executeController($route['controller'], $route['method'], $params);

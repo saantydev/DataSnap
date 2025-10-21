@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Código - DataSnap</title>
+    <link rel="shortcut icon" href="/config/icons/logo-solo.svg">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/config/css/register-login.css">
+</head>
+<body>
+    <main class="display-flex">
+        <div class="panel-1 display-flex center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+                <g id="freepik--background-simple--inject-17">
+                    <path d="M98,155.42C122,91.52,205.84,50.5,268.8,86.73c55.5,31.93,56.54,110.37,66.5,165.86,2,10.91,4.74,22.21,12,30.56,14.28,16.34,36.41,19.57,44.4,42.09,7.32,20.62.27,45-15.63,59.67-21.07,19.44-53.83,19.85-77.94,6-26.12-15-44.08-40.11-64.5-61.52-7.24-7.6-15.52-16.8-24.88-21.83-10.42-5.59-22.89-4.36-34.3-4C98.31,306.07,75.48,215.1,98,155.42Z" style="fill:#48A193"></path>
+                    <path d="M98,155.42C122,91.52,205.84,50.5,268.8,86.73c55.5,31.93,56.54,110.37,66.5,165.86,2,10.91,4.74,22.21,12,30.56,14.28,16.34,36.41,19.57,44.4,42.09,7.32,20.62.27,45-15.63,59.67-21.07,19.44-53.83,19.85-77.94,6-26.12-15-44.08-40.11-64.5-61.52-7.24-7.6-15.52-16.8-24.88-21.83-10.42-5.59-22.89-4.36-34.3-4C98.31,306.07,75.48,215.1,98,155.42Z" style="fill:#fff;opacity:0.9"></path>
+                </g>
+            </svg>
+        </div>
+        <div class="panel-2 display-flex flex-col">
+            <div class="wave-div">
+                <svg width="130" height="1440" viewBox="0 0 130 1440" fill="none" xmlns="http://www.w3.org/2000/svg" class="wave">
+                    <g clip-path="url(#clip0_806_204)">
+                        <path d="M56.7508 1440L64.3175 1405.6C71.8167 1371.2 86.9503 1302.4 96.2736 1233.92C105.597 1165.28 109.245 1097.12 104.516 1028.48C99.7868 960 86.68 891.2 78.5728 822.72C70.4655 754.08 67.3577 685.92 70.9384 617.28C74.5191 548.8 84.9235 480 98.3004 411.52C111.677 342.88 128.162 274.72 129.851 206.08C131.54 137.6 118.433 68.8 111.948 34.4L105.394 0H0L0 34.4C0 68.8 0 137.6 0 206.08C0 274.72 0 342.88 0 411.52C0 480 0 548.8 0 617.28C0 685.92 0 754.08 0 822.72C0 891.2 0 960 0 1028.48C0 1097.12 0 1165.28 0 1233.92C0 1302.4 0 1371.2 0 1405.6L0 1440H56.7508Z"/>
+                    </g>
+                </svg>
+            </div>
+            <h1 class="login-titulo display-flex center">
+                <svg viewBox="0 0 51 51" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_226_53)">
+                        <path d="M0.414201 7.791V15.3148L5.60239 19.6005L10.7906 23.8862V26.6481V29.4418H16.6321C22.2046 29.4418 22.512 29.41 24.1646 28.6164C27.8924 26.8069 28.392 22.3624 25.1638 19.8545C24.2414 19.1243 21.6666 17.9815 20.9748 18.0132C20.8595 18.0132 18.4384 18.0132 15.5945 18.0132H10.3678L10.4831 13.4735L10.5984 8.96561L16.9395 8.87037C20.8595 8.80688 24.0877 8.90211 25.3944 9.15608C33.5418 10.5847 39.6139 16.8704 39.6139 23.8545C39.6139 28.2672 37.846 31.8862 34.2335 34.8386C30.0445 38.2672 26.3552 39.2831 17.8619 39.2831H12.4431L7.29336 34.9339C4.44946 32.5212 1.72086 30.2672 1.18282 29.8862L0.222046 29.1878L0.337339 38.5212L0.452632 47.8545H13.058C27.0085 47.8545 28.7763 47.664 33.8876 45.664C45.6091 41.0291 52.2961 29.9497 49.6444 19.4418C47.5691 11.1243 40.8821 4.55291 31.5818 1.69577C27.2391 0.362431 25.5481 0.235447 12.7121 0.235447H0.414201V7.791Z"/>
+                    </g>
+                </svg>
+                DATASNAP
+            </h1>
+            <h3 class="subtitulo">Verificar tu cuenta</h3>
+            
+            <p class="text-center" style="margin: 20px 0; color: #666;">Hemos enviado un código de 6 dígitos a:</p>
+            <p class="text-center" style="color: #48A193; font-weight: bold; margin-bottom: 30px;"><?php echo htmlspecialchars($email); ?></p>
+
+            <form class="formulario display-flex flex-col" method="post" action="/verify-code">
+                <div class="campo display-flex flex-col">
+                    <label for="code">Código de verificación:</label>
+                    <div class="input-grupo display-flex">
+                        <label for="code">
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                </svg>
+                            </span>
+                        </label>
+                        <input type="text" id="code" name="code" placeholder="000000" maxlength="6" required autocomplete="off" style="text-align: center; font-size: 24px; letter-spacing: 4px; font-weight: bold;">
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-boton">Verificar cuenta</button>
+                
+                <p class="registro display-flex center text-center gap-1">
+                    ¿No recibiste el código? <a href="/resend-code" id="resaltar"><b>Reenviar</b></a>
+                </p>
+            </form>
+
+            <?php if (!empty($message)): ?>
+            <div class="<?php echo strpos($message, 'correctamente') !== false ? 'success-message' : 'error-message'; ?>">
+                <?php echo htmlspecialchars($message); ?>
+            </div>
+            <?php endif; ?>
+        </div>
+    </main>
+
+    <script>
+        // Auto-focus en el input del código
+        document.getElementById('code').focus();
+        
+        // Solo permitir números
+        document.getElementById('code').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+</body>
+</html>
