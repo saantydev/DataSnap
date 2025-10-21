@@ -1,0 +1,144 @@
+:root {
+    --accent: #009dba;
+    --text: #111827;
+    --muted: #6b7280;
+    --card: #fff;
+    --shadow: rgba(17, 24, 39, 0.08);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", Arial, sans-serif;
+  }
+  
+  body {
+    background: #f7f9fc;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    width: 100%;
+    padding: 20px 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .logo {
+    height: 40px;
+    width: auto;
+  }
+  
+  .page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px 40px;
+  }
+  
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    background: var(--card);
+    border-radius: 24px;
+    box-shadow: 0 8px 30px var(--shadow);
+    padding: 40px 60px;
+    max-width: 1100px;
+    width: 100%;
+  }
+  
+  .illustration {
+    flex: 0 0 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .img-pensante {
+    width: 220px;
+    height: auto;
+  }
+  
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 11px;
+    flex: 1;
+  }
+  
+  .img-404 {
+    width: 200px;
+    height: auto;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+  
+  .desc {
+    color: var(--muted);
+    max-width: 320px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 23px 50px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 157, 186, 0.3);
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  .btn:hover {
+    background: #007f95;
+    transform: translateY(-2px);
+  }
+  
+  /* Footer */
+  .attribution {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Responsive */
+  @media (max-width: 850px) {
+    .card {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+      padding: 30px;
+    }
+  
+    .illustration {
+      flex: 0 0 auto;
+    }
+  
+    .img-pensante {
+      width: 180px;
+    }
+  
+    .img-404 {
+      width: 180px;
+    }
+  }
+  

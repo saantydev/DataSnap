@@ -40,12 +40,65 @@ class Database
      */
     private function __construct(array $config)
     {
-        // Normalizar claves y aplicar defaults antes de validar
-        $config = $this->normalizeConfig($config);
+        // Intentar conectar con la configuración proporcionada, o con fallbacks
+        $this->initializeConnection($config);
+    }
 
-        $this->validateConfig($config);
-        $this->config = $config;
-        $this->connect();
+    /**
+     * Inicializa la conexión con mecanismo de fallback
+     *
+     * @param array $config Configuración inicial
+     * @throws \Exception Si no se puede conectar con ninguna configuración
+     */
+    private function initializeConnection(array $config): void
+    {
+        $configsToTry = [$config];
+
+        // Si es la configuración por defecto, agregar local como fallback
+        if ($this->isDefaultConfig($config)) {
+            $localConfigFile = __DIR__ . '/../../config/database.local.php';
+            if (file_exists($localConfigFile)) {
+                $localConfig = require $localConfigFile;
+                if (!empty($localConfig) && is_array($localConfig)) {
+                    $configsToTry[] = $localConfig;
+                }
+            }
+        }
+
+        $lastException = null;
+        foreach ($configsToTry as $configAttempt) {
+            try {
+                // Normalizar claves y aplicar defaults antes de validar
+                $configAttempt = $this->normalizeConfig($configAttempt);
+
+                $this->validateConfig($configAttempt);
+                $this->config = $configAttempt;
+                $this->connect();
+                return; // Conexión exitosa
+            } catch (\Exception $e) {
+                $lastException = $e;
+                error_log("Fallo al conectar con configuración: " . $e->getMessage());
+            }
+        }
+
+        // Si llegamos aquí, ninguna configuración funcionó
+        throw new \Exception("No se pudo establecer conexión a la base de datos con ninguna configuración disponible. Último error: " . $lastException->getMessage());
+    }
+
+    /**
+     * Verifica si la configuración es la por defecto (cargada automáticamente)
+     *
+     * @param array $config
+     * @return bool
+     */
+    private function isDefaultConfig(array $config): bool
+    {
+        $defaultConfigFile = __DIR__ . '/../../config/database.php';
+        if (file_exists($defaultConfigFile)) {
+            $defaultConfig = require $defaultConfigFile;
+            return $config === $defaultConfig;
+        }
+        return false;
     }
 
     /**
@@ -120,6 +173,7 @@ class Database
     private function connect(): void
     {
         try {
+            // DEBUG: Mostrar configuración que se está usando
             $dsn = sprintf(
                 "mysql:host=%s;dbname=%s;charset=%s",
                 $this->config['host'],
@@ -169,7 +223,7 @@ class Database
     {
         if (self::$instance === null) {
             if (empty($config)) {
-                // Cargar configuración por defecto
+                // Cargar configuración por defecto (el constructor manejará los fallbacks)
                 $configFile = __DIR__ . '/../../config/database.php';
                 if (!file_exists($configFile)) {
                     throw new \RuntimeException("Archivo de configuración de base de datos no encontrado: $configFile");
@@ -181,6 +235,7 @@ class Database
 
         return self::$instance;
     }
+
 
     /**
      * Obtiene la conexión PDO

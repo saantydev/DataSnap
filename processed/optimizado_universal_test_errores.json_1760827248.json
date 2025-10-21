@@ -1,0 +1,58 @@
+[
+  {
+    "nombre":"Juan Perez",
+    "email":"juan@gmail.com",
+    "edad":"25",
+    "precio":150.5,
+    "activo":1.0
+  },
+  {
+    "nombre":"Maria Garcia",
+    "email":"maria@hotmail.com",
+    "edad":null,
+    "precio":200.0,
+    "activo":1.0
+  },
+  {
+    "nombre":"Pedro L\u00f3pez",
+    "email":"pedro@yahoo.com",
+    "edad":"30",
+    "precio":null,
+    "activo":1.0
+  },
+  {
+    "nombre":null,
+    "email":"ana@gmail.com",
+    "edad":"22",
+    "precio":75.25,
+    "activo":null
+  },
+  {
+    "nombre":"Carlos Ruiz",
+    "email":"carlos@gmail.com",
+    "edad":"35",
+    "precio":300.0,
+    "activo":0.0
+  },
+  {
+    "nombre":"Sofia Martinez",
+    "email":"sofia@outlook.com",
+    "edad":"28",
+    "precio":null,
+    "activo":1.0
+  },
+  {
+    "nombre":null,
+    "email":null,
+    "edad":null,
+    "precio":null,
+    "activo":null
+  },
+  {
+    "nombre":"Luis Fernandez",
+    "email":"luis@gmail.com",
+    "edad":"40",
+    "precio":500.99,
+    "activo":0.0
+  }
+]

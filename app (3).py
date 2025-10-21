@@ -1,0 +1,188 @@
+from flask import Flask, request, jsonify, send_file
+import os, json, mysql.connector, requests
+from parsers.csv_parser import process_csv
+from parsers.txt_parser import process_txt
+from parsers.xlsx_parser import process_xlsx
+from parsers.json_parser import process_json
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+
+app = Flask(__name__)
+
+UPLOAD_FOLDER = 'uploads'
+PROCESSED_FOLDER = 'processed'
+HISTORIAL_FOLDER = 'historial'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(PROCESSED_FOLDER, exist_ok=True)
+os.makedirs(HISTORIAL_FOLDER, exist_ok=True)
+
+# Config DB desde variables de entorno
+DB_CONFIG = {
+    "host": os.environ.get("DB_HOST"),
+    "user": os.environ.get("DB_USER"),
+    "password": os.environ.get("DB_PASS"),
+    "database": os.environ.get("DB_NAME"),
+    "port": int(os.environ.get("DB_PORT", 3306))
+}
+
+# Config Google Drive
+creds_info = json.loads(os.environ["GCP_SERVICE_ACCOUNT_JSON"])
+creds = service_account.Credentials.from_service_account_info(
+    creds_info,
+    scopes=["https://www.googleapis.com/auth/drive"]
+)
+drive_service = build("drive", "v3", credentials=creds)
+DRIVE_FOLDER_ID = os.environ["GDRIVE_FOLDER_ID"]
+
+@app.route('/upload_original', methods=['POST'])
+def upload_original():
+    if 'file' not in request.files:
+        return jsonify({"success": False, "error": "No se envió archivo"}), 400
+
+    file = request.files['file']
+    local_path = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(local_path)
+
+    try:
+        file_metadata = {"name": file.filename, "parents": [DRIVE_FOLDER_ID]}
+        media = MediaFileUpload(local_path, mimetype="application/octet-stream")
+        uploaded = drive_service.files().create(
+            body=file_metadata,
+            media_body=media,
+            fields="id, webViewLink"
+        ).execute()
+
+        drive_id = uploaded["id"]
+        drive_link = uploaded["webViewLink"]
+
+        # Hacerlo accesible públicamente
+        drive_service.permissions().create(
+            fileId=drive_id,
+            body={"type": "anyone", "role": "reader"}
+        ).execute()
+
+        return jsonify({"success": True, "drive_id": drive_id, "drive_link": drive_link})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'file' not in request.files:
+        return jsonify({"error": "No se envió archivo"}), 400
+    file = request.files['file']
+    save_path = os.path.join(UPLOAD_FOLDER, file.filename)
+    file.save(save_path)
+    return jsonify({"success": True, "ruta": save_path})
+
+@app.route('/procesar', methods=['POST'])
+def procesar():
+    data = request.json
+    if not data or 'id' not in data:
+        return jsonify({"error": "No se envió el ID del archivo"}), 400
+
+    id_archivo = data['id']
+
+    try:
+        conn = mysql.connector.connect(**DB_CONFIG)
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT ruta, nombre, drive_id_original FROM archivos WHERE id = %s", (id_archivo,))
+        result = cursor.fetchone()
+        conn.close()
+        if not result:
+            return jsonify({"error": "Archivo no encontrado en la base de datos"}), 404
+
+        ruta = result['ruta']
+        temp_file = False
+
+        if result.get('drive_id_original'):
+            # Descargar desde Google Drive
+            download_url = f"https://drive.google.com/uc?export=download&id={result['drive_id_original']}"
+            response = requests.get(download_url)
+            if response.status_code == 200:
+                temp_path = os.path.join(UPLOAD_FOLDER, f"temp_{id_archivo}_{result['nombre']}")
+                with open(temp_path, 'wb') as f:
+                    f.write(response.content)
+                ruta = temp_path
+                temp_file = True
+            else:
+                return jsonify({"error": "No se pudo descargar el archivo desde Google Drive"}), 500
+        else:
+            if not os.path.exists(ruta):
+                return jsonify({"error": f"No se encontró el archivo: {ruta}"}), 404
+    except Exception as e:
+        return jsonify({"error": f"Error al conectar con la base de datos: {e}"}), 500
+
+    extension = os.path.splitext(ruta)[1].lower()
+    try:
+        if extension == ".csv":
+            df = process_csv(ruta, HISTORIAL_FOLDER)
+        elif extension == ".txt":
+            df = process_txt(ruta, HISTORIAL_FOLDER)
+        elif extension == ".xlsx":
+            df = process_xlsx(ruta, HISTORIAL_FOLDER)
+        elif extension == ".json":
+            df = process_json(ruta, HISTORIAL_FOLDER)
+        else:
+            return jsonify({"error": "Formato no soportado"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Error al procesar: {e}"}), 500
+
+    salida = os.path.join(PROCESSED_FOLDER, f"mejorado_{os.path.basename(ruta)}.csv")
+    df.to_csv(salida, index=False, na_rep="NaN")
+
+    # Limpiar archivo temporal si se descargó
+    if temp_file:
+        os.remove(ruta)
+
+    # Subir a Google Drive
+    try:
+        file_metadata = {
+            "name": os.path.basename(salida),
+            "parents": [DRIVE_FOLDER_ID]
+        }
+        media = MediaFileUpload(salida, mimetype="text/csv")
+        uploaded = drive_service.files().create(
+            body=file_metadata,
+            media_body=media,
+            fields="id, webViewLink, webContentLink"
+        ).execute()
+
+        drive_id = uploaded.get("id")
+        drive_link = uploaded.get("webViewLink")
+
+        # Hacer accesible por link público (opcional, quita si no querés compartirlo abiertamente)
+        drive_service.permissions().create(
+            fileId=drive_id,
+            body={"type": "anyone", "role": "reader"},
+        ).execute()
+
+    except Exception as e:
+        return jsonify({"error": f"No se pudo subir a Google Drive: {e}"}), 500
+
+    # Actualizar base de datos
+    try:
+        conn = mysql.connector.connect(**DB_CONFIG)
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE archivos
+            SET estado = 'optimizado',
+                drive_id = %s,
+                drive_link = %s
+            WHERE id = %s
+        """, (drive_id, drive_link, id_archivo))
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        return jsonify({"error": f"No se pudo actualizar la base de datos: {e}"}), 500
+
+    return jsonify({
+        "success": True,
+        "archivo_id": id_archivo,
+        "ruta_local": salida,
+        "drive_id": drive_id,
+        "drive_link": drive_link
+    })
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000)

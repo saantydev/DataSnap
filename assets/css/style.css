@@ -1,0 +1,134 @@
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  transition: background-color 1s, color 2s;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end{
+  align-items: end;
+}
+
+.text-align-end{
+  text-align: end;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.gap-3 {
+  gap: 3rem;
+}
+
+.gap-4 {
+  gap: 4rem;
+}
+
+.gap-5 {
+  gap: 5rem;
+}
+
+a {
+  color: var(--color-texto);
+  text-decoration: none;
+}
+
+.btn1 {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: 2.5px solid var(--color-primario);
+  border-radius: 14px;
+}
+
+.btn2 {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--color-primario);
+  border-radius: 14px;
+  color: var(--color-texto);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
+    --color-secundario: #1F2937;
+    --color-fondo: #111827;
+    --color-texto: #FFFFFF;
+    --color-texto-secundario: #ffffff80;
+    --color-texto-footer: #FFFFFF;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
+    --color-secundario: #C8F5F9;
+    --color-fondo: #FDFDFD;
+    --color-texto: black;
+    --color-texto-secundario: #00000080;
+    --color-texto-footer: #FFFFFF;
+  }
+}
+
+:root[data-tema="light"] {
+    --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
+    --color-secundario: #C8F5F9;
+    --color-fondo: #FDFDFD;
+    --color-texto: black;
+    --color-texto-secundario: #00000080;
+    --color-texto-footer: #FFFFFF;
+}
+:root[data-tema="dark"] {
+    --color-primario: #2DACB5;
+    --color-primario-rgb: 45, 172, 181;
+    --color-secundario: #1F2937;
+    --color-fondo: #111827;
+    --color-texto: #FFFFFF;
+    --color-texto-secundario: #ffffff80;
+    --color-texto-footer: #FFFFFF;
+}
