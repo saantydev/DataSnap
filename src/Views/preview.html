@@ -8,16 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/config/css/sidebar.css">
     <link rel="stylesheet" href="/config/css/preview.css">
-    <script src="/assets/js/main.js"></script>
+    <script src="/config/js/theme.js"></script>
 </head>
 <body class="body-archivos">
     <?php $active = 'files'; include __DIR__ . '/partials/sidebar.php'; ?>
     
-    <main class="main-content">
-        <div class="container">
+    <main class="md:ml-72 w-full min-h-screen flex justify-center" style="background-color: var(--color-fondo);">
+        <div class="container max-w-6xl mx-auto p-6">
             <!-- Header -->
             <div class="header-section">
                 <div class="header-content">

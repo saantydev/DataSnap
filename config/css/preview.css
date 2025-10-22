@@ -116,9 +116,8 @@ body {
 }
 
 .container {
-    max-width: 1280px;
-    margin: 0 auto;
     width: 100%;
+    max-width: 1280px;
 }
 
 /* Clases CSS puras para reemplazar Tailwind */
@@ -934,7 +933,6 @@ main::before {
     background: linear-gradient(135deg, #4b5563, #374151);
 }
 
-<<<<<<< HEAD
 .btn-chat {
     background: linear-gradient(135deg, #14b8a6, #0d9488);
     color: white;
@@ -944,8 +942,7 @@ main::before {
     background: linear-gradient(135deg, #0d9488, #0f766e);
 }
 
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
+
 .actions-right {
     color: var(--text-muted);
     font-size: 0.75rem;
@@ -1046,36 +1043,36 @@ main::before {
     }
 }
 
-/* Forzar colores claros siempre */
+/* Variables de colores adaptativas del sistema */
 :root {
-    --text-primary: #1f2937 !important;
-    --text-secondary: #6b7280 !important;
-    --text-muted: #9ca3af !important;
-    --bg-primary: #ffffff !important;
-    --bg-secondary: #f8fafc !important;
-    --bg-tertiary: #f1f5f9 !important;
-    --border-color: #e2e8f0 !important;
+    --text-primary: var(--color-texto);
+    --text-secondary: var(--color-texto-secundario);
+    --text-muted: var(--color-texto-secundario);
+    --bg-primary: var(--color-fondo);
+    --bg-secondary: var(--color-secundario);
+    --bg-tertiary: var(--color-secundario);
+    --border-color: rgba(var(--color-primario-rgb), 0.2);
 }
 
-/* Forzar colores de texto específicos */
+/* Colores de texto adaptativos */
 h1, h2, h3, h4, h5, h6 {
-    color: #1f2937 !important;
+    color: var(--color-texto) !important;
 }
 
-p, span, div {
-    color: #374151 !important;
+p, div {
+    color: var(--color-texto) !important;
 }
 
 .text-gray-900 {
-    color: #111827 !important;
+    color: var(--color-texto) !important;
 }
 
 .text-gray-600 {
-    color: #4b5563 !important;
+    color: var(--color-texto-secundario) !important;
 }
 
 .text-gray-500 {
-    color: #6b7280 !important;
+    color: var(--color-texto-secundario) !important;
 }
 
 /* Efectos especiales */
