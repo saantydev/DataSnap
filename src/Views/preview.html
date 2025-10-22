@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/config/css/sidebar.css">
     <link rel="stylesheet" href="/config/css/preview.css">
     <script src="/assets/js/main.js"></script>
-
 </head>
-<body>
+<body class="body-archivos">
     <?php $active = 'files'; include __DIR__ . '/partials/sidebar.php'; ?>
     
     <main class="main-content">
@@ -185,11 +185,12 @@
         let originalData = null;
         let optimizedData = null;
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             currentFileId = new URLSearchParams(window.location.search).get('id');
             if (currentFileId) {
                 loadFileData();
+            } else {
+                showError('ID de archivo no válido');
             }
             setupTabs();
             setupEventListeners();
@@ -197,7 +198,6 @@
         });
         
         function addLoadingAnimations() {
-            // Add staggered animations to elements
             const elements = document.querySelectorAll('.file-info-item, .preview-tab');
             elements.forEach((el, index) => {
                 el.style.opacity = '0';
@@ -220,18 +220,13 @@
         }
 
         function switchTab(tabName) {
-            // Update tab buttons
             document.querySelectorAll('.preview-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
             document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-
-            // Update content
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
             });
-            
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
         }
 
@@ -242,7 +237,6 @@
 
         async function loadFileData() {
             try {
-                // Mostrar indicador de carga
                 document.getElementById('fileName').textContent = 'Cargando...';
                 document.getElementById('fileStatus').textContent = 'Cargando...';
                 document.getElementById('fileSize').textContent = 'Cargando...';
@@ -256,7 +250,6 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Animate content loading
                     setTimeout(() => updateFileInfo(data.file), 200);
                     setTimeout(() => displayOriginalContent(data.original_content), 400);
                     
@@ -266,13 +259,6 @@
                             showComparison(data.original_content, data.optimized_content);
                             const downloadBtn = document.getElementById('downloadBtn');
                             downloadBtn.classList.remove('hidden');
-                            downloadBtn.style.opacity = '0';
-                            downloadBtn.style.transform = 'scale(0.9)';
-                            setTimeout(() => {
-                                downloadBtn.style.transition = 'all 0.3s ease-out';
-                                downloadBtn.style.opacity = '1';
-                                downloadBtn.style.transform = 'scale(1)';
-                            }, 100);
                         }, 600);
                     }
                 } else {
@@ -282,7 +268,6 @@
                 console.error('Error loading file data:', error);
                 showError('Error de conexión: ' + error.message);
                 
-                // Restaurar estado inicial en caso de error
                 document.getElementById('fileName').textContent = 'Error al cargar';
                 document.getElementById('fileStatus').textContent = 'Error';
                 document.getElementById('fileSize').textContent = 'N/A';
@@ -308,7 +293,10 @@
         }
 
         function formatFileSize(bytes) {
-            return DataSnapUtils.formatFileSize(bytes);
+            if (!bytes) return '0 B';
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
         }
 
         function displayOriginalContent(content) {
@@ -326,12 +314,9 @@
         function formatContentForDisplay(content, type) {
             if (!content) return '<div class="empty-state"><div class="empty-state-icon">📄</div><p>No hay contenido disponible</p></div>';
             
-            // Limpiar contenido de caracteres especiales HTML
             const cleanContent = content.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&amp;/g, '&');
             
-            // Detectar tipo de archivo por contenido
-            if (cleanContent.includes('CREATE TABLE') || cleanContent.includes('INSERT INTO') || cleanContent.includes('-- phpMyAdmin')) {
-                // Es SQL - mostrar con formato de código
+            if (cleanContent.includes('CREATE TABLE') || cleanContent.includes('INSERT INTO')) {
                 const lines = cleanContent.split('\n');
                 const maxLines = 25;
                 const displayLines = lines.slice(0, maxLines);
@@ -344,12 +329,11 @@
                 return html;
             }
             
-            // Detectar CSV
             const lines = cleanContent.split('\n').filter(line => line.trim());
             if (lines.length > 1 && lines[0].includes(',') && !cleanContent.includes('CREATE TABLE')) {
                 try {
                     const headers = lines[0].split(',');
-                    const rows = lines.slice(1, 20); // Mostrar 20 filas
+                    const rows = lines.slice(1, 20);
                     
                     let html = '<table class="content-table"><thead><tr>';
                     headers.forEach(header => {
@@ -357,7 +341,7 @@
                     });
                     html += '</tr></thead><tbody>';
                     
-                    rows.forEach((row, index) => {
+                    rows.forEach((row) => {
                         const cells = row.split(',');
                         html += `<tr>`;
                         headers.forEach((_, cellIndex) => {
@@ -379,7 +363,6 @@
                 }
             }
             
-            // Mostrar como texto plano
             const textLines = cleanContent.split('\n');
             const maxLines = 50;
             const displayContent = textLines.slice(0, maxLines).join('\n');
@@ -392,26 +375,20 @@
         }
 
         function showComparison(original, optimized) {
-            // Show original content in comparison
             const originalContainer = document.getElementById('comparisonOriginal');
             if (original) {
-                originalContainer.innerHTML = formatContentForDisplay(original, 'original').replace('max-h-96', 'max-h-64');
+                originalContainer.innerHTML = formatContentForDisplay(original, 'original');
             }
             
-            // Show optimized content in comparison
             const optimizedContainer = document.getElementById('comparisonOptimized');
             if (optimized) {
-                optimizedContainer.innerHTML = formatContentForDisplay(optimized, 'optimized').replace('max-h-96', 'max-h-64');
+                optimizedContainer.innerHTML = formatContentForDisplay(optimized, 'optimized');
                 
-                // Show stats
                 const stats = calculateStats(original, optimized);
                 displayStats(stats);
                 
-                // Show differences
                 const differences = findDifferences(original, optimized);
                 displayDifferences(differences);
-            } else {
-                document.getElementById('comparisonContent').innerHTML = '<div class="text-center py-8 text-gray-500">No hay archivo optimizado para comparar</div>';
             }
         }
 
@@ -420,7 +397,7 @@
             const optimizedLines = optimized.split('\n').filter(line => line.trim()).length;
             
             return {
-                originalRows: originalLines - 1, // Exclude header
+                originalRows: originalLines - 1,
                 optimizedRows: optimizedLines - 1,
                 rowsRemoved: (originalLines - 1) - (optimizedLines - 1),
                 compressionRatio: ((original.length - optimized.length) / original.length * 100).toFixed(1)
@@ -452,20 +429,10 @@
         function findDifferences(original, optimized) {
             const differences = [];
             
-            // Detectar diferencias reales
             if (original.includes('juan@gmai.com') && optimized.includes('juan@gmail.com')) {
                 differences.push({ type: 'email', original: 'juan@gmai.com', optimized: 'juan@gmail.com', description: 'Dominio de email corregido' });
             }
             
-            if (original.includes('maria@hotmial.com') && optimized.includes('maria@hotmail.com')) {
-                differences.push({ type: 'email', original: 'maria@hotmial.com', optimized: 'maria@hotmail.com', description: 'Dominio de email corregido' });
-            }
-            
-            if (original.includes('NaN') && !optimized.includes('NaN')) {
-                differences.push({ type: 'data', original: 'NaN', optimized: 'Valores corregidos', description: 'Valores NaN reemplazados' });
-            }
-            
-            // Contar líneas para detectar duplicados eliminados
             const originalLines = original.split('\n').filter(line => line.trim()).length;
             const optimizedLines = optimized.split('\n').filter(line => line.trim()).length;
             
@@ -527,14 +494,16 @@
         }
 
         function showError(message) {
-            DataSnapUtils.showNotification(message, 'error');
+            console.error('Preview error:', message);
+            document.querySelector('.container').innerHTML = `
+                <div class="error-container">
+                    <h2>❌ Error</h2>
+                    <p>${message}</p>
+                    <a href="/files" class="btn btn-primary">Volver a Mis Archivos</a>
+                </div>
+            `;
         }
-
-        function showSuccess(message) {
-            DataSnapUtils.showNotification(message, 'success');
-        }
-        
-        function expandContent(element) {
+         function expandContent(element) {
             // Función para expandir contenido (placeholder)
             element.style.display = 'none';
             const container = element.parentElement;
