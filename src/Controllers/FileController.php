@@ -433,6 +433,104 @@ public function optimize(): void
     }
 
     /**
+     * Muestra la página de previsualización de archivos
+     *
+     * @return void
+     */
+    public function preview(): void
+    {
+        try {
+            $userId = $this->getCurrentUserId();
+            if (!$userId) {
+                $this->redirectToLogin();
+                return;
+            }
+
+            // Renderizar la vista de previsualización
+            require_once __DIR__ . '/../Views/preview.html';
+
+        } catch (\Exception $e) {
+            error_log("Error en FileController::preview: " . $e->getMessage(), 0);
+            $this->showError('Error interno del servidor');
+        }
+    }
+
+    /**
+     * Obtiene los datos de un archivo para previsualización
+     *
+     * @return void
+     */
+    public function previewData(): void
+    {
+        try {
+            $userId = $this->getCurrentUserId();
+            if (!$userId) {
+                $this->jsonResponse(['success' => false, 'message' => 'Usuario no autenticado'], 401);
+                return;
+            }
+
+            $fileId = $_GET['id'] ?? null;
+            if (!$fileId || !is_numeric($fileId)) {
+                $this->jsonResponse(['success' => false, 'message' => 'ID de archivo inválido'], 400);
+                return;
+            }
+
+            // Verificar propiedad del archivo
+            if (!$this->fileModel->isFileOwner((int)$fileId, $userId)) {
+                $this->jsonResponse(['success' => false, 'message' => 'Archivo no encontrado o no autorizado'], 403);
+                return;
+            }
+
+            // Obtener información del archivo
+            $file = $this->fileModel->getFileById((int)$fileId);
+            if (!$file) {
+                $this->jsonResponse(['success' => false, 'message' => 'Archivo no encontrado'], 404);
+                return;
+            }
+
+            // Leer contenido del archivo original
+            $originalPath = __DIR__ . '/../../' . $file['ruta'];
+            $originalContent = null;
+            if (file_exists($originalPath)) {
+                $originalContent = file_get_contents($originalPath);
+                // Limitar contenido para previsualización (primeros 50KB)
+                if (strlen($originalContent) > 51200) {
+                    $originalContent = substr($originalContent, 0, 51200) . "\n\n... (archivo truncado para previsualización)";
+                }
+            }
+
+            // Leer contenido del archivo optimizado si existe
+            $optimizedContent = null;
+            if ($file['estado'] === 'optimizado' && !empty($file['ruta_optimizada'])) {
+                $optimizedPath = __DIR__ . '/../../' . $file['ruta_optimizada'];
+                if (file_exists($optimizedPath)) {
+                    $optimizedContent = file_get_contents($optimizedPath);
+                    // Limitar contenido para previsualización (primeros 50KB)
+                    if (strlen($optimizedContent) > 51200) {
+                        $optimizedContent = substr($optimizedContent, 0, 51200) . "\n\n... (archivo truncado para previsualización)";
+                    }
+                }
+            }
+
+            $this->jsonResponse([
+                'success' => true,
+                'file' => [
+                    'id' => $file['id'],
+                    'nombre' => $file['nombre'],
+                    'estado' => $file['estado'],
+                    'tamano' => $file['tamano'] ?? 0
+                ],
+                'original_content' => $originalContent,
+                'optimized_content' => $optimizedContent
+            ]);
+
+        } catch (\Exception $e) {
+            error_log("Error en FileController::previewData: " . $e->getMessage(), 0);
+            $this->jsonResponse(['success' => false, 'message' => 'Error interno del servidor'], 500);
+        }
+    }
+
+    /**
      * Descarga un archivo optimizado
      *
      * @return void

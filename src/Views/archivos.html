@@ -253,6 +253,12 @@
                     <td class="py-3 px-4">${statusText}</td>
                     <td class="py-3 px-4">
                         <div class="flex items-center justify-center space-x-2">
+                            <a href="/preview?id=${file.id}" class="inline-flex items-center px-3 py-1 text-sm bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors" title="Previsualizar">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="mr-1">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg> Ver
+                            </a>
                             ${actionButton}
                             <div class="relative">
                                 <button class="dropdown-trigger p-1 rounded hover:bg-gray-100 transition-colors" title="Más opciones">

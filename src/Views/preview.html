@@ -242,8 +242,7 @@
         function setupEventListeners() {
             document.getElementById('downloadBtn').addEventListener('click', downloadOptimized);
             document.getElementById('chatBtn').addEventListener('click', chatWithDatabase);
-
-
+        }
 
         async function loadFileData() {
             try {
@@ -252,7 +251,7 @@
                 document.getElementById('fileStatus').textContent = 'Cargando...';
                 document.getElementById('fileSize').textContent = 'Cargando...';
                 
-                const response = await fetch(`/files?action=preview-data&id=${currentFileId}`);
+                const response = await fetch(`/api/files/preview-data?id=${currentFileId}`);
                 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -552,7 +551,6 @@
             notice.textContent = 'Contenido completo mostrado';
             container.appendChild(notice);
         }
-    }
     </script>
 </body>
 </html>

@@ -6,10 +6,8 @@ use Controllers\LoginController;
 use Controllers\RegisterController;
 use Controllers\FileController;
 use Controllers\PanelController;
-<<<<<<< HEAD
 use Controllers\ChatbotController;
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
+
 
 class Router
 {
@@ -34,10 +32,9 @@ class Router
             '/files' => ['controller' => 'FileController', 'method' => 'index'],
             '/files/list' => ['controller' => 'FileController', 'method' => 'list'],
             '/files/preview' => ['controller' => 'FileController', 'method' => 'preview'],
-<<<<<<< HEAD
+            '/preview' => ['controller' => 'FileController', 'method' => 'preview'],
+            '/api/files/preview-data' => ['controller' => 'FileController', 'method' => 'previewData'],
             '/chatbot' => ['controller' => 'ChatbotController', 'method' => 'index'],
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             '/logout' => ['controller' => 'LoginController', 'method' => 'logout'],
             '/auth/google' => ['controller' => 'FileController', 'method' => 'googleAuth'],
         ];
@@ -51,10 +48,7 @@ class Router
             '/files/delete' => ['controller' => 'FileController', 'method' => 'delete'],
             '/panel/upload' => ['controller' => 'PanelController', 'method' => 'upload'],
             '/panel/stats' => ['controller' => 'PanelController', 'method' => 'stats'],
-<<<<<<< HEAD
             '/chatbot/query' => ['controller' => 'ChatbotController', 'method' => 'query'],
-=======
->>>>>>> 80eb21836f8ebbf25d3d8a477426d5caea9f6925
             '/auth/google/callback' => ['controller' => 'FileController', 'method' => 'googleCallback'],
         ];
 
