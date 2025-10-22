@@ -50,7 +50,6 @@ function ds_nav_item($href, $label, $icon, $key, $active) {
         <?php ds_nav_item('/panel', 'Subir Archivo', 'add', 'panel', $active); ?>
         <?php ds_nav_item('/files', 'Mis Bases de Datos', 'storage', 'files', $active); ?>
         <?php ds_nav_item('/chatbot', 'ChatBot', 'chat', 'chatbot', $active); ?>
-        <?php ds_nav_item('/configuracion', 'Configuración', 'settings', 'settings', $active); ?>
         <div class="theme-selector">
             <span class="theme-label">Tema</span>
             <div class="tema-selector">
