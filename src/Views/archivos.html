@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/config/css/sidebar.css">
     <link rel="stylesheet" href="/config/css/archivos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="body-archivos">
@@ -97,7 +98,7 @@
             // Inicializar icono de ordenamiento
             updateSortIcon();
 
-            // Mostrar archivos originales por defecto
+            // Mostrar todos los archivos por defecto
             setTimeout(() => filterFilesByTab('todos'), 100);
         });
 
@@ -206,7 +207,7 @@
                 row.dataset.fileStatus = file.estado || 'original';
 
                 // Formatear tamaño (asegurarse de que sea número)
-                const sizeBytes = parseInt(file.size) || 0;
+                const sizeBytes = parseInt(file.tamano) || 0;
                 const sizeMB = (sizeBytes / (1024 * 1024)).toFixed(2) + ' MB';
 
                 // Formatear fecha
@@ -273,9 +274,19 @@
             });
         }
 
-        // Función para optimizar archivo
         function optimizeFile(fileId) {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+            const button = document.querySelector(`[onclick="optimizeFile(${fileId})"]`);
+            const originalText = button.innerHTML;
+
+            button.innerHTML = `
+                <svg class="animate-spin mr-1" width="14" height="14" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
+                    <path fill="currentColor" class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Procesando...
+            `;
+            button.disabled = true;
 
             fetch('/files/optimize', {
                 method: 'POST',
@@ -289,16 +300,65 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Archivo enviado a optimización');
-                    // Recargar archivos después de un momento
+                    if (data.estadisticas) {
+                        let statsMessage = 'Archivo optimizado exitosamente!\n\n';
+                        if (data.estadisticas.filas_originales !== undefined) {
+                            statsMessage += `Filas originales: ${data.estadisticas.filas_originales}\n`;
+                        }
+                        if (data.estadisticas.filas_limpias !== undefined) {
+                            statsMessage += `Filas después de limpieza: ${data.estadisticas.filas_limpias}\n`;
+                        }
+                        if (data.estadisticas.anomalias && Object.keys(data.estadisticas.anomalias).length > 0) {
+                            statsMessage += `Anomalías detectadas: ${JSON.stringify(data.estadisticas.anomalias, null, 2)}\n`;
+                        }
+                        Swal.fire({
+                            title: '¡Archivo Optimizado!',
+                            html: statsMessage.replace(/\n/g, '<br>'),
+                            icon: 'success',
+                            confirmButtonText: 'Continuar'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '¡Éxito!',
+                            text: 'Archivo enviado a optimización',
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    }
                     setTimeout(() => loadFiles(), 1000);
                 } else {
-                    alert('Error: ' + data.message);
+                    if (data.redirect) {
+                        Swal.fire({
+                            title: 'Sesión Expirada',
+                            text: 'Tu sesión de Google ha expirado. Serás redirigido para reautorizar.',
+                            icon: 'warning',
+                            confirmButtonText: 'Continuar'
+                        }).then(() => {
+                            window.location.href = data.redirect;
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: data.message,
+                            icon: 'error',
+                            confirmButtonText: 'Entendido'
+                        });
+                    }
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error al optimizar el archivo');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Error al optimizar el archivo',
+                    icon: 'error',
+                    confirmButtonText: 'Entendido'
+                });
+            })
+            .finally(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
             });
         }
 
@@ -327,7 +387,10 @@
             rows.forEach(row => {
                 const fileStatus = row.dataset.fileStatus;
 
-                if (tabType === 'originales') {
+                if (tabType === 'todos') {
+                    // Mostrar todos los archivos
+                    row.style.display = '';
+                } else if (tabType === 'originales') {
                     // Mostrar solo archivos originales (no modificados)
                     row.style.display = (fileStatus === 'original') ? '' : 'none';
                 } else if (tabType === 'modificados') {
@@ -336,10 +399,12 @@
                 }
             });
         }
-    function previewFile(fileId) {
-    // Redirigir a la página de previsualización
-window.location.href = `/files/preview?id=${fileId}`;
-}
+
+        // Función para previsualizar archivo
+        function previewFile(fileId) {
+            // Redirigir a la página de previsualización
+            window.location.href = `/files/preview?id=${fileId}`;
+        }
 
         // Funcionalidad del menú desplegable
         document.addEventListener('click', function(e) {
@@ -375,7 +440,17 @@ window.location.href = `/files/preview?id=${fileId}`;
                     const fileId = trigger.closest('tr').dataset.fileId;
                     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-                    if (confirm('¿Estás seguro de que quieres eliminar este archivo?')) {
+                    Swal.fire({
+                        title: '¿Eliminar archivo?',
+                        text: '¿Estás seguro de que quieres eliminar este archivo?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                         fetch('/files/delete?id=' + fileId, {
                             method: 'POST',
                             headers: {
@@ -388,16 +463,33 @@ window.location.href = `/files/preview?id=${fileId}`;
                             if (data.success) {
                                 // Remover la fila de la tabla
                                 trigger.closest('tr').remove();
-                                alert('Archivo eliminado correctamente');
+                                Swal.fire({
+                                    title: '¡Eliminado!',
+                                    text: 'Archivo eliminado correctamente',
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
                             } else {
-                                alert('Error al eliminar el archivo: ' + data.message);
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Error al eliminar el archivo: ' + data.message,
+                                    icon: 'error',
+                                    confirmButtonText: 'Entendido'
+                                });
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Error al eliminar el archivo');
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Error al eliminar el archivo',
+                                icon: 'error',
+                                confirmButtonText: 'Entendido'
+                            });
                         });
-                    }
+                        }
+                    });
                     menu.remove();
                 });
 
