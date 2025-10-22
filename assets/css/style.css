@@ -118,7 +118,7 @@ a {
     --color-primario-rgb: 45, 172, 181;
     --color-secundario: #C8F5F9;
     --color-fondo: #FDFDFD;
-    --color-fondo2: #FFFFFF;
+    --color-fondo2: #ececec;
     --color-texto: black;
     --color-texto-secundario: #00000080;
     --color-texto-footer: #FFFFFF;
@@ -128,7 +128,7 @@ a {
     --color-primario-rgb: 45, 172, 181;
     --color-secundario: #1F2937;
     --color-fondo: #111827;
-    --color-fondo2: #111827;
+    --color-fondo2: #1F2937;
     --color-texto: #FFFFFF;
     --color-texto-secundario: #ffffff80;
     --color-texto-footer: #FFFFFF;

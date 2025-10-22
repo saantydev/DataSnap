@@ -56,6 +56,9 @@ main{
     background-color: var(--color-fondo);
     display: flex;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .main-content {
@@ -63,6 +66,8 @@ main{
     margin-left: 288px;
     padding: 24px;
     background-color: var(--color-fondo);
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .page-title {
@@ -79,6 +84,8 @@ main{
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--color-texto-secundario);
     margin-bottom: 24px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .filter-container {
@@ -102,7 +109,6 @@ main{
 }
 
 .search-input {
-    width: 100%;
     padding: 10px 16px 10px 40px;
     border: 1px solid var(--color-texto-secundario);
     border-radius: 8px;
@@ -172,6 +178,8 @@ main{
     display: flex;
     margin-bottom: 24px;
     border-bottom: 1px solid var(--color-texto-secundario);
+    width: 100%;
+    overflow-x: auto;
 }
 
 .tab {
@@ -180,6 +188,8 @@ main{
     border-bottom: 2px solid transparent;
     color: var(--color-texto-secundario);
     transition: all 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .tab.active {
@@ -220,6 +230,8 @@ main{
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .table-header {
@@ -319,6 +331,9 @@ main{
     border-radius: 6px;
     text-decoration: none;
     transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .btn-optimize:hover {
@@ -390,6 +405,20 @@ main{
     display: none;
 }
 
+#filesTableContainer {
+    width: 100%;
+    overflow-x: auto;
+}
+
+#filesTableContainer.hidden {
+    display: none;
+}
+
+.titulo {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 /* Estilos personalizados para SweetAlert2 */
 .swal-custom {
     border: 1px solid var(--color-texto-secundario) !important;
@@ -459,18 +488,33 @@ main{
     .main-content {
         margin-left: 0;
         padding: 16px;
+        width: 100%;
     }
     
     .filter-container {
         flex-direction: column;
+        gap: 12px;
     }
     
     .filter-controls {
         flex-direction: column;
         width: 100%;
+        gap: 8px;
     }
     
     .filter-select {
         width: 100%;
+    }
+    
+    .files-table {
+        font-size: 0.875rem;
+    }
+    
+    .table-header {
+        padding: 8px 12px;
+    }
+    
+    .files-table td {
+        padding: 8px 12px;
     }
 }

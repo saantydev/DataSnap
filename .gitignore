@@ -1,2 +1,4 @@
 .vscode
 .htacces
+.env
+sftp.json
