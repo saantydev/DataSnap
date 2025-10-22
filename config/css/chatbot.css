@@ -4,6 +4,16 @@
     flex-direction: column;
 }
 
+@media (max-width: 768px) {
+    .chat-container {
+        height: calc(100vh - 160px);
+    }
+    
+    main {
+        margin-left: 0 !important;
+    }
+}
+
 .chat-messages {
     flex: 1;
     overflow-y: auto;
@@ -33,8 +43,16 @@
     word-wrap: break-word;
 }
 
+@media (max-width: 768px) {
+    .message-content {
+        max-width: 85%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
 .message.user .message-content {
-    background: #3b82f6;
+    background: var(--color-primario);
     color: white;
     border-bottom-right-radius: 0.25rem;
 }
@@ -64,7 +82,7 @@
 }
 
 .message.user .message-avatar {
-    background: #3b82f6;
+    background: var(--color-primario);
     color: white;
 }
 
@@ -77,6 +95,26 @@
     padding: 1rem;
     background: white;
     border-top: 1px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+    .chat-input-container {
+        padding: 0.75rem;
+    }
+    
+    .chat-input-container .flex {
+        gap: 0.5rem;
+    }
+    
+    .chat-input-container input {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .chat-input-container button {
+        padding: 0.75rem;
+        min-width: 48px;
+    }
 }
 
 :root[data-tema="dark"] .chat-input-container {
@@ -139,4 +177,48 @@
     border-radius: 0.5rem;
     padding: 1rem;
     margin-bottom: 1rem;
+}
+
+/* Table scroll styles */
+table {
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+}
+
+table tbody, table thead {
+    display: table;
+    width: 100%;
+}
+
+.message-content table {
+    overflow-x: auto;
+    display: block;
+    max-width: 100%;
+}
+
+.message-content table tbody, 
+.message-content table thead {
+    display: table;
+    width: max-content;
+    min-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .database-selector {
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .database-selector h3 {
+        font-size: 0.9rem;
+    }
+    
+    .database-selector p {
+        font-size: 0.8rem;
+    }
+    
+    .message-content table {
+        font-size: 0.8rem;
+    }
 }
