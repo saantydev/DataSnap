@@ -336,10 +336,11 @@
                 }
             });
         }
-     function previewFile(fileId) {
-            // Redirigir a la página de previsualización
-            window.location.href = `/preview?id=${fileId}`;
-        }
+    function previewFile(fileId) {
+    // Redirigir a la página de previsualización
+    window.location.href = `/files?action=preview&id=${fileId}`;
+}
+
         // Funcionalidad del menú desplegable
         document.addEventListener('click', function(e) {
             if (e.target.closest('.dropdown-trigger')) {
