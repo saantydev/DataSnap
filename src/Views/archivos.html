@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- CSRF token para fetch/form -->
     <meta name="csrf-token" content="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? ''); ?>">
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -20,7 +21,7 @@
 
 <body class="body-archivos">
     <?php $active = 'files'; include __DIR__ . '/partials/sidebar.php'; ?>
-    <main class="main-content">
+    <main class="md:ml-72 p-6 min-h-screen" style="background-color: var(--color-fondo);">
 
         <div class="titulo">
             <h2 class="page-title">Mis archivos</h2>
