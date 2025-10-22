@@ -5,35 +5,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mis Archivos - Datasnap</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
     <!-- CSRF token para fetch/form -->
     <meta name="csrf-token" content="<?php echo htmlspecialchars($_SESSION['csrf_token'] ?? ''); ?>">
-    <link rel="stylesheet" href="/config/css/misArchivos.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/config/css/sidebar.css">
+    <link rel="stylesheet" href="/config/css/archivos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="bg-white flex">
+<body class="body-archivos">
     <?php $active = 'files'; include __DIR__ . '/partials/sidebar.php'; ?>
-    <main class="flex-1 ml-72 p-6">
+    <main class="main-content">
 
         <div class="titulo">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Mis archivos</h2>
-            <div class="filter-bar bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
-                <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-                    <div class="flex-1 min-w-0">
+            <h2 class="page-title">Mis archivos</h2>
+            <div class="filter-bar">
+                <div class="filter-container">
+                    <div class="search-container">
                         <div class="relative">
-                            <input type="text" id="filterInput" placeholder="Buscar archivos..."
-                                   class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            <img src="/config/icons/material-symbols_search.svg" alt="Buscar" class="absolute left-3 top-3 w-4 h-4 text-gray-400">
+                            <input type="text" id="filterInput" placeholder="Buscar archivos..." class="search-input">
+                            <img src="/config/icons/material-symbols_search.svg" alt="Buscar" class="search-icon">
                         </div>
                     </div>
-                    <div class="flex gap-3 items-center">
-                        <select id="typeFilter" class="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm min-w-[120px]">
+                    <div class="filter-controls">
+                        <select id="typeFilter" class="filter-select">
                             <option value="">Todos</option>
                             <option value="json">JSON</option>
                             <option value="csv">CSV</option>
@@ -41,14 +41,13 @@
                             <option value="txt">TXT</option>
                             <option value="xlsx">XLSX</option>
                         </select>
-                        <select id="dateFilter" class="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm">
+                        <select id="dateFilter" class="filter-select">
                             <option value="">Fecha</option>
                             <option value="reciente">Más reciente</option>
                             <option value="antiguo">Más antiguo</option>
                         </select>
-                        <button id="sortBtn" title="Cambiar orden"
-                                class="p-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all">
-                            <img id="sortIcon" src="/config/icons/tabler_sort-ascending.svg" alt="Ordenar" class="w-5 h-5">
+                        <button id="sortBtn" title="Cambiar orden" class="sort-btn">
+                            <img id="sortIcon" src="/config/icons/tabler_sort-ascending.svg" alt="Ordenar" class="sort-icon">
                         </button>
                     </div>
                 </div>
@@ -56,28 +55,29 @@
         </div>
 
         <div class="tabs mb-6">
-            <div class="tab active" data-tab="originales">Archivos originales</div>
+            <div class="tab active" data-tab="todos">Todos los archivos</div>
+            <div class="tab inactive" data-tab="originales">Archivos originales</div>
             <div class="tab inactive" data-tab="modificados">Archivos modificados</div>
         </div>
 
         <!-- Estado vacío -->
-        <div id="emptyState" class="hidden text-center py-12">
-            <img src="/config/icons/file.svg" alt="No files" class="w-24 h-24 mx-auto mb-4 opacity-50">
-            <h3 class="text-xl font-medium text-gray-600 mb-2">No tienes archivos aún</h3>
-            <p class="text-gray-500">Sube tu primer archivo para comenzar a optimizarlo</p>
+        <div id="emptyState" class="empty-state hidden">
+            <img src="/config/icons/file.svg" alt="No files" class="empty-icon">
+            <h3 class="empty-title">No tienes archivos aún</h3>
+            <p class="empty-text">Sube tu primer archivo para comenzar a optimizarlo</p>
         </div>
 
         <!-- Tabla de archivos -->
         <div id="filesTableContainer" class="hidden">
-            <table class="w-full">
+            <table class="files-table">
                 <thead>
                     <tr>
-                        <th class="text-left py-3 px-4">Nombre</th>
-                        <th class="text-left py-3 px-4">Tipo</th>
-                        <th class="text-left py-3 px-4">Tamaño</th>
-                        <th class="text-left py-3 px-4">Fecha</th>
-                        <th class="text-left py-3 px-4">Estado</th>
-                        <th class="text-center py-3 px-4 min-w-[200px]">Acciones</th>
+                        <th class="table-header">Nombre</th>
+                        <th class="table-header">Tipo</th>
+                        <th class="table-header">Tamaño</th>
+                        <th class="table-header">Fecha</th>
+                        <th class="table-header">Estado</th>
+                        <th class="table-header table-header-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="filesTableBody">
@@ -101,8 +101,8 @@
             // Inicializar icono de ordenamiento
             updateSortIcon();
 
-            // Mostrar archivos originales por defecto
-            setTimeout(() => filterFilesByTab('originales'), 100);
+            // Mostrar todos los archivos por defecto
+            setTimeout(() => filterFilesByTab('todos'), 100);
         });
 
         // Configurar filtros
@@ -180,14 +180,21 @@
 
         // Función para cargar archivos desde el servidor
         function loadFiles() {
+            console.log('Loading files...');
             fetch('/files/list')
-                .then(response => response.json())
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
                 .then(data => {
+                    console.log('Data received:', data);
                     if (data.success && data.archivos && data.archivos.length > 0) {
+                        console.log('Files found:', data.archivos.length);
                         populateTable(data.archivos);
                         document.getElementById('filesTableContainer').classList.remove('hidden');
                         document.getElementById('emptyState').classList.add('hidden');
                     } else {
+                        console.log('No files found or error');
                         document.getElementById('emptyState').classList.remove('hidden');
                         document.getElementById('filesTableContainer').classList.add('hidden');
                     }
@@ -274,6 +281,24 @@
         function optimizeFile(fileId) {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
+            // Mostrar alerta de procesamiento
+            Swal.fire({
+                title: 'Procesando archivo...',
+                text: 'Por favor espera mientras optimizamos tu archivo',
+                icon: 'info',
+                background: 'var(--color-fondo)',
+                color: 'var(--color-texto)',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                customClass: {
+                    popup: 'swal-custom'
+                },
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
             fetch('/files/optimize', {
                 method: 'POST',
                 headers: {
@@ -286,16 +311,49 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert('Archivo enviado a optimización');
+                    Swal.fire({
+                        title: '¡Optimización completada!',
+                        text: 'Tu archivo ha sido optimizado exitosamente',
+                        icon: 'success',
+                        background: 'var(--color-fondo)',
+                        color: 'var(--color-texto)',
+                        confirmButtonColor: '#2DACB5',
+                        confirmButtonText: 'Perfecto',
+                        customClass: {
+                            popup: 'swal-custom'
+                        }
+                    });
                     // Recargar archivos después de un momento
                     setTimeout(() => loadFiles(), 1000);
                 } else {
-                    alert('Error: ' + data.message);
+                    Swal.fire({
+                        title: 'Error en la optimización',
+                        text: data.message || 'No se pudo optimizar el archivo',
+                        icon: 'error',
+                        background: 'var(--color-fondo)',
+                        color: 'var(--color-texto)',
+                        confirmButtonColor: '#2DACB5',
+                        confirmButtonText: 'Entendido',
+                        customClass: {
+                            popup: 'swal-custom'
+                        }
+                    });
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error al optimizar el archivo');
+                Swal.fire({
+                    title: 'Error de conexión',
+                    text: 'No se pudo conectar con el servidor. Inténtalo de nuevo.',
+                    icon: 'error',
+                    background: 'var(--color-fondo)',
+                    color: 'var(--color-texto)',
+                    confirmButtonColor: '#2DACB5',
+                    confirmButtonText: 'Reintentar',
+                    customClass: {
+                        popup: 'swal-custom'
+                    }
+                });
             });
         }
 
@@ -319,12 +377,18 @@
 
         // Filtrar archivos por pestaña
         function filterFilesByTab(tabType) {
+            console.log('Filtering by tab:', tabType);
             const rows = document.querySelectorAll('#filesTableBody tr');
+            console.log('Rows found:', rows.length);
 
             rows.forEach(row => {
                 const fileStatus = row.dataset.fileStatus;
+                console.log('File status:', fileStatus);
 
-                if (tabType === 'originales') {
+                if (tabType === 'todos') {
+                    // Mostrar todos los archivos
+                    row.style.display = '';
+                } else if (tabType === 'originales') {
                     // Mostrar solo archivos originales (no modificados)
                     row.style.display = (fileStatus === 'original') ? '' : 'none';
                 } else if (tabType === 'modificados') {
@@ -368,7 +432,22 @@
                     const fileId = trigger.closest('tr').dataset.fileId;
                     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-                    if (confirm('¿Estás seguro de que quieres eliminar este archivo?')) {
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: '¿Quieres eliminar este archivo? Esta acción no se puede deshacer.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        background: 'var(--color-fondo)',
+                        color: 'var(--color-texto)',
+                        confirmButtonColor: '#dc2626',
+                        cancelButtonColor: '#2DACB5',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar',
+                        customClass: {
+                            popup: 'swal-custom'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
                         fetch('/files/delete?id=' + fileId, {
                             method: 'POST',
                             headers: {
@@ -381,16 +460,47 @@
                             if (data.success) {
                                 // Remover la fila de la tabla
                                 trigger.closest('tr').remove();
-                                alert('Archivo eliminado correctamente');
+                                Swal.fire({
+                                    title: '¡Eliminado!',
+                                    text: 'Archivo eliminado correctamente',
+                                    icon: 'success',
+                                    background: 'var(--color-fondo)',
+                                    color: 'var(--color-texto)',
+                                    confirmButtonColor: '#2DACB5',
+                                    customClass: {
+                                        popup: 'swal-custom'
+                                    }
+                                });
                             } else {
-                                alert('Error al eliminar el archivo: ' + data.message);
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Error al eliminar el archivo: ' + data.message,
+                                    icon: 'error',
+                                    background: 'var(--color-fondo)',
+                                    color: 'var(--color-texto)',
+                                    confirmButtonColor: '#2DACB5',
+                                    customClass: {
+                                        popup: 'swal-custom'
+                                    }
+                                });
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Error al eliminar el archivo');
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Error al eliminar el archivo',
+                                icon: 'error',
+                                background: 'var(--color-fondo)',
+                                color: 'var(--color-texto)',
+                                confirmButtonColor: '#2DACB5',
+                                customClass: {
+                                    popup: 'swal-custom'
+                                }
+                            });
                         });
-                    }
+                        }
+                    });
                     menu.remove();
                 });
 
@@ -403,6 +513,43 @@
                 });
             }
         });
+    </script>
+
+    <script>
+        const root = document.documentElement;
+
+        // Animación suave para el cambio de tema
+        function animateThemeChange() {
+            root.style.transition = 'background-color 0.7s, color 0.7s';
+            setTimeout(() => {
+                root.style.transition = '';
+            }, 800);
+        }
+
+        // Aplicar tema
+        function setTheme(mode) {
+            animateThemeChange();
+            if (mode === 'auto') {
+                root.removeAttribute('data-tema');
+                localStorage.removeItem('tema');
+            } else {
+                root.setAttribute('data-tema', mode);
+                localStorage.setItem('tema', mode);
+            }
+        }
+
+        // Inicializar tema
+        function initTheme() {
+            const saved = localStorage.getItem('tema');
+            if (saved === 'light' || saved === 'dark') {
+                root.setAttribute('data-tema', saved);
+            } else {
+                root.removeAttribute('data-tema');
+            }
+        }
+
+        // Inicializar tema al cargar la página
+        initTheme();
     </script>
 
 </body>
