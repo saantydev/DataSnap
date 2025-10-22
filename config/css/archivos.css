@@ -63,7 +63,7 @@ main{
 
 .main-content {
     flex: 1;
-    margin-left: 288px;
+    margin-left: 18rem; /* 288px - mismo que w-72 de Tailwind */
     padding: 24px;
     background-color: var(--color-fondo);
     min-height: 100vh;
@@ -510,7 +510,7 @@ main{
     flex-wrap: wrap;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 767px) {
     .main-content {
         margin-left: 0;
         padding: 16px;
